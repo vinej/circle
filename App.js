@@ -52,3 +52,8 @@ const navigator = createStackNavigator(
 );
 
 export default createAppContainer(navigator);
+
+
+// const reducer = (state, action) => { }
+// const [state, dispatch] = useReducer(reducer, { a default  object });
+
