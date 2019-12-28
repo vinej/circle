@@ -10,23 +10,30 @@ const SignupScreen = () => {
   return (
     <View>
         <Text style={styles.maintitle}>Signup</Text>
+        
         <Text styles={styles.title}>Alias</Text>
         <TextInput 
+            secureTextEntry={false}
             style={styles.input} 
             autoCapitalize="none" 
             autoCorrect={false}
             onChangeText= {newValue => setAlias(newValue)}
             />
-        <Text styles={styles.title}>Email</Text>
+
+        <Text styles={styles.title}>Courriel</Text>
         <TextInput 
+            secureTextEntry={false}
             style={styles.input} 
             autoCapitalize="none" 
             autoCorrect={false}
             onChangeText= {newValue => setEmail(newValue)}
             />
+        
         <Text styles={styles.title}>Mot de passe</Text>
         <TextInput 
             secureTextEntry={true}
+            keyboardType={"visible-password"}
+            placeholder={"mot de passe"}
             style={styles.input} 
             autoCapitalize="none" 
             autoCorrect={false}
@@ -42,18 +49,19 @@ const SignupScreen = () => {
 const styles = StyleSheet.create({
   title: {
     margin : 5,
-    fontSize : 15,
+    fontSize : 30,
     borderWidth: 1
   },
   maintitle: {
     margin : 5,
-    fontSize : 30,
-    borderWidth: 1
+    fontSize : 30
   },
   input: {
+    fontSize:14,
     margin : 15,
     borderColor : 'black',
-    borderWidth: 1
+    borderWidth: 1,
+    height:25
   }
 });
 

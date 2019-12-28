@@ -9,20 +9,26 @@ const LoginScreen = () => {
   return (
     <View>
         <Text style={styles.maintitle}>Sign in</Text>
-        <Text styles={styles.title}>Email</Text>
+
+        <Text styles={styles.title}>Courriel</Text>
         <TextInput 
+            secureTextEntry={false}
             style={styles.input} 
             autoCapitalize="none" 
             autoCorrect={false}
             onChangeText= {newValue => setEmail(newValue)}
+            placeHolder="courriel"
             />
+
         <Text styles={styles.title}>Mot de passe</Text>
         <TextInput 
+            keyboardType={"visible-password"}
             secureTextEntry={true}
             style={styles.input} 
             autoCapitalize="none" 
             autoCorrect={false}
             onChangeText= {newValue => setPassword(newValue)}
+            placeHolder={"mot de passe"}
             />
           <TouchableOpacity>
             <Text>Se connecter</Text>
@@ -34,13 +40,20 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   title: {
     margin : 5,
-    fontSize : 15,
+    fontSize : 30,
     borderWidth: 1
   },
+  maintitle: {
+    margin : 5,
+    fontSize : 30,
+
+  },
   input: {
+    fontSize:14,
     margin : 15,
     borderColor : 'black',
-    borderWidth: 1
+    borderWidth: 1,
+    height:25
   }
 });
 
