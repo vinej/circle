@@ -18,6 +18,7 @@ import RappelScreen from './src/screens/RappelScreen';
 import SettingScreen from './src/screens/SettingScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
+import TopicScreen from './src/screens/topicScreen';
 
 const navigator = createStackNavigator(
   {
@@ -39,10 +40,11 @@ const navigator = createStackNavigator(
     Rappel : RappelScreen,
     Setting : SettingScreen,
     Signup : SignupScreen,
-    Welcome : WelcomeScreen
+    Welcome : WelcomeScreen,
+    Topic : TopicScreen
   },
   {
-    initialRouteName: 'Welcome',
+    initialRouteName: 'Main',
     defaultNavigationOptions: {
       title: 'App'
     }
