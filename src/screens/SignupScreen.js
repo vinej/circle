@@ -27,8 +27,7 @@ const SignupScreen = () => {
             autoCapitalize="none" 
             autoCorrect={false}
             onChangeText= {newValue => setEmail(newValue)}
-            />
-        
+            />        
         <Text styles={styles.title}>Mot de passe</Text>
         <TextInput 
             secureTextEntry={true}

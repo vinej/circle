@@ -57,3 +57,11 @@ export default createAppContainer(navigator);
 // const reducer = (state, action) => { }
 // const [state, dispatch] = useReducer(reducer, { a default  object });
 
+
+// Box Model == positionning of a single element
+// Flex Box Model == position multiple elements with a common parent
+// Position Model == overide Box + Flex Model
+// parent: alignItems, flexDirection, justifyContent on the parent view
+// child : flex, alignSelf
+// postion : relative or absolute
+// ...StyleSheet.absoluteFillObject
