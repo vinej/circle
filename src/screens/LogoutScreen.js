@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
 const LogoutScreen = () => {
-  <Text style={styles.text}>Logout Screen</Text>;
+  return (
+    <Text style={styles.text}>Logout Screen</Text>
+  );
 };
 
 const styles = StyleSheet.create({

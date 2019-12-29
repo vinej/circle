@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput, TouchableOpacity, Bottom} from 'react-native';
+import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button} from 'react-native';
 
-const SignupScreen = () => {
+const SignupScreen = ({navigation}) => {
 
   const [email, setEmail] = useState('');
   const [alias, setAlias] = useState('');
@@ -41,15 +41,13 @@ const SignupScreen = () => {
         <TouchableOpacity>
           <Text>S'enregistrer</Text>
         </TouchableOpacity>
-        <Bottom title="goto signin"
-          onPress={ () => props.navigation.navigate("Login")}
+        <Button title="goto signin"
+          onPress={ () => navigation.navigate("Login")}
         />    
-        <Bottom title="goto main"
-          onPress={ () => props.navigation.navigate("mainFlownpm start")}
+        <Button title="goto main"
+          onPress={ () => navigation.navigate("mainFlow")}
         />    
     </View>
-    
-    
   )
 };
 

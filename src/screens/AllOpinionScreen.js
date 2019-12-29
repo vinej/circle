@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, FlatList} from 'react-native';
+import { Text, StyleSheet, FlatList, View, TouchableOpacity} from 'react-native';
 import OpinionDetail from '../components/OpinionDetail'
 
 const AllOpinionScreen = () => {
@@ -13,21 +13,47 @@ const AllOpinionScreen = () => {
   // horizontal : horizontal list.
   // ShowsHorizontalScrollIndicator={false}
   return (
-    <FlatList
-      data = { opinions }
-      keyExtractor = { (opinion) => opinion.id.toString()}
-      renderItem = { ( { item } )  => {
-        return (
-          <OpinionDetail opinion = {item}/>
-        )
-      }}
-      />
+    <View>
+      <View style={styles.view}>
+        <TouchableOpacity style={styles.filter}>
+            <Text style={styles.text}>All</Text>
+        </TouchableOpacity>
+        <TouchableOpacity  style={styles.filter}>
+            <Text style={styles.text}>Best</Text>
+        </TouchableOpacity>
+        <TouchableOpacity  style={styles.filter}>
+            <Text style={styles.text}>Friends</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data = { opinions }
+        keyExtractor = { (opinion) => opinion.id.toString()}
+        renderItem = { ( { item } )  => {
+          return (
+            <OpinionDetail opinion = {item}/>
+          )
+        }}
+        />
+      </View>
     );
 };
 
 const styles = StyleSheet.create({
   view: {
-    fontSize: 30
+    flexDirection: 'row',
+    alignItems : 'center',
+    justifyContent: 'space-around'
+  },
+  text: {
+    fontSize:24,
+    margin: 3,
+    width: 100
+  },
+  filter: {
+    top:15,
+    margin: 3,
+    borderColor: 'black',
+    borderWidth: 1
   }
 });
 

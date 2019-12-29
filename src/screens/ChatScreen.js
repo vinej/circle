@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
 const ChatScreen = () => {
-  <Text style={styles.text}>Chat Screen</Text>;
+  return (
+    <Text style={styles.text}>Chat Screen</Text>
+  );
 };
 
 const styles = StyleSheet.create({

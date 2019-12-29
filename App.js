@@ -14,6 +14,7 @@ import PaypalScreen from './src/screens/PaypalScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import RuleScreen from './src/screens/RuleScreen';
+import SettingScreen from './src/screens/SettingScreen';
 
 const switchNavigator = createSwitchNavigator( {
   loginFlow: createStackNavigator( {
@@ -26,19 +27,18 @@ const switchNavigator = createSwitchNavigator( {
     Opinion : NewOpinionScreen,
     Chat: ChatScreen,
     settingFlow : createStackNavigator( {
+      Setting : SettingScreen,
       Logout : LogoutScreen,
       Paypal : PaypalScreen,
       Rule: RuleScreen,
-      Issue, IssueScreen,
-      About, AboutScreen,
+      Issue : IssueScreen,
+      About : AboutScreen,
       Advertiser: AdvertiserScreen
     })
   })
 });
 
-
 export default createAppContainer(switchNavigator);
-
 
 // const reducer = (state, action) => { }
 // const [state, dispatch] = useReducer(reducer, { a default  object });

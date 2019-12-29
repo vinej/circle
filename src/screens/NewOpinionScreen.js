@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
 const NewOpinionScreen = () => {
-  <Text style={styles.text}>New Opinion Screen</Text>;
+  return (
+    <Text style={styles.text}>Opinion Screen</Text>
+  );
 };
 
 const styles = StyleSheet.create({

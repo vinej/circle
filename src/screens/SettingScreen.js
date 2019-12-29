@@ -1,8 +1,29 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, View, Button} from 'react-native';
 
-const SettingScreen = () => {
-  <Text style={styles.text}>Setting Screen</Text>;
+const SettingScreen = ({navigation}) => {
+  return (
+    <View>
+        <Button title="Logout"
+          onPress={ () => navigation.navigate("Logout")}
+        />   
+        <Button title="Paypal"
+          onPress={ () => navigation.navigate("Paypal")}
+        />   
+        <Button title="Rule"
+          onPress={ () => navigation.navigate("Rule")}
+        />   
+        <Button title="Issue"
+          onPress={ () => navigation.navigate("Issue")}
+        />   
+        <Button title="About"
+          onPress={ () => navigation.navigate("About")}
+        />   
+        <Button title="Annonceur"
+          onPress={ () => navigation.navigate("Advertiser")}
+        />   
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

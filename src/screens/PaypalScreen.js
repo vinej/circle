@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
 const PaypalScreen = () => {
-  <Text style={styles.text}>Paypal Screen</Text>;
+  return (
+    <Text style={styles.text}>Paypal Screen</Text>
+  );
 };
 
 const styles = StyleSheet.create({
