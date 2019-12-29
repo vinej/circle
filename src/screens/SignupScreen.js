@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
+import { Text, StyleSheet, View, TextInput, TouchableOpacity, Bottom} from 'react-native';
 
 const SignupScreen = () => {
 
@@ -9,39 +9,47 @@ const SignupScreen = () => {
 
   return (
     <View>
-        <Text style={styles.maintitle}>Signup</Text>
-        
-        <Text styles={styles.title}>Alias</Text>
-        <TextInput 
-            secureTextEntry={false}
-            style={styles.input} 
-            autoCapitalize="none" 
-            autoCorrect={false}
-            onChangeText= {newValue => setAlias(newValue)}
-            />
+      <Text style={styles.maintitle}>Signup</Text>
 
-        <Text styles={styles.title}>Courriel</Text>
-        <TextInput 
-            secureTextEntry={false}
-            style={styles.input} 
-            autoCapitalize="none" 
-            autoCorrect={false}
-            onChangeText= {newValue => setEmail(newValue)}
-            />        
-        <Text styles={styles.title}>Mot de passe</Text>
-        <TextInput 
-            secureTextEntry={true}
-            keyboardType={"visible-password"}
-            placeholder={"mot de passe"}
-            style={styles.input} 
-            autoCapitalize="none" 
-            autoCorrect={false}
-            onChangeText= {newValue => setPassword(newValue)}
-            />
-          <TouchableOpacity>
-            <Text>S'enregistrer</Text>
-          </TouchableOpacity>
+      <Text styles={styles.title}>Alias</Text>
+      <TextInput 
+          secureTextEntry={false}
+          style={styles.input} 
+          autoCapitalize="none" 
+          autoCorrect={false}
+          onChangeText= {newValue => setAlias(newValue)}
+          />
+
+      <Text styles={styles.title}>Courriel</Text>
+      <TextInput 
+          secureTextEntry={false}
+          style={styles.input} 
+          autoCapitalize="none" 
+          autoCorrect={false}
+          onChangeText= {newValue => setEmail(newValue)}
+          />        
+      <Text styles={styles.title}>Mot de passe</Text>
+      <TextInput 
+          secureTextEntry={true}
+          keyboardType={"visible-password"}
+          placeholder={"mot de passe"}
+          style={styles.input} 
+          autoCapitalize="none" 
+          autoCorrect={false}
+          onChangeText= {newValue => setPassword(newValue)}
+          />
+        <TouchableOpacity>
+          <Text>S'enregistrer</Text>
+        </TouchableOpacity>
+        <Bottom title="goto signin"
+          onPress={ () => props.navigation.navigate("Login")}
+        />    
+        <Bottom title="goto main"
+          onPress={ () => props.navigation.navigate("mainFlownpm start")}
+        />    
     </View>
+    
+    
   )
 };
 
