@@ -24,4 +24,8 @@ export class MockTodoService {
     next({ id:1, desc: 'test', done: false})
   };
 
+  delete(next, err) {
+    next(1)
+  };
+
 }

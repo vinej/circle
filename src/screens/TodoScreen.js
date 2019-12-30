@@ -1,5 +1,6 @@
 import React from 'react';
-import { inject, observer } from 'mobx-react'
+import Mobx from 'mobx'
+import { observer, Observer } from 'mobx-react'
 import { Text, StyleSheet, FlatList, View, Button, TouchableOpacity} from 'react-native';
 import todoAction from '../actions/todo_actions'
 import todoStore from '../stores/todo_store'
@@ -12,27 +13,32 @@ const TodoScreen = (props) => {
   // horizontal : horizontal list.
   // ShowsHorizontalScrollIndicator={false}
 
-  const todos = todoStore.todos;
+  const todos = todoStore.todos.slice();
+
   return (
-    <View>
+      <View>
+        <Button title="add"
+            onPress={ () => todoAction.todoAdd({ id:1, desc: 'test', done: false})}
+        />   
+        <Button title="delete"
+            onPress={ () => todoAction.todoDelete(1)}
+        />   
+
         <FlatList
         data = { todos }
         keyExtractor = { (todo) => todo.id.toString()}
-        renderItem = { ( { item } )  => {
-          return (
-            <View>
-              <Text>{item.id}</Text>
-              <Text>{item.desc}</Text>
-              <Text>{item.done}</Text>
-            </View>
-          )
-        }}
+        renderItem = { ( { item } )  => (
+           <Observer>{ () => (
+              <View style={styles.filter}>
+                <Text>{item.id}</Text>
+                <Text>{item.desc}</Text>
+                <Text>{item.done}</Text>
+              </View>
+          )}</Observer>
+        )}
         />
-        <Button title="add"
-            onPress={ () => todoAction.todoAdd({ id:1, desc: 'test', done: false})}
-          />    
       </View>
-    );
+    )
 };
 
 const styles = StyleSheet.create({
