@@ -3,7 +3,7 @@ import AuthService from '../services/auth_service';
 import { authTypes as t } from '../actions/auth_action_type'
 
 // must use static method to pass them as callback
-export default class AuthActions {
+export class AuthActions {
   static authCheckToken() {
     dispatch( {
       type: t.authCheckToken

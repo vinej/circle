@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react'
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button} from 'react-native';
-import AuthAction from '../actions/auth_actions';
+import { AuthActions as on } from '../actions/auth_actions';
+import authStore from '../stores/auth_store';
 
-const SignupScreen = (props) => {
+const SignupScreen = ( { navigation }) => {
 
   const [email, setEmail] = useState('');
   const [alias, setAlias] = useState('');
   const [password, setPassword] = useState('');
-
-  //console.log(props);
-  const on = AuthAction;          // action on event
-  const navigation = props.navigation;
 
   return (
       <View>
@@ -55,6 +52,8 @@ const SignupScreen = (props) => {
           >
             <Text>Se connecter</Text>
           </TouchableOpacity>
+
+          <Text> { authStore.errorMessage }</Text>
       </View>
   )
 };

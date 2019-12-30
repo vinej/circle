@@ -1,7 +1,12 @@
 import React from 'react';
 import { Text, StyleSheet, Button, View } from 'react-native';
+import { AuthActions as on } from '../actions/auth_actions'
 
 const WelcomeScreen = ( { navigation}) => {
+
+    // is already connected, go directly to main flow
+    on.authCheckToken();
+
     return (
         <View  style={styles.viewStyle}>
             <Text style={styles.testStyle}>This is the circle</Text>

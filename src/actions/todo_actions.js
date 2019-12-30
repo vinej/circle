@@ -2,7 +2,7 @@ import { dispatch } from '../resolvers/dispatcher'
 import TodoService from '../services/todo_service';
 import { todoTypes  as t } from './todo_action_type'
 
-export default class TodoActions {
+export class TodoActions {
   static todoGetAll() {
     dispatch( {
       type: t.todoGetAll,

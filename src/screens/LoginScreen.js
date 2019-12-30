@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { observer } from 'mobx-react'
 import { Text, StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
-import authAction from '../actions/auth_actions'
+import { AuthActions as on } from '../actions/auth_actions'
+import authStore from '../stores/auth_store'
 
 const LoginScreen = () => {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,10 +33,11 @@ const LoginScreen = () => {
             placeHolder={"mot de passe"}
             />
           <TouchableOpacity 
-            onPress={ () => authAction.authSignIn(email, password) }          
+            onPress={ () => on.authSignIn(email, password) }          
           >
             <Text>Se connecter</Text>
           </TouchableOpacity>
+          <Text>{ authStore.errorMessage }</Text>
     </View>
   )
 };
@@ -60,4 +62,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+export default observer(LoginScreen);

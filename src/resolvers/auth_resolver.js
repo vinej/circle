@@ -8,6 +8,9 @@ export function authResolver(action, next) {
 
   const t = authTypes
   switch(action.type) {
+    case t.checkToken:
+      authStore.checkToken();
+      break;
     case t.authSetAuthorizations:
       authStore.setAuthorizations(action.payload)
       break;
