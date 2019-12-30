@@ -1,12 +1,6 @@
 import { thunkResolver }          from './thunk_resolver';
 import { loggerResolver }         from './logger_resolver';
 import authResolver               from './auth_resolver';
-import todoResolver               from './todo_resolver';
-import testResolver               from './test_resolver';
-import routeResolver              from './route_resolver';
-import remuxResolver              from './remux_resolver';
-import signInUpResolver           from './signinup_resolver';
-
 
 class ParallelAction {
   constructor(count, next) {
@@ -108,9 +102,6 @@ export let dispatcher = new Dispatcher();
 // logger first
 dispatcher.addResolver( loggerResolver )
 
-// event remux system
-dispatcher.addResolver( remuxResolver )
-
 // thunk for services
 dispatcher.addResolver( thunkResolver )
 
@@ -118,15 +109,13 @@ dispatcher.addResolver( thunkResolver )
 dispatcher.addResolver( authResolver )
 
 // no special order for functionnal resolvers
-dispatcher.addResolver( routeResolver )
-
-dispatcher.addResolver( todoResolver )
+//dispatcher.addResolver( todoResolver )
 
 // form resolvers
-dispatcher.addResolver( signInUpResolver )
+//dispatcher.addResolver( signInUpResolver )
 
 // resolvers for testing purpose at the end
-dispatcher.addResolver( testResolver )
+//dispatcher.addResolver( testResolver )
 
 export const dispatch = dispatcher.dispatch.bind(dispatcher)
 export const dispatchParalleNext = dispatcher.dispatchParalleNext.bind(dispatcher)

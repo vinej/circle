@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { ROOT_URL, HEADERS, PARAMETERS } from './config_service'
+import api from './circle_api'
 
 export default class AuthService {
   constructor() {
@@ -18,7 +17,7 @@ export default class AuthService {
   }
 
   signIn({ email, password }, next, err) {
-    axios.post(`${ROOT_URL}/auth/signin?${PARAMETERS()}`, { email, password })
+    api.post('/auth/signin', { email, password })
     .then(response => {
       console.log(response.data.token)
       next(response.data.token, response.data.name); 
@@ -29,7 +28,7 @@ export default class AuthService {
   }
 
   signUp({ email, password, name }, next, err) {
-    axios.post(`${ROOT_URL}/auth/signup?${PARAMETERS()}`, { email, password, name })
+    api.post('/auth/signup', { email, password, name })
     .then(response => {
       console.log(response.data.token)
       next(response.data.token, name); 
@@ -38,7 +37,7 @@ export default class AuthService {
   }
 
   setAuthorizations(next, err) {
-    axios.get(`${ROOT_URL}/api/actions?${PARAMETERS()}`, HEADERS())
+    api.get('/api/actions')
     .then(response => {
       next(response.data)
     })

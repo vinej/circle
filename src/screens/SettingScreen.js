@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, StyleSheet, View, Button} from 'react-native';
+import { StyleSheet, View, Button} from 'react-native';
+//import { Ionicons } from '@expo/vector-icons';
 
 const SettingScreen = ({navigation}) => {
   return (

@@ -1,3 +1,6 @@
+import React from 'react'
+import { Provider} from 'mobx-react'
+
 import {  createStackNavigator, 
           createSwitchNavigator, 
           createBottomTabNavigator,
@@ -15,6 +18,11 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import RuleScreen from './src/screens/RuleScreen';
 import SettingScreen from './src/screens/SettingScreen';
+import authStore from './src/stores/auth_store'
+import AuthService from './src/services/auth_service'
+import { MockAuthService, } from './src/services/mock_services'
+
+AuthService.setInstance( new MockAuthService() )
 
 const switchNavigator = createSwitchNavigator( {
   loginFlow: createStackNavigator( {
@@ -38,7 +46,15 @@ const switchNavigator = createSwitchNavigator( {
   })
 });
 
-export default createAppContainer(switchNavigator);
+const App = createAppContainer(switchNavigator);
+
+export default () => {
+  return (
+      <Provider store={authStore}>
+        <App/>
+      </Provider>
+  )
+};
 
 // const reducer = (state, action) => { }
 // const [state, dispatch] = useReducer(reducer, { a default  object });

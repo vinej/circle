@@ -1,53 +1,64 @@
 import React, { useState } from 'react';
+import { inject, observer } from 'mobx-react'
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button} from 'react-native';
 
-const SignupScreen = ({navigation}) => {
+
+const SignupScreen = (props) => {
 
   const [email, setEmail] = useState('');
   const [alias, setAlias] = useState('');
   const [password, setPassword] = useState('');
 
+  //console.log(props);
+  const on = props.store.on          // action on event
+  const navigation = props.navigation;
+
   return (
-    <View>
-      <Text style={styles.maintitle}>Signup</Text>
+      <View>
+        <Text style={styles.maintitle}>Signup</Text>
 
-      <Text styles={styles.title}>Alias</Text>
-      <TextInput 
-          secureTextEntry={false}
-          style={styles.input} 
-          autoCapitalize="none" 
-          autoCorrect={false}
-          onChangeText= {newValue => setAlias(newValue)}
-          />
+        <Text styles={styles.title}>Alias</Text>
+        <TextInput 
+            secureTextEntry={false}
+            style={styles.input} 
+            autoCapitalize="none" 
+            autoCorrect={false}
+            onChangeText= {newValue => setAlias(newValue)}
+            />
 
-      <Text styles={styles.title}>Courriel</Text>
-      <TextInput 
-          secureTextEntry={false}
-          style={styles.input} 
-          autoCapitalize="none" 
-          autoCorrect={false}
-          onChangeText= {newValue => setEmail(newValue)}
-          />        
-      <Text styles={styles.title}>Mot de passe</Text>
-      <TextInput 
-          secureTextEntry={true}
-          keyboardType={"visible-password"}
-          placeholder={"mot de passe"}
-          style={styles.input} 
-          autoCapitalize="none" 
-          autoCorrect={false}
-          onChangeText= {newValue => setPassword(newValue)}
-          />
-        <TouchableOpacity>
-          <Text>S'enregistrer</Text>
-        </TouchableOpacity>
-        <Button title="goto signin"
-          onPress={ () => navigation.navigate("Login")}
-        />    
-        <Button title="goto main"
-          onPress={ () => navigation.navigate("mainFlow")}
-        />    
-    </View>
+        <Text styles={styles.title}>Courriel</Text>
+        <TextInput 
+            secureTextEntry={false}
+            style={styles.input} 
+            autoCapitalize="none" 
+            autoCorrect={false}
+            onChangeText= {newValue => setEmail(newValue)}
+            />        
+        <Text styles={styles.title}>Mot de passe</Text>
+        <TextInput 
+            secureTextEntry={true}
+            keyboardType={"visible-password"}
+            placeholder={"mot de passe"}
+            style={styles.input} 
+            autoCapitalize="none" 
+            autoCorrect={false}
+            onChangeText= {newValue => setPassword(newValue)}
+            />
+          <TouchableOpacity
+              onPress={ () => { 
+                on.authSignUp(email, password, alias);
+                navigation.navigate("mainFlow"); } }
+            >
+            <Text>S'enregistrer</Text>
+          </TouchableOpacity>
+
+          <Button title="goto signin"
+            onPress={ () => navigation.navigate("Login")}
+          />    
+          <Button title="goto main"
+            onPress={ () => navigation.navigate("mainFlow")}
+          />    
+      </View>
   )
 };
 
@@ -70,4 +81,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignupScreen;
+
+export default inject("store")(observer(SignupScreen));

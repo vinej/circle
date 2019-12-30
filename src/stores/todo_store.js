@@ -1,31 +1,34 @@
-import { action } from 'mobx'
+import { action, decorate, observable } from 'mobx'
 import TodoActions from '../actions/todo_actions'
-import { appState } from './app_state'
 
-export default class TodoStore {
+class TodoStore {
+
+  desc = '';
+  totos = [];
+  count = 0;
+
   constructor() {
-    this.state = appState.todos
     this.on = TodoActions
   }
 
   set desc(desc) {
-    this.state.desc = desc
+    this.desc = desc
   }
 
   get desc() {
-    return this.state.desc
+    return this.desc
   }
 
   get todos() {
-    return this.state.todos
+    return this.todos
   }
 
   setAll(todos) {
-    this.state.todos = todos
+    this.todos = todos
   }
 
   setDesc(desc) {
-    this.state.desc = desc
+    this.desc = desc
   }
 
   setDone( {todo, done }) {
@@ -34,22 +37,29 @@ export default class TodoStore {
 
   delete(id) {
     const idx = this.state.todos.findIndex( (r) => r.id === id );
-    this.state.todos.splice(idx,1);
+    this.todos.splice(idx,1);
   }
 
-  @action
   init() {
-    this.state.todos = []
+    this.todos = []
     this.desc = ''
     this.count = 0
   }
 
-  @action
   add() {
-    if (this.state.desc === '') return
-    this.state.todos.push( { id: this.state.count, desc: this.state.desc, done: false} );
-    this.state.count = this.state.count + 1
-    this.state.desc = ''
+    if (this.desc === '') return
+    this.todos.push( { id: this.count, desc: this.desc, done: false} );
+    this.count = this.state.count + 1
+    this.desc = ''
   }
 }
-export let todoStore = new TodoStore()
+
+decorate( TodoStore, {
+  desc: observable,
+  todos : observable,
+  count: observable,
+  add: action,
+  init: action
+})
+
+export default new TodoStore()

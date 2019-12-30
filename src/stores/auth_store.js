@@ -1,12 +1,17 @@
-import { action } from 'mobx'
+import { action, decorate, observable } from 'mobx'
 import AuthActions from '../actions/auth_actions'
-import RefRoutes from '../ref_routes'
-import { appState } from './app_state'
+import localStorage from '../helpers/localStorage'
 
-export default class AuthStore {
+class AuthStore {
+
   constructor() {
-    this.state = appState.user
-  }
+    this.on = AuthActions; 
+  };
+
+  name = '';
+  authenticated = false;
+  errorMessage = '';
+  isAutorizationInit = false;
 
   isActionAvailable(actiontype) {
     return true
@@ -17,58 +22,65 @@ export default class AuthStore {
   }
 
   getError() {
-    return this.state.errorMessage
+    return this.errorMessage
   }
 
-  @action
   setAuthorizations(authorizations) {
-    this.state.isAutorizationInit = true
+    this.isAutorizationInit = true
     //this.authorizations = authorizations
-    RefRoutes.routeTodo()
   }
 
   isAuthenticated() {
     return this.state.authenticated
   }
 
-  @action
   checkToken() {
-    const token = localStorage.getItem('remux-token')
+    const token = localStorage.getItem('remux-circle-token')
     if (token != null && token != '') {
-      const name = localStorage.getItem('remux-name')
-      this.state.authenticated = true
-      this.state.name = name
-      this.state.errorMessage = ''
+      const name = localStorage.getItem('remux-circle-name')
+      this.authenticated = true
+      this.name = name
+      this.errorMessage = ''
       AuthActions.authSetAuthorizations()
     } else {
-      this.state.authenticated = false
-      this.state.name = ''
-      this.state.errorMessage = ''
-      RefRoutes.routeSignIn()
+      this.authenticated = false
+      this.name = ''
+      this.errorMessage = ''
     }
   }
 
-  @action
   signInOrUp(token, name) {
-    localStorage.setItem('remux-token', token);
-    localStorage.setItem('remux-name', name);
-    this.state.authenticated = true;
-    this.state.name = name;
-    this.state.errorMessage = '';
+    localStorage.setItem('remux-circle-token', token);
+    localStorage.setItem('remux-circle-name', name);
+    this.authenticated = true;
+    this.name = name;
+    this.errorMessage = '';
     AuthActions.authSetAuthorizations()
   }
 
-  @action
   signOut() {
-    localStorage.removeItem('remux-token');
-    localStorage.removeItem('remux-name');
-    this.state.authenticated = false;
-    this.state.name = '';
-    this.state.errorMessage = '';
+    localStorage.removeItem('remux-circle-token');
+    localStorage.removeItem('remux-circle-name');
+    this.authenticated = false;
+    this.name = '';
+    this.errorMessage = '';
   }
 
   authError(error) {
     console.log(error)
   }
 }
-export let authStore = new AuthStore()
+
+decorate(AuthStore,
+{
+  name : observable,
+  authenticated : observable,
+  errorMessage : observable,
+  isAutorizationInit : observable,
+  signOut: action,
+  signInOrUp: action,
+  checkToken: action,
+  setAuthorizations: action
+});
+
+export default new  AuthStore();

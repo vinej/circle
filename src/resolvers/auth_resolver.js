@@ -1,4 +1,4 @@
-import { authStore } from '../stores/auth_store'
+import authStore  from '../stores/auth_store'
 import { authTypes, authPrefixType  } from '../actions/auth_actions'
 
 export default function(action, next) {
