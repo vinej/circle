@@ -1,15 +1,19 @@
 import React from 'react';
 import { Text, StyleSheet, Button, View } from 'react-native';
 
-const WelcomeScreen = () => {
-    const name = 'Zachary';
-
+const WelcomeScreen = ( { navigation}) => {
     return (
         <View  style={styles.viewStyle}>
             <Text style={styles.testStyle}>This is the circle</Text>
-            <Text style={styles.welcomeStyle}>Bienvenu {name}</Text>
-            <Button title="S'enregister"></Button>
-            <Button title="Acceder a l'application"></Button>
+            <Text style={styles.welcomeStyle}>Bienvenu </Text>
+            <Button 
+                title="S'enregister"
+                onPress={ () => navigation.navigate("Signup")}
+            />
+            <Button 
+                title="Se connecter"
+                onPress={ () => navigation.navigate("Login")}
+            />
         </View>
     );
 };

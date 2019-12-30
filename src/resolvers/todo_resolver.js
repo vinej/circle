@@ -14,8 +14,6 @@ export function todoResolver(action, next) {
       todoStore.delete(action.payload)
       break;
     case t.todoGetAll :
-      console.log("xxxxxxxx set all");
-      console.log(action.payload);
       todoStore.setAll(action.payload)
       break;
   }

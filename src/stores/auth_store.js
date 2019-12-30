@@ -1,5 +1,6 @@
 import { action, decorate, observable } from 'mobx'
 import localStorage from '../helpers/localStorage'
+import { navigate } from  '../navigationRef'
 
 class AuthStore {
   name = '';
@@ -7,57 +8,48 @@ class AuthStore {
   errorMessage = '';
   isAutorizationInit = false;
 
-  isActionAvailable(actiontype) {
-    return true
-    // if (actiontype.endsWith("_")) {
-    //   actiontype = actiontype.substr(0, actiontype.length - 1);
-    // }
-    // return this.actions.indexOf(actiontype) > -1
-  }
-
   getError() {
     return this.errorMessage
   }
 
-  setAuthorizations(authorizations) {
-    this.isAutorizationInit = true
-    //this.authorizations = authorizations
-  }
-
   isAuthenticated() {
-    return this.state.authenticated
+    return this.authenticated
   }
 
-  checkToken() {
-    const token = localStorage.getItem('remux-circle-token')
+  async checkToken() {
+    const token = await localStorage.getItem('remux-circle-token')
     if (token != null && token != '') {
-      const name = localStorage.getItem('remux-circle-name')
+      const name = await localStorage.getItem('remux-circle-name')
       this.authenticated = true
       this.name = name
       this.errorMessage = ''
-      //AuthActions.authSetAuthorizations()
+      this.isAutorizationInit = true
+      navigate('mainFlow');
     } else {
       this.authenticated = false
       this.name = ''
       this.errorMessage = ''
+      this.isAutorizationInit = false
     }
   }
 
-  signInOrUp(token, name) {
-    localStorage.setItem('remux-circle-token', token);
-    localStorage.setItem('remux-circle-name', name);
+  async signInOrUp(token, name) {
+    await localStorage.setItem('remux-circle-token', token);
+    await localStorage.setItem('remux-circle-name', name);
     this.authenticated = true;
     this.name = name;
     this.errorMessage = '';
-    //AuthActions.authSetAuthorizations()
+    this.isAutorizationInit = true
+    navigate('mainFlow');
   }
 
-  signOut() {
-    localStorage.removeItem('remux-circle-token');
-    localStorage.removeItem('remux-circle-name');
+  async signOut() {
+    await localStorage.removeItem('remux-circle-token');
+    await localStorage.removeItem('remux-circle-name');
     this.authenticated = false;
     this.name = '';
     this.errorMessage = '';
+    navigate("Welcome");
   }
 
   authError(error) {

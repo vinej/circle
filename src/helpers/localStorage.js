@@ -1,17 +1,18 @@
+import { AsyncStorage} from 'react-native'
 
 class localStorage {
     items = {}
 
-    getItem(item) {
-        return this.items[item]; 
+    async getItem(item) {
+        return await AsyncStorage.getItem(item); 
     }
 
-    setItem(item, value) {
-        this.items[item] = value;
+    async setItem(item, value) {
+        await AsyncStorage.setItem(item, value);
     }
 
-    removeItem(item) {
-        delete this.items[item];
+    async removeItem(item) {
+        await AsyncStorage.removeItem(item);
     }
 }
 

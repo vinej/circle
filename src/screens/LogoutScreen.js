@@ -1,9 +1,16 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity} from 'react-native';
+import authAction from '../actions/auth_actions'
 
 const LogoutScreen = () => {
-  return (
-    <Text style={styles.text}>Logout Screen</Text>
+  return (<>
+            <Text style={styles.text}>Desole de vous voir partir</Text>
+            <TouchableOpacity
+                onPress={ () => authAction.authSignOut() }
+              >
+              <Text>Quitter circle</Text>
+            </TouchableOpacity>
+            </>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
+import authAction from '../actions/auth_actions'
 
 const LoginScreen = () => {
 
@@ -30,7 +31,9 @@ const LoginScreen = () => {
             onChangeText= {newValue => setPassword(newValue)}
             placeHolder={"mot de passe"}
             />
-          <TouchableOpacity>
+          <TouchableOpacity 
+            onPress={ () => authAction.authSignIn(email, password) }          
+          >
             <Text>Se connecter</Text>
           </TouchableOpacity>
     </View>

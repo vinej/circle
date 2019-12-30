@@ -15,12 +15,9 @@ class TodoStore {
   }
 
   add(todo) {
-    console.log(todo);
     todo.id = this.count + 1;
     this.todos.push( todo );
     this.count = this.count + 1
-    console.log(this.todos);
-    console.log(this.count);
   }
 
   setAll(todos) {

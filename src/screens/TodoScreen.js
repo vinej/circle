@@ -1,5 +1,4 @@
 import React from 'react';
-import Mobx from 'mobx'
 import { observer, Observer } from 'mobx-react'
 import { Text, StyleSheet, FlatList, View, Button, TouchableOpacity} from 'react-native';
 import todoAction from '../actions/todo_actions'

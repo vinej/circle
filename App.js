@@ -1,10 +1,11 @@
 import React from 'react'
-import { Provider} from 'mobx-react'
+import { setNavigator } from './src/navigationRef'
 
 import {  createStackNavigator, 
           createSwitchNavigator, 
           createBottomTabNavigator,
-          createAppContainer } from 'react-navigation';
+          createAppContainer,
+         } from 'react-navigation';
 import AboutScreen from './src/screens/AboutScreen';
 import AdvertiserScreen from './src/screens/AdvertiserScreen';
 import AllOpinionScreen from './src/screens/AllOpinionScreen';
@@ -17,20 +18,30 @@ import PaypalScreen from './src/screens/PaypalScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import RuleScreen from './src/screens/RuleScreen';
-import SettingScreen from './src/screens/SettingScreen';
-import authStore from './src/stores/auth_store'
-import todoStore from './src/stores/todo_store'
 import AuthService from './src/services/auth_service'
 import TodoService from './src/services/todo_service'
+import WelcomeScreen from './src/screens/WelcomeScreen'
+import SettingScreen from './src/screens/SettingScreen'
 import { MockAuthService, MockTodoService } from './src/services/mock_services'
 import TodoScreen from './src/screens/TodoScreen';
 
 AuthService.setInstance( new MockAuthService() )
 TodoService.setInstance( new MockTodoService() )
 
+const settingNavigator = createStackNavigator( {
+  Setting: SettingScreen,
+  Logout : LogoutScreen,
+  Todo: TodoScreen,
+  Paypal : PaypalScreen,
+  Rule: RuleScreen,
+  Issue : IssueScreen,
+  About : AboutScreen,
+  Advertiser: AdvertiserScreen
+});
+
 const switchNavigator = createSwitchNavigator( {
   loginFlow: createStackNavigator( {
-    Todo: TodoScreen,
+    Welcome: WelcomeScreen,
     Signup : SignupScreen,
     Login : LoginScreen
   } ),
@@ -39,25 +50,16 @@ const switchNavigator = createSwitchNavigator( {
     Profile : ProfileScreen,
     Opinion : NewOpinionScreen,
     Chat: ChatScreen,
-    settingFlow : createStackNavigator( {
-      Setting : SettingScreen,
-      Logout : LogoutScreen,
-      Paypal : PaypalScreen,
-      Rule: RuleScreen,
-      Issue : IssueScreen,
-      About : AboutScreen,
-      Advertiser: AdvertiserScreen
-    })
+    Settings : settingNavigator
   })
 });
 
-const App = createAppContainer(switchNavigator);
+const App = createAppContainer(switchNavigator );
 
 export default () => {
   return (
-    <Provider store={ authStore }>
-      <App/>
-    </Provider>
+      //
+      <App ref= { (navigator) => { setNavigator(navigator) } } />
   )
 };
 
