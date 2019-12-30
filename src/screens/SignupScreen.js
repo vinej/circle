@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button} from 'react-native';
-
+import { AuthAction} from '../actions/auth_actions';
 
 const SignupScreen = (props) => {
 
@@ -10,7 +10,7 @@ const SignupScreen = (props) => {
   const [password, setPassword] = useState('');
 
   //console.log(props);
-  const on = props.store.on          // action on event
+  const on = AuthAction;          // action on event
   const navigation = props.navigation;
 
   return (
@@ -80,6 +80,5 @@ const styles = StyleSheet.create({
     height:25
   }
 });
-
 
 export default inject("store")(observer(SignupScreen));

@@ -1,18 +1,6 @@
 import { dispatch } from '../resolvers/dispatcher'
 import AuthService from '../services/auth_service';
-
-export let authPrefixType = "auth_"
-
-export let authTypes = {
-  authSetAuthorizations   : authPrefixType + 'SetAuthorizations',
-  authSignIn              : authPrefixType + 'SignIn',
-  authSignUp              : authPrefixType + 'SignUp',
-  authSignOut             : authPrefixType + 'SignOut',
-  authCheckToken          : authPrefixType + 'CheckToken',
-  authError               : authPrefixType + 'Error'
-}
-
-const t = authTypes
+import { authTypes as t } from '../actions/auth_action_type'
 
 // must use static method to pass them as callback
 export default class AuthActions {

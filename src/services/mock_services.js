@@ -18,5 +18,10 @@ export class MockTodoService {
                   { id:2, desc: 'test 2', done: true} ]
     // simulate a service call
     next(todos)
-  }
+  };
+
+  add(next, err) {
+    next({ id:1, desc: 'test', done: false})
+  };
+
 }

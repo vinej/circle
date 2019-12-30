@@ -1,34 +1,21 @@
-import { todoStore } from '../stores/todo_store'
-import { todoTypes, todoPrefixType  } from '../actions/todo_actions'
-import { authTypes  } from '../actions/auth_actions'
+import todoStore from '../stores/todo_store'
+import { todoTypes as t, todoPrefixType  } from '../actions/todo_action_type'
 
-export default function(action, next) {
-
-  if (  todoPrefixType !== action.prefixType && 
-        action.type != authTypes.authSignOut ) {
+export function todoResolver(action, next) {
+  if ( todoPrefixType !== action.prefixType ) {
     return next(null, action);
   }
 
-  if (action.type == authTypes.authSignOut) {
-    todoStore.init()
-    return next(null, action);
-  }
-
-  const t = todoTypes
   switch(action.type) {
     case t.todoAdd :
-      todoStore.add()
+      todoStore.add(action.payload)
       break;
     case t.todoDelete :
       todoStore.delete(action.payload)
       break;
-    case t.todoSetDesc :
-      todoStore.setDesc(action.payload)
-      break;
-    case t.todoSetDone :
-      todoStore.setDone(action.payload)
-      break;
     case t.todoGetAll :
+      console.log("xxxxxxxx set all");
+      console.log(action.payload);
       todoStore.setAll(action.payload)
       break;
   }

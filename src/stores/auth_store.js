@@ -1,13 +1,7 @@
 import { action, decorate, observable } from 'mobx'
-import AuthActions from '../actions/auth_actions'
 import localStorage from '../helpers/localStorage'
 
 class AuthStore {
-
-  constructor() {
-    this.on = AuthActions; 
-  };
-
   name = '';
   authenticated = false;
   errorMessage = '';
@@ -41,7 +35,7 @@ class AuthStore {
       this.authenticated = true
       this.name = name
       this.errorMessage = ''
-      AuthActions.authSetAuthorizations()
+      //AuthActions.authSetAuthorizations()
     } else {
       this.authenticated = false
       this.name = ''
@@ -55,7 +49,7 @@ class AuthStore {
     this.authenticated = true;
     this.name = name;
     this.errorMessage = '';
-    AuthActions.authSetAuthorizations()
+    //AuthActions.authSetAuthorizations()
   }
 
   signOut() {
@@ -83,4 +77,4 @@ decorate(AuthStore,
   setAuthorizations: action
 });
 
-export default new  AuthStore();
+export default new AuthStore();

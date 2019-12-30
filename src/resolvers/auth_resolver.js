@@ -1,8 +1,7 @@
 import authStore  from '../stores/auth_store'
-import { authTypes, authPrefixType  } from '../actions/auth_actions'
+import { authTypes, authPrefixType  } from '../actions/auth_action_type'
 
-export default function(action, next) {
-
+export function authResolver(action, next) {
   if (authPrefixType !== action.prefixType) {
     return next(null, action);
   }

@@ -19,13 +19,18 @@ import SignupScreen from './src/screens/SignupScreen';
 import RuleScreen from './src/screens/RuleScreen';
 import SettingScreen from './src/screens/SettingScreen';
 import authStore from './src/stores/auth_store'
+import todoStore from './src/stores/todo_store'
 import AuthService from './src/services/auth_service'
-import { MockAuthService, } from './src/services/mock_services'
+import TodoService from './src/services/todo_service'
+import { MockAuthService, MockTodoService } from './src/services/mock_services'
+import TodoScreen from './src/screens/TodoScreen';
 
 AuthService.setInstance( new MockAuthService() )
+TodoService.setInstance( new MockTodoService() )
 
 const switchNavigator = createSwitchNavigator( {
   loginFlow: createStackNavigator( {
+    Todo: TodoScreen,
     Signup : SignupScreen,
     Login : LoginScreen
   } ),
@@ -50,9 +55,9 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
-      <Provider store={authStore}>
-        <App/>
-      </Provider>
+    <Provider store={ authStore }>
+      <App/>
+    </Provider>
   )
 };
 
