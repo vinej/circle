@@ -53,6 +53,11 @@ class AuthStore {
   }
 
   authError(error) {
+    console.log("***error*** : " + error)
+    this.errorMessage = error;
+    this.authenticated = false;
+    this.name = '' ;
+    this.isAutorizationInit = false
     console.log(error)
   }
 }

@@ -25,7 +25,6 @@ import SettingScreen from './src/screens/SettingScreen'
 import { MockAuthService, MockTodoService } from './src/services/mock_services'
 import TodoScreen from './src/screens/TodoScreen';
 
-AuthService.setInstance( new MockAuthService() )
 TodoService.setInstance( new MockTodoService() )
 
 const settingNavigator = createStackNavigator( {

@@ -17,23 +17,30 @@ export default class AuthService {
   }
 
   signIn({ email, password }, next, err) {
-    api.post('/auth/signin', { email, password })
+    var parameters = `/api/token?email=${email}&password=${password}`;
+    api.get(parameters)
     .then(response => {
-      console.log(response.data.token)
-      next(response.data.token, response.data.name); 
+      next(response.data.Token, response.data.Alias); 
     })
-    .catch(response => {
-      err(response.data)
+    .catch(error => {
+      let errorObject=JSON.parse(JSON.stringify(error));
+      console.log(errorObject);
+      err(errorObject.message);
     });
   }
 
   signUp({ email, password, name }, next, err) {
-    api.post('/auth/signup', { email, password, name })
+    var parameters = `/api/token?email=${email}&password=${password}&alias=${name}`;
+    api.get(parameters)
     .then(response => {
-      console.log(response.data.token)
-      next(response.data.token, name); 
+      console.log(response)
+      next(response.data.Token, response.data.Alias); 
     })
-    .catch(response => err(response.data));
+    .catch(error => { 
+      let errorObject=JSON.parse(JSON.stringify(error));
+      console.log(errorObject);
+      err(errorObject.message);
+    });
   }
 
   setAuthorizations(next, err) {
