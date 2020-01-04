@@ -1,9 +1,12 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
+import {SafeAreaView} from 'react-navigation'
 
 const ChatScreen = () => {
   return (
-    <Text style={styles.text}>Chat Screen</Text>
+    <SafeAreaView forceInset={ { top: 'always'} }>
+      <Text style={styles.text}>Chat Screen</Text>
+    </SafeAreaView>
   );
 };
 

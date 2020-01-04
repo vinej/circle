@@ -16,6 +16,9 @@ export function todoResolver(action, next) {
     case t.todoGetAll :
       todoStore.setAll(action.payload)
       break;
-  }
+      case t.todoError :
+        todoStore.error(action.payload)
+        break;
+    }
   return next(null, action);
 }

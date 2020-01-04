@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react'
-import { Text, StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, TextInput, Text} from 'react-native';
+import { Button, Input, Divider} from 'react-native-elements';
 import { AuthActions as on } from '../actions/auth_actions'
 import authStore from '../stores/auth_store'
+import {SafeAreaView} from 'react-navigation'
 
-const LoginScreen = () => {
+const LoginScreen = ( { navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
+    <SafeAreaView forceInset={ { top: 'always'} }>
     <View>
-        <Text style={styles.maintitle}>Sign in</Text>
-
-        <Text styles={styles.title}>Courriel</Text>
-        <TextInput 
+        <Text style={styles.maintitle}>Se connecter a Circle</Text>
+        <Text style={styles.title}>Courriel</Text>
+        <Input 
             secureTextEntry={false}
             style={styles.input} 
             autoCapitalize="none" 
@@ -22,8 +24,8 @@ const LoginScreen = () => {
             placeHolder="courriel"
             />
 
-        <Text styles={styles.title}>Mot de passe</Text>
-        <TextInput 
+        <Text style={styles.title}>Mot de passe</Text>
+        <Input 
             keyboardType={"visible-password"}
             secureTextEntry={true}
             style={styles.input} 
@@ -32,24 +34,34 @@ const LoginScreen = () => {
             onChangeText= {newValue => setPassword(newValue)}
             placeHolder={"mot de passe"}
             />
-          <TouchableOpacity 
+          <View style={ styles.viewButton}>
+          <Button
+            buttonStyle={styles.button}
+            title="Se connecter"
+            type='outline'
             onPress={ () => on.authSignIn(email, password) }          
-          >
-            <Text>Se connecter</Text>
-          </TouchableOpacity>
+          />
+          <Button
+            buttonStyle={styles.button}
+            type='outline'
+            title="Retour a Welcome" 
+            onPress={ () => navigation.navigate('Welcome') }          
+          />
+          </View>
           <Text>{ authStore.errorMessage }</Text>
     </View>
+    </SafeAreaView>
   )
 };
 
 const styles = StyleSheet.create({
   title: {
-    margin : 5,
-    fontSize : 30,
-    borderWidth: 1
+    marginLeft: 15,
+    fontSize: 20
   },
   maintitle: {
     margin : 5,
+    marginBottom:20,
     fontSize : 30,
 
   },
@@ -59,6 +71,13 @@ const styles = StyleSheet.create({
     borderColor : 'black',
     borderWidth: 1,
     height:25
+  },
+  viewButton: {
+    alignItems: "center",
+    marginTop: 20
+  },
+  button: {
+    marginBottom: 5
   }
 });
 

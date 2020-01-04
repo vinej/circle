@@ -1,9 +1,17 @@
 import axios from 'axios'
-import localStorage from '../helpers/localStorage'
+import authStore from '../stores/auth_store'
+
+
+export const HEADERS = function() {
+    return { headers: { 'Authorization' : `Bearer ${authStore.token}` } } 
+}
+
+export const checkStandardError = function(error) {
+    let errorObject=JSON.parse(JSON.stringify(error));
+    return errorObject.message;
+}
 
 export default axios.create( {
-    baseURL: 'http://af1f511d.ngrok.io',
-    headers: { Authorization: localStorage.getItem('remux-circle-token') },
-    params: 'project=all&locale=en-US'
+    baseURL: 'http://2bfaec97  .ngrok.io/api'
 });
 

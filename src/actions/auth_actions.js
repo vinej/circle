@@ -40,7 +40,6 @@ export class AuthActions {
 
   // called from service
   static _authSignIn(token, name) {
-    console.log('next 2')
     dispatch( {
       type: t.authSignIn,
       payload: { token, name }

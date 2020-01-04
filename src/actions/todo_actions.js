@@ -1,6 +1,8 @@
 import { dispatch } from '../resolvers/dispatcher'
 import TodoService from '../services/todo_service';
 import { todoTypes  as t } from './todo_action_type'
+import { authTypes  as at } from './auth_action_type'
+import { TabRouter } from 'react-navigation';
 
 export class TodoActions {
   static todoGetAll() {
@@ -49,6 +51,17 @@ export class TodoActions {
   }
 
   static todoError(error) {
-    alert(error)
+    if (error == 'Request failed with status code 401') {
+      dispatch( {
+        type: at.authError,
+        payload: error
+      })
+    }
+    else {
+      dispatch( {
+        type: t.todoError,
+        payload: error
+      })
+    }
   }
 }

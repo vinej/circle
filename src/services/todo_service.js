@@ -11,7 +11,7 @@ export default class TodoService {
 
   static getInstance() {
     if (!this.instanceService) {
-      this.instanceService = new CrudService('todos')
+      this.instanceService = new CrudService('todo')
     }
     return this.instanceService
   }  

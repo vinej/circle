@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, FlatList, View, TouchableOpacity} from 'react-native';
+import {SafeAreaView} from 'react-navigation'
 import OpinionDetail from '../components/OpinionDetail'
 
 const AllOpinionScreen = () => {
@@ -13,6 +14,7 @@ const AllOpinionScreen = () => {
   // horizontal : horizontal list.
   // ShowsHorizontalScrollIndicator={false}
   return (
+    <SafeAreaView forceInset={ { top: 'always'} }>
     <View>
       <View style={styles.view}>
         <TouchableOpacity style={styles.filter}>
@@ -35,6 +37,7 @@ const AllOpinionScreen = () => {
         }}
         />
       </View>
+    </SafeAreaView>
     );
 };
 

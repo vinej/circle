@@ -2,10 +2,10 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import {SafeAreaView} from 'react-navigation'
 
-const ProfileScreen = () => {
+const OpinionScreen = () => {
   return (
     <SafeAreaView forceInset={ { top: 'always'} }>
-      <Text style={styles.text}>Profile Screen</Text>
+      <Text style={styles.text}>Opinion Screen</Text>
     </SafeAreaView>
   );
 };
@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreen;
+export default OpinionScreen;

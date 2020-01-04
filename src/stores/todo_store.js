@@ -1,4 +1,5 @@
 import { action, decorate, observable } from 'mobx'
+import { CheckStandardError } from '../stores/StandardError'
 
 class TodoStore {
   todos = [];
@@ -26,6 +27,10 @@ class TodoStore {
 
   getAll() {
     return this.todos;
+  }
+
+  error(error) {
+    CheckStandardError(error);
   }
 }
 

@@ -1,41 +1,49 @@
 import React from 'react';
-import { Text, StyleSheet, Button, View } from 'react-native';
-import { AuthActions as on } from '../actions/auth_actions'
+import { Icon, Text, Button } from 'react-native-elements';
+import { StyleSheet,  View } from 'react-native';
+import {SafeAreaView} from 'react-navigation'
 
 const WelcomeScreen = ( { navigation}) => {
-
-    // is already connected, go directly to main flow
-    on.authCheckToken();
-
     return (
-        <View  style={styles.viewStyle}>
-            <Text style={styles.testStyle}>This is the circle</Text>
-            <Text style={styles.welcomeStyle}>Bienvenu </Text>
+        <View style={styles.mainViewStyle}>
+            <Icon type="feather" name="circle" size= {100}/>
+            <Text h1 style={styles.circleStyle}>This is the circle</Text>
+            <Text h2 style={styles.welcomeStyle}>Bienvenu </Text>
+            <View>
             <Button 
-                title="S'enregister"
+                type="outline"
                 onPress={ () => navigation.navigate("Signup")}
+                icon= {
+                    <Icon type="antdesign" name='login'/>
+                }
+                iconRight
+                title="S'enregister   "
             />
-            <Button 
-                title="Se connecter"
+            <Button   
+                type="outline"
                 onPress={ () => navigation.navigate("Login")}
+                icon= {
+                    <Icon type="octicon" name='sign-in'/>
+                }
+                iconRight
+                title="Se connecter  "
             />
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create( {
-    testStyle : {
-        textAlign: 'center',
-        fontSize : 30,
-        marginTop: 200,
-        marginBottom: 200
+    circleStyle : {
+        textAlign: 'center'
     },
     welcomeStyle : {
-        textAlign: 'center',
+        textAlign: 'center'
     },
-    viewStyle : {
-        backgroundColor: 'yellow',
-    }
+    mainViewStyle : {
+        backgroundColor: 'beige',
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'space-evenly'   },
 });
 
 export default WelcomeScreen;

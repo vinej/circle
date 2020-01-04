@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react'
-import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button} from 'react-native';
+import { StyleSheet, View, TextInput} from 'react-native';
+import { Text, Button, Input} from 'react-native-elements';
 import { AuthActions as on } from '../actions/auth_actions';
 import authStore from '../stores/auth_store';
+import {SafeAreaView} from 'react-navigation'
 
 const SignupScreen = ( { navigation }) => {
 
@@ -11,11 +13,12 @@ const SignupScreen = ( { navigation }) => {
   const [password, setPassword] = useState('');
 
   return (
+    <SafeAreaView forceInset={ { top: 'always'} }>
       <View>
-        <Text style={styles.maintitle}>Signup</Text>
+        <Text style={styles.maintitle}>S'enregistrer a Circle</Text>
 
-        <Text styles={styles.title}>Alias</Text>
-        <TextInput 
+        <Text style={styles.title}>Alias</Text>
+        <Input 
             secureTextEntry={false}
             style={styles.input} 
             autoCapitalize="none" 
@@ -23,16 +26,16 @@ const SignupScreen = ( { navigation }) => {
             onChangeText= {newValue => setAlias(newValue)}
             />
 
-        <Text styles={styles.title}>Courriel</Text>
-        <TextInput 
+        <Text style={styles.title}>Courriel</Text>
+        <Input 
             secureTextEntry={false}
             style={styles.input} 
             autoCapitalize="none" 
             autoCorrect={false}
             onChangeText= {newValue => setEmail(newValue)}
             />        
-        <Text styles={styles.title}>Mot de passe</Text>
-        <TextInput 
+        <Text style={styles.title}>Mot de passe</Text>
+        <Input 
             secureTextEntry={true}
             keyboardType={"visible-password"}
             placeholder={"mot de passe"}
@@ -41,28 +44,33 @@ const SignupScreen = ( { navigation }) => {
             autoCorrect={false}
             onChangeText= {newValue => setPassword(newValue)}
             />
-          <TouchableOpacity
-              onPress={ () => on.authSignUp(email, password, alias) }
-          >
-            <Text>S'enregistrer</Text>
-          </TouchableOpacity>
+        
+        <View style={styles.viewButton}>
+          <Button
+            buttonStyle={ styles.button }
+            type='outline'
+            title="S'enregistrer"
+            onPress={ () => on.authSignUp(email, password, alias) }
+          />
 
-          <TouchableOpacity
-              onPress={ () => navigation.navigate("Login") }
-          >
-            <Text>Se connecter</Text>
-          </TouchableOpacity>
+          <Button
+            buttonStyle={ styles.button }
+            type="outline"
+            onPress={ () => navigation.navigate("Welcome") }
+            title="Retour a Welcome"
+          />
+        </View>  
 
           <Text> { authStore.errorMessage }</Text>
       </View>
+    </SafeAreaView>
   )
 };
 
 const styles = StyleSheet.create({
   title: {
-    margin : 5,
-    fontSize : 30,
-    borderWidth: 1
+    marginLeft: 15,
+    fontSize: 20
   },
   maintitle: {
     margin : 5,
@@ -74,6 +82,13 @@ const styles = StyleSheet.create({
     borderColor : 'black',
     borderWidth: 1,
     height:25
+  },
+  viewButton: {
+    alignItems: "center",
+    marginTop: 20
+  },
+  button: {
+    marginBottom: 5
   }
 });
 

@@ -6,5 +6,6 @@ export let todoTypes = {
   todoDelete    : todoPrefixType + 'Delete',
   todoSetDesc   : todoPrefixType + 'SetDesc',
   todoSetDone   : todoPrefixType + 'SetDone',
-  todoGetAll    : todoPrefixType + 'GetAll'
+  todoGetAll    : todoPrefixType + 'GetAll',
+  todoError     : todoPrefixType + 'Error'
 }

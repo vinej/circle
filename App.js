@@ -1,4 +1,5 @@
 import React from 'react'
+import { ThemeProvider } from 'react-native-elements';
 import { setNavigator } from './src/navigationRef'
 
 import {  createStackNavigator, 
@@ -13,23 +14,21 @@ import ChatScreen from './src/screens/ChatScreen';
 import IssueScreen from './src/screens/IssueScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import LogoutScreen from './src/screens/LogoutScreen';
-import NewOpinionScreen from './src/screens/NewOpinionScreen';
+import OpinionScreen from './src/screens/OpinionScreen';
 import PaypalScreen from './src/screens/PaypalScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import RuleScreen from './src/screens/RuleScreen';
-import AuthService from './src/services/auth_service'
-import TodoService from './src/services/todo_service'
 import WelcomeScreen from './src/screens/WelcomeScreen'
 import SettingScreen from './src/screens/SettingScreen'
-import { MockAuthService, MockTodoService } from './src/services/mock_services'
 import TodoScreen from './src/screens/TodoScreen';
-
-TodoService.setInstance( new MockTodoService() )
+import SplashScreen from './src/screens/SplashScreen';
+import TopicScreen from './src/screens/TopicScreen';
 
 const settingNavigator = createStackNavigator( {
   Setting: SettingScreen,
   Logout : LogoutScreen,
+  Topic: TopicScreen,
   Todo: TodoScreen,
   Paypal : PaypalScreen,
   Rule: RuleScreen,
@@ -39,15 +38,14 @@ const settingNavigator = createStackNavigator( {
 });
 
 const switchNavigator = createSwitchNavigator( {
-  loginFlow: createStackNavigator( {
-    Welcome: WelcomeScreen,
-    Signup : SignupScreen,
-    Login : LoginScreen
-  } ),
+  Splash : SplashScreen,
+  Welcome: WelcomeScreen,
+  Signup : SignupScreen,
+  Login : LoginScreen,
   mainFlow : createBottomTabNavigator( {
     AllOpinion : AllOpinionScreen,
     Profile : ProfileScreen,
-    Opinion : NewOpinionScreen,
+    Opinion : OpinionScreen,
     Chat: ChatScreen,
     Settings : settingNavigator
   })
@@ -57,8 +55,9 @@ const App = createAppContainer(switchNavigator );
 
 export default () => {
   return (
-      //
-      <App ref= { (navigator) => { setNavigator(navigator) } } />
+     <ThemeProvider>
+        <App ref= { (navigator) => { setNavigator(navigator) } } />
+      </ThemeProvider>  
   )
 };
 

@@ -1,23 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { observer, Observer } from 'mobx-react'
 import { Text, StyleSheet, FlatList, View, Button, TouchableOpacity} from 'react-native';
-import todoAction from '../actions/todo_actions'
+import { TodoActions as on } from '../actions/todo_actions'
 import todoStore from '../stores/todo_store'
+import { AuthActions } from '../actions/auth_actions';
+import { EvilIcons } from '@expo/vector-icons';
 
 const TodoScreen = (props) => {
-  //console.log(props);
-
-  //let todos = [ { id:1, desc: 'test', done: false}, 
-  //{ id:2, desc: 'test 2', done: true} ]
-  // horizontal : horizontal list.
-  // ShowsHorizontalScrollIndicator={false}
-
   const todos = todoStore.todos.slice();
+
+  // call get all once
+  useEffect(() => {
+    on.todoGetAll();
+  }, [])
 
   return (
       <View>
         <Button title="add"
-            onPress={ () => todoAction.todoAdd({ id:1, desc: 'test', done: false})}
+            onPress={ () => todoAction.todoAdd({ IdMember:1,  Content: 'test34', IdDone: true, DoneDate:'2012-12-12'})}
         />   
         <Button title="delete"
             onPress={ () => todoAction.todoDelete(1)}
@@ -25,13 +25,13 @@ const TodoScreen = (props) => {
 
         <FlatList
         data = { todos }
-        keyExtractor = { (todo) => todo.id.toString()}
+        keyExtractor = { (todo) => todo.Id.toString()}
         renderItem = { ( { item } )  => (
            <Observer>{ () => (
               <View style={styles.filter}>
-                <Text>{item.id}</Text>
-                <Text>{item.desc}</Text>
-                <Text>{item.done}</Text>
+                <Text>{item.Id}</Text>
+                <Text>{item.Content}</Text>
+                <Text>{item.IsDone}</Text>
               </View>
           )}</Observer>
         )}
@@ -39,6 +39,17 @@ const TodoScreen = (props) => {
       </View>
     )
 };
+
+TodoScreen.navigationOptions = () => {
+  return {
+    headerRight: (
+      <TouchableOpacity >
+        <EvilIcons name='pencil' size={30} />
+      </TouchableOpacity>
+    )
+  }
+}
+
 
 const styles = StyleSheet.create({
   view: {

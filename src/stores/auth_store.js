@@ -4,6 +4,7 @@ import { navigate } from  '../navigationRef'
 
 class AuthStore {
   name = '';
+  token = '';
   authenticated = false;
   errorMessage = '';
   isAutorizationInit = false;
@@ -20,6 +21,7 @@ class AuthStore {
     const token = await localStorage.getItem('remux-circle-token')
     if (token != null && token != '') {
       const name = await localStorage.getItem('remux-circle-name')
+      this.token = token;
       this.authenticated = true
       this.name = name
       this.errorMessage = ''
@@ -30,12 +32,14 @@ class AuthStore {
       this.name = ''
       this.errorMessage = ''
       this.isAutorizationInit = false
+      navigate('Welcome');
     }
   }
 
   async signInOrUp(token, name) {
-    await localStorage.setItem('remux-circle-token', token);
-    await localStorage.setItem('remux-circle-name', name);
+    await localStorage.setItem('remux-circle-token', token.toString());
+    await localStorage.setItem('remux-circle-name', name.toString());
+    this.token = token;
     this.authenticated = true;
     this.name = name;
     this.errorMessage = '';
@@ -48,17 +52,21 @@ class AuthStore {
     await localStorage.removeItem('remux-circle-name');
     this.authenticated = false;
     this.name = '';
+    this.toen = '';
     this.errorMessage = '';
     navigate("Welcome");
   }
 
-  authError(error) {
-    console.log("***error*** : " + error)
+  async authError(error) {
+    await localStorage.removeItem('remux-circle-token');
+    await localStorage.removeItem('remux-circle-name');
     this.errorMessage = error;
     this.authenticated = false;
     this.name = '' ;
+    this.token = '';
     this.isAutorizationInit = false
     console.log(error)
+    navigate('Login');
   }
 }
 

@@ -1,4 +1,5 @@
 import api from './circle_api'
+import { checkStandardError } from './circle_api'
 
 export default class AuthService {
   constructor() {
@@ -17,29 +18,24 @@ export default class AuthService {
   }
 
   signIn({ email, password }, next, err) {
-    var parameters = `/api/token?email=${email}&password=${password}`;
+    var parameters = `/token?email=${email}&password=${password}`;
     api.get(parameters)
     .then(response => {
       next(response.data.Token, response.data.Alias); 
     })
     .catch(error => {
-      let errorObject=JSON.parse(JSON.stringify(error));
-      console.log(errorObject);
-      err(errorObject.message);
+      err(checkStandardError(error));
     });
   }
 
   signUp({ email, password, name }, next, err) {
-    var parameters = `/api/token?email=${email}&password=${password}&alias=${name}`;
+    var parameters = `/token?email=${email}&password=${password}&alias=${name}`;
     api.get(parameters)
     .then(response => {
-      console.log(response)
       next(response.data.Token, response.data.Alias); 
     })
     .catch(error => { 
-      let errorObject=JSON.parse(JSON.stringify(error));
-      console.log(errorObject);
-      err(errorObject.message);
+      err(checkStandardError(error));
     });
   }
 

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { API_URL, HEADERS, PARAMETERS } from './config_service';
+import api from './circle_api'
+import { HEADERS } from './circle_api'
 
 export default class CrudService {
   constructor(service) {
@@ -7,34 +7,42 @@ export default class CrudService {
   }
 
   add(entity, next, err) {
-    axios.post(`${API_URL}/${this.service}?${PARAMETERS()}`, entity, HEADERS())
+    api.post(`/${this.service}`, entity, HEADERS())
     .then(response => {
       next(response.data); 
     })
-    .catch(response => err(response.data));
+    .catch(error => {
+      err(checkStandardError(error));
+    });
   };
 
   delete(entity, next, err) {
-    axios.delete(`${API_URL}/${this.service}/${entity._id}?${PARAMETERS()}`, HEADERS())
+    api.delete(`/${this.service}/${entity.Id}`, HEADERS())
     .then(response => {
       next(entity); 
     })
-    .catch(response => err(response.data));
+    .catch(error => {
+      err(checkStandardError(error));
+    });
   };
 
   update(entity, next, err) {
-    axios.put(`${API_URL}/${this.service}?${PARAMETERS()}`, entity, HEADERS())
+    api.put(`/${this.service}`, entity, HEADERS())
     .then(response => {
       next(response.data); 
     })
-    .catch(response => err(response.data));
+    .catch(error => {
+      err(checkStandardError(error));
+    });
   };
 
   getAll(next, err) {
-    axios.get(`${API_URL}/${this.service}?${PARAMETERS()}`, HEADERS())
+    api.get(`/${this.service}`, HEADERS())
     .then(response => {
         next(response.data);
     })
-    .catch(response => err(response.data));
+    .catch(error => {
+      err(error);
+    });
   };
 }

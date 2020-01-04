@@ -1,26 +1,33 @@
 import React from 'react';
-import { StyleSheet, View, Button} from 'react-native';
+import { StyleSheet, View,} from 'react-native';
+import { Button,} from 'react-native-elements';
 //import { Ionicons } from '@expo/vector-icons';
 
 const SettingScreen = ({navigation}) => {
   return (
     <View>
-        <Button title="Logout"
+        <Button title="Logout" type="outline"
           onPress={ () => navigation.navigate("Logout")}
         />   
-        <Button title="Paypal"
+        <Button title="Topic" type="outline"
+          onPress={ () => navigation.navigate("Topic")}
+        />   
+        <Button title="Todo" type="outline"
+          onPress={ () => navigation.navigate("Todo")}
+        />   
+        <Button title="Paypal" type="outline"
           onPress={ () => navigation.navigate("Paypal")}
         />   
-        <Button title="Rule"
+        <Button title="Rule" type="outline"
           onPress={ () => navigation.navigate("Rule")}
         />   
-        <Button title="Issue"
+        <Button title="Issue" type="outline"
           onPress={ () => navigation.navigate("Issue")}
         />   
-        <Button title="About"
+        <Button title="About" type="outline"
           onPress={ () => navigation.navigate("About")}
         />   
-        <Button title="Annonceur"
+        <Button title="Annonceur" type="outline"
           onPress={ () => navigation.navigate("Advertiser")}
         />   
     </View>
