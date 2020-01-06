@@ -51,17 +51,9 @@ export class TodoActions {
   }
 
   static todoError(error) {
-    if (error == 'Request failed with status code 401') {
-      dispatch( {
-        type: at.authError,
-        payload: error
-      })
-    }
-    else {
-      dispatch( {
-        type: t.todoError,
-        payload: error
-      })
-    }
+    dispatch( {
+      type: t.todoError,
+      payload: error
+    })
   }
 }
