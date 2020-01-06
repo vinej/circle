@@ -7,7 +7,7 @@ const TopicScreen = () => {
 
   // call get the current topic
   useEffect(() => {
-    on.get();
+    on.getCurrent();
   }, []);
 
   var saveButton;

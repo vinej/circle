@@ -20,6 +20,23 @@ export class TopicActions {
     })
   }
 
+  static topicGetCurrent() {
+    dispatch( {
+      type: t.topicGetCurrent,
+      payload: function() {
+        const service = TopicService.getInstance()
+        service.getCurrent( topicActions._topicGetCurrent , topicActions.topicError);
+      }
+    })
+  }
+
+  static _topicGetCurrent(topic) {
+    dispatch( {
+      type: t.topicGetCurrent,
+      payload: topic
+    })
+  }
+
   static topicAdd(topic) {
     dispatch( {
       type: t.topicAdd,

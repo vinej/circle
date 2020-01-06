@@ -2,11 +2,12 @@
 export let topicPrefixType = 'topic_'
 
 export let topicTypes = {
-  topicAdd        : topicPrefixType + 'Add',
-  topicDelete     : topicPrefixType + 'Delete',
-  topicUpdate     : topicPrefixType + 'Update',
-  topicActivate   : topicPrefixType + 'Activate',
-  topicDeActivate : topicPrefixType + 'DeActivate',
-  topicGetAll     : topicPrefixType + 'GetAll',
-  topicError      : topicPrefixType + 'Error'
+  topicAdd         : topicPrefixType + 'Add',
+  topicDelete      : topicPrefixType + 'Delete',
+  topicUpdate      : topicPrefixType + 'Update',
+  topicActivate    : topicPrefixType + 'Activate',
+  topicDeActivate  : topicPrefixType + 'DeActivate',
+  topicGetAll      : topicPrefixType + 'GetAll',
+  topicGetCcurrent : topicPrefixType + 'GetCurrent',
+  topicError       : topicPrefixType + 'Error'
 }
