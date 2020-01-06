@@ -54,6 +54,23 @@ export class TopicActions {
     })
   }
 
+  static topicUpdate(topic) {
+    dispatch( {
+      type: t.topicUpdate,
+      payload: function() {
+        const service = TopicService.getInstance()
+        service.topicUpdate( topicActions._topicUpdate , topicActions.topicError);
+      }
+    })
+  }
+
+  static _topicUpdate(topic) {
+    dispatch( {
+      type: t.topicUpdate,
+      payload: topic
+    })
+  }
+
   static topicActivate(topic) {
     dispatch( {
       type: t.topicActivate,

@@ -3,34 +3,43 @@ import { CheckStandardError } from './StandardError'
 
 class TopicStore {
   // the topic for the period
-  // Id                : int64
+  // id                : int64
   // Comment           : max 100 car
   // IsActivated       : bool
   // DateStart         : DateTime
   // DateEnd           : DateTime
-  // ? WinnerPrice       : The price that will be given to the winner
-  // ? currentWinnerId   : The current member in first place until now to win                
-  // ? currentWinnerLike : The number of like for this member
-  // a adviser list is associated to one topic
-  topic = {};
+  id = -1;
+  comment = '';
+  isActivated = false;
+  dateStart = '';
+  dateEnd = '';
 
   // call at first by the service to set the current topic
   set(topic) {
-    this.topic = topic;
+    this.id = topic.Id;
+    this.comment = topic.Comment;
+    this.isActivated = topic.IsActivated;
+    this.dateStart = topic.DateStart;
+    this.dateEnd = topic.DateEnd;
+  }
+
+  clear() {
+    this.id = -1;
+    this.comment = '';
+    this.isActivated = false;
+    this.dateStart = '';
+    this.dateEnd = '';
   }
 
   // get the current topic, call mostly by the TopicScreen
   get() {
-    return this.topic;
-  }
-
-  activate(topic) {
-    this.topic = topic;
-  }
-
-  deactivate(topic) {
-    this.topic = topic;
-    // activate a topic
+    return {
+      Id : this.id,  
+      Comment : this.comment,
+      IsActivated : this.isActivated,
+      DateStart : this.dateStart,
+      DateEnd : this.dateEnd
+    }
   }
 
   error(error) {
@@ -39,12 +48,14 @@ class TopicStore {
 }
 
 decorate( TopicStore, {
-  topic : observable,
+  id : observable,
+  comment : observable,
+  dateStart : observable,
+  dateEnd : observable,
+  isActivated : observable,
   get: action,
   set: action,
-  activate : action,
-  desactivate: action
+  clear: action
 })
 
 export default new TopicStore();
-
