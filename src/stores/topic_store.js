@@ -1,5 +1,4 @@
 import { action, decorate, observable } from 'mobx'
-import { CheckStandardError } from './StandardError'
 
 class TopicStore {
   // the topic for the period
@@ -43,7 +42,6 @@ class TopicStore {
   }
 
   error(error) {
-    CheckStandardError(error);
   }
 }
 

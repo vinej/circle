@@ -17,9 +17,9 @@ class AuthStore {
     return this.authenticated
   }
 
-  async checkToken() {
-    const token = await localStorage.getItem('remux-circle-token')
-    if (token != null && token != '') {
+  async checkToken(isValid) {
+    if (isValid) {
+      // check if the token still valid
       const name = await localStorage.getItem('remux-circle-name')
       this.token = token;
       this.authenticated = true
@@ -57,7 +57,7 @@ class AuthStore {
     navigate("Welcome");
   }
 
-  async authError(error) {
+  async error(error) {
     await localStorage.removeItem('remux-circle-token');
     await localStorage.removeItem('remux-circle-name');
     this.errorMessage = error;

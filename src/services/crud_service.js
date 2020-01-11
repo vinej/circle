@@ -32,8 +32,6 @@ export default class CrudService {
   };
 
   update(entity, next, err) {
-    console.log("service update");
-    console.log(entity);
     api.put(`/${this.service}`, entity, HEADERS())
     .then(response => {
       next(response.data); 

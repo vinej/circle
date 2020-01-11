@@ -3,6 +3,7 @@ import { loggerResolver }         from './logger_resolver';
 import { authResolver }           from './auth_resolver';
 import { todoResolver }           from './todo_resolver';
 import { topicResolver }           from './topic_resolver';
+import { errorResolver }           from './error_resolver';
 
 class ParallelAction {
   constructor(count, next) {
@@ -103,6 +104,9 @@ class Dispatcher {
 export let dispatcher = new Dispatcher();
 // logger first
 dispatcher.addResolver( loggerResolver )
+
+// Error second
+dispatcher.addResolver( errorResolver )
 
 // thunk for services
 dispatcher.addResolver( thunkResolver )

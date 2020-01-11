@@ -1,30 +1,25 @@
 import { dispatch } from '../resolvers/dispatcher'
 import AuthService from '../services/auth_service';
 import { authTypes as t } from '../actions/auth_action_type'
+import localStorage from '../helpers/localStorage'
 
 // must use static method to pass them as callback
 export class AuthActions {
-  static authCheckToken() {
+  static async authCheckToken() {
+    const token = await localStorage.getItem('remux-circle-token')
     dispatch( {
-      type: t.authCheckToken
-    })
-  }
-
-  static authSetAuthorizations() {
-    dispatch( {
-      type: t.authSetAuthorizations,
+      type: t.authCheckToken,
       payload: function() {
         const service = AuthService.getInstance()
-        service.setAuthorizations(AuthActions._authSetAuthorizations , AuthActions.authError)
+        service.checkToken(token, AuthActions._authCheckToken , AuthActions.authError)
       }
     })
   }
 
-  // called from service
-  static _authSetAuthorizations(authorizations) {
+  static _authCheckToken(isValid) {
     dispatch( {
-      type: t.authSetAuthorizations,
-      payload: authorizations
+      type: t.authCheckToken,
+      payload: isValid
     })
   }
 
