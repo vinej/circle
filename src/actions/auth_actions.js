@@ -7,13 +7,21 @@ import localStorage from '../helpers/localStorage'
 export class AuthActions {
   static async authCheckToken() {
     const token = await localStorage.getItem('remux-circle-token')
-    dispatch( {
-      type: t.authCheckToken,
-      payload: function() {
-        const service = AuthService.getInstance()
-        service.checkToken(token, AuthActions._authCheckToken , AuthActions.authError)
-      }
-    })
+    if (token != null && token != '') {
+      dispatch( {
+        type: t.authCheckToken,
+        payload: function() {
+          const service = AuthService.getInstance()
+          service.checkToken(token, AuthActions._authCheckToken , AuthActions.authError)
+        }
+      })
+    } else {
+      // no token, == false
+      dispatch( {
+        type: t.authCheckToken,
+        payload: false
+      })
+    }
   }
 
   static _authCheckToken(isValid) {
