@@ -2,6 +2,11 @@ import api from './circle_api'
 import { HEADERS } from './circle_api'
 
 export default class CrudService {
+
+  static setInstance(instanceService) {
+    this.instanceService = instanceService
+  }
+
   constructor(service) {
     this.service = service;
   }
@@ -27,6 +32,8 @@ export default class CrudService {
   };
 
   update(entity, next, err) {
+    console.log("service update");
+    console.log(entity);
     api.put(`/${this.service}`, entity, HEADERS())
     .then(response => {
       next(response.data); 

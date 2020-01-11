@@ -1,50 +1,67 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react'
-import {  StyleSheet, View} from 'react-native';
+import {  StyleSheet, ScrollView} from 'react-native';
 import { Text, Button, CheckBox, Input } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import TopicStore from '../stores/topic_store';
 import { TopicActions as on } from '../actions/topic_actions'
+import I18n from 'ex-react-native-i18n'
+
 
 const TopicScreen = () => {
-
+  //var topic = TopicStore.get();
   // call get the current topic
   useEffect(() => {
     on.topicGetCurrent();
   }, []);
 
   var saveButton;
-  if (TopicStore.id == -1) {
+  if (TopicStore.Id == -1) {
     saveButton = <Button 
       title="Add" 
       type="outline"
-      onPress={ () => on.add() }
+      onPress={ () => on.topicAdd(TopicStore.get()) }
     />
   } else {
     saveButton = <Button 
       title="Update" 
       type="outline"
-      onPress={ () => on.add() }
+      onPress={ () => on.topicUpdate(TopicStore.get()) }
     />
   } 
 
   return (
-    <View>
+    <ScrollView>
       <Text style={styles.text}>Topic Screen</Text>
 
       <Input  label="Description"
-        defaultValue= { TopicStore.description }
-        style={styles.input} 
+        defaultValue= { TopicStore.Description }
         autoCapitalize="none" 
         autoCorrect={false}
-        onChangeText= {newValue => TopicStore.description = newValue}
-        placeHolder={"Topic comment"}
+        onChangeText= {newValue => TopicStore.Description = newValue}
+        placeHolder={"Topic Description"}
       />
 
       <CheckBox
         title="Activated"
-        checked={ TopicStore.isActivated }
-        onPress={ () => TopicStore.isActivated = !TopicStore.isActivated }
+        checked={ TopicStore.IsActivated }
+        onPress={ () => TopicStore.IsActivated = !TopicStore.IsActivated }
+      />
+
+      <DateTimePicker 
+        title="Start"
+        display="calendar"
+        locale={ I18n.locale}
+        value={ TopicStore.StartDate}
+        onChange={ (event, date) => TopicStore.StartDate = new Date(date) }
+        mode="date"
+      />
+
+      <DateTimePicker 
+        locale={ I18n.locale}
+        value={ TopicStore.EndDate}
+        onChange={ (event, date) => TopicStore.EndDate = new Date(date) }
+        mode="date"
       />
 
       { saveButton }
@@ -56,7 +73,7 @@ const TopicScreen = () => {
       <Button title="select from list" type="outline"
         onPress={ () => navigation.navigate("Topic")}
       /> 
-    </View>
+    </ScrollView>
   );
 }
 

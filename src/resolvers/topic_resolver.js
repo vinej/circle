@@ -16,7 +16,8 @@ export function topicResolver(action, next) {
     case t.topicGetAll :
       topicStore.setAll(action.payload)
       break;
-    case t.topicGetCcurrent :
+    case t.topicGetCurrent :
+      console.log("resolver topic get current")
       topicStore.set(action.payload)
       break;
     case t.topicActivate :

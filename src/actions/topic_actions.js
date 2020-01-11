@@ -42,7 +42,7 @@ export class TopicActions {
       type: t.topicAdd,
       payload: function() {
         const service = TopicService.getInstance()
-        service.topicAdd( TopicActions._topicAdd , TopicActions.topicError);
+        service.add( topic, TopicActions._topicAdd , TopicActions.topicError);
       }
     })
   }
@@ -59,7 +59,7 @@ export class TopicActions {
       type: t.topicDelete,
       payload: function() {
         const service = TopicService.getInstance()
-        service.topicDelete( TopicActions._topicDelete , TopicActions.topicError);
+        service.delete( topic, TopicActions._topicDelete , TopicActions.topicError);
       }
     })
   }
@@ -76,7 +76,7 @@ export class TopicActions {
       type: t.topicUpdate,
       payload: function() {
         const service = TopicService.getInstance()
-        service.topicUpdate( TopicActions._topicUpdate , TopicActions.topicError);
+        service.update( topic, TopicActions._topicUpdate , TopicActions.topicError);
       }
     })
   }
@@ -84,40 +84,6 @@ export class TopicActions {
   static _topicUpdate(topic) {
     dispatch( {
       type: t.topicUpdate,
-      payload: topic
-    })
-  }
-
-  static topicActivate(topic) {
-    dispatch( {
-      type: t.topicActivate,
-      payload: function() {
-        const service = TopicService.getInstance()
-        service.topicActivate( TopicActions._topicActivate , TopicActions.topicError);
-      }
-    })
-  }
-
-  static _topicActivate(topic) {
-    dispatch( {
-      type: t.topicActivate,
-      payload: topic
-    })
-  }
-
-  static topicDeActivate(topic) {
-    dispatch( {
-      type: t.topicDeActivate,
-      payload: function() {
-        const service = TopicService.getInstance()
-        service.topicDeActivate( topicActions._topicDeActivate , topicActions.topicError);
-      }
-    })
-  }
-
-  static _topicDeActivate(topic) {
-    dispatch( {
-      type: t.topicActivate,
       payload: topic
     })
   }

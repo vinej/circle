@@ -1,17 +1,14 @@
 import api from './circle_api'
 import { HEADERS } from './circle_api'
+import CrudService from './crud_service' 
 
-export default class TopicService  {
+export default class TopicService  extends CrudService {
   constructor() {
+    super("topic");
     this.instanceService = null
   }
 
-  static setInstance(instanceService) {
-    this.instanceService = instanceService
-  }
-
   static getInstance() {
-    console.log("new service");
     if (this.instanceService == null) {
       this.instanceService = new TopicService()
     }
@@ -27,24 +24,4 @@ export default class TopicService  {
       err(error);
     });
   }
-
-  activate(entity, next, err) {
-    api.put(`/${this.service}/${enitiy.Id}/activate`, entity, HEADERS())
-    .then(response => {
-      next(response.data); 
-    })
-    .catch(error => {
-      err(error);
-    });
-  };
-
-  deactivate(entity, next, err) {
-    api.put(`/${this.service}/${enitiy.Id}/deactivate`, entity, HEADERS())
-    .then(response => {
-      next(response.data); 
-    })
-    .catch(error => {
-      err(error);
-    });
-  };
 }

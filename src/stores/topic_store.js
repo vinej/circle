@@ -8,37 +8,37 @@ class TopicStore {
   // IsActivated       : bool
   // DateStart         : DateTime
   // DateEnd           : DateTime
-  id = -1;
-  description = '';
-  isActivated = false;
-  dateStart = new Date();
-  dateEnd = new Date();
+  Id = -1;
+  Description = '';
+  IsActivated = false;
+  StartDate = new Date();
+  EndDate = new Date();
 
   // call at first by the service to set the current topic
   set(topic) {
-    this.id = topic.Id;
-    this.description = topic.Description;
-    this.isActivated = topic.IsActivated;
-    this.dateStart = topic.DateStart;
-    this.dateEnd = topic.DateEnd;
+    this.Id = topic.Id;
+    this.Description = topic.Description;
+    this.IsActivated = topic.IsActivated;
+    this.StartDate = new Date(topic.StartDate);
+    this.EndDate = new Date(topic.EndDate);
   }
 
   clear() {
-    this.id = -1;
-    this.description = '';
-    this.isActivated = false;
-    this.dateStart = '';
-    this.dateEnd = '';
+    this.Id = -1;
+    this.Description = '';
+    this.IsActivated = false;
+    this.StartDate = new Date();
+    this.EndDate = new Date();
   }
 
   // get the current topic, call mostly by the TopicScreen
   get() {
     return {
-      Id : this.id,  
-      Description : this.description,
-      IsActivated : this.isActivated,
-      DateStart : this.dateStart,
-      DateEnd : this.dateEnd
+      Id : this.Id,  
+      Description : this.Description,
+      IsActivated : this.IsActivated,
+      StartDate : this.StartDate,
+      EndDate : this.EndDate
     }
   }
 
@@ -48,11 +48,11 @@ class TopicStore {
 }
 
 decorate( TopicStore, {
-  id : observable,
-  description : observable,
-  dateStart : observable,
-  dateEnd : observable,
-  isActivated : observable,
+  Id : observable,
+  Description : observable,
+  DateStart : observable,
+  DateEnd : observable,
+  IsActivated : observable,
   get: action,
   set: action,
   clear: action
