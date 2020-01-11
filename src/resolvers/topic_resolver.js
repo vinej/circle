@@ -16,6 +16,9 @@ export function topicResolver(action, next) {
     case t.topicGetAll :
       topicStore.setAll(action.payload)
       break;
+    case t.topicGetCcurrent :
+      topicStore.set(action.payload)
+      break;
     case t.topicActivate :
       topicStore.activate(action.payload)
       break;

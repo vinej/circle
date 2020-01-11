@@ -1,6 +1,7 @@
-import CrudService from './crud_service' 
+import api from './circle_api'
+import { HEADERS } from './circle_api'
 
-export default class TopicService extends CrudService {
+export default class TopicService  {
   constructor() {
     this.instanceService = null
   }
@@ -10,14 +11,15 @@ export default class TopicService extends CrudService {
   }
 
   static getInstance() {
-    if (!this.instanceService) {
+    console.log("new service");
+    if (this.instanceService == null) {
       this.instanceService = new TopicService()
     }
     return this.instanceService
   }  
 
   getCurrent(next, err) {
-    api.get(`/${this.service}/getcurrent`, HEADERS())
+    api.get(`/${this.service}/0/current`, HEADERS())
     .then(response => {
         next(response.data);
     })

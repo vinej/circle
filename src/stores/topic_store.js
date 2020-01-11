@@ -9,15 +9,15 @@ class TopicStore {
   // DateStart         : DateTime
   // DateEnd           : DateTime
   id = -1;
-  comment = '';
+  description = '';
   isActivated = false;
-  dateStart = '';
-  dateEnd = '';
+  dateStart = new Date();
+  dateEnd = new Date();
 
   // call at first by the service to set the current topic
   set(topic) {
     this.id = topic.Id;
-    this.comment = topic.Comment;
+    this.description = topic.Description;
     this.isActivated = topic.IsActivated;
     this.dateStart = topic.DateStart;
     this.dateEnd = topic.DateEnd;
@@ -25,7 +25,7 @@ class TopicStore {
 
   clear() {
     this.id = -1;
-    this.comment = '';
+    this.description = '';
     this.isActivated = false;
     this.dateStart = '';
     this.dateEnd = '';
@@ -35,7 +35,7 @@ class TopicStore {
   get() {
     return {
       Id : this.id,  
-      Comment : this.comment,
+      Description : this.description,
       IsActivated : this.isActivated,
       DateStart : this.dateStart,
       DateEnd : this.dateEnd
@@ -49,7 +49,7 @@ class TopicStore {
 
 decorate( TopicStore, {
   id : observable,
-  comment : observable,
+  description : observable,
   dateStart : observable,
   dateEnd : observable,
   isActivated : observable,

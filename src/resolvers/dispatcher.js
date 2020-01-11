@@ -2,6 +2,7 @@ import { thunkResolver }          from './thunk_resolver';
 import { loggerResolver }         from './logger_resolver';
 import { authResolver }           from './auth_resolver';
 import { todoResolver }           from './todo_resolver';
+import { topicResolver }           from './topic_resolver';
 
 class ParallelAction {
   constructor(count, next) {
@@ -109,9 +110,11 @@ dispatcher.addResolver( thunkResolver )
 // authentification
 dispatcher.addResolver( authResolver )
 
-// no special order for functionnal resolvers
+// no special order for functionnal resolvers6
 dispatcher.addResolver( todoResolver )
 
+// no special order for functionnal resolvers6
+dispatcher.addResolver( topicResolver )
 // form resolvers
 //dispatcher.addResolver( signInUpResolver )
 

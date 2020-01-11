@@ -1,17 +1,20 @@
-import React from 'react';
-import {  StyleSheet } from 'react-native';
-import { Text, Button, Checkbox } from 'react-native-elements';
-import topicStore from '../actions/topic_store';
+import React, { useEffect } from 'react';
+import { observer } from 'mobx-react'
+import {  StyleSheet, View} from 'react-native';
+import { Text, Button, CheckBox, Input } from 'react-native-elements';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import TopicStore from '../stores/topic_store';
+import { TopicActions as on } from '../actions/topic_actions'
 
 const TopicScreen = () => {
 
   // call get the current topic
   useEffect(() => {
-    on.getCurrent();
+    on.topicGetCurrent();
   }, []);
 
   var saveButton;
-  if (topicStore.id == -1) {
+  if (TopicStore.id == -1) {
     saveButton = <Button 
       title="Add" 
       type="outline"
@@ -29,29 +32,19 @@ const TopicScreen = () => {
     <View>
       <Text style={styles.text}>Topic Screen</Text>
 
-      <Input  label="Comment"
+      <Input  label="Description"
+        defaultValue= { TopicStore.description }
         style={styles.input} 
         autoCapitalize="none" 
         autoCorrect={false}
-        onChangeText= {newValue => topicStore.comment = newValue}
+        onChangeText= {newValue => TopicStore.description = newValue}
         placeHolder={"Topic comment"}
       />
 
-      <Checkbox
+      <CheckBox
         title="Activated"
-        checked={ value => topicStore.isActivated = value}
-      />
-
-      <DateTimePicker value={topicStore.dateStart}
-          mode='datetime'
-          display="Start Date"
-          onChange={ date => topicStore.dateEnd = date} 
-      />
-
-      <DateTimePicker value={ topicStore.dateEnd}
-          mode='datetime'
-          display="End Date"
-          onChange={ date => topicStore.dateEnd = date} 
+        checked={ TopicStore.isActivated }
+        onPress={ () => TopicStore.isActivated = !TopicStore.isActivated }
       />
 
       { saveButton }
@@ -64,7 +57,8 @@ const TopicScreen = () => {
         onPress={ () => navigation.navigate("Topic")}
       /> 
     </View>
-);
+  );
+}
 
 const styles = StyleSheet.create({
   text: {
@@ -72,4 +66,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TopicScreen;
+export default observer(TopicScreen);

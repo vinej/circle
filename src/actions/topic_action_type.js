@@ -8,6 +8,6 @@ export let topicTypes = {
   topicActivate    : topicPrefixType + 'Activate',
   topicDeActivate  : topicPrefixType + 'DeActivate',
   topicGetAll      : topicPrefixType + 'GetAll',
-  topicGetCcurrent : topicPrefixType + 'GetCurrent',
+  topicGetCurrent  : topicPrefixType + 'GetCurrent',
   topicError       : topicPrefixType + 'Error'
 }

@@ -8,7 +8,7 @@ export class TopicActions {
       type: t.topicGetAll,
       payload: function() {
         const service = TopicService.getInstance()
-        service.getAll( topicActions._topicGetAll , topicActions.topicError);
+        service.getAll( TopicActions._topicGetAll , TopicActions.topicError);
       }
     })
   }
@@ -24,8 +24,8 @@ export class TopicActions {
     dispatch( {
       type: t.topicGetCurrent,
       payload: function() {
-        const service = TopicService.getInstance()
-        service.getCurrent( topicActions._topicGetCurrent , topicActions.topicError);
+        const service = TopicService.getInstance();
+        service.getCurrent( TopicActions._topicGetCurrent , TopicActions.topicError);
       }
     })
   }
@@ -42,7 +42,7 @@ export class TopicActions {
       type: t.topicAdd,
       payload: function() {
         const service = TopicService.getInstance()
-        service.topicAdd( topicActions._topicAdd , topicActions.topicError);
+        service.topicAdd( TopicActions._topicAdd , TopicActions.topicError);
       }
     })
   }
@@ -59,7 +59,7 @@ export class TopicActions {
       type: t.topicDelete,
       payload: function() {
         const service = TopicService.getInstance()
-        service.topicDelete( topicActions._topicDelete , topicActions.topicError);
+        service.topicDelete( TopicActions._topicDelete , TopicActions.topicError);
       }
     })
   }
@@ -76,7 +76,7 @@ export class TopicActions {
       type: t.topicUpdate,
       payload: function() {
         const service = TopicService.getInstance()
-        service.topicUpdate( topicActions._topicUpdate , topicActions.topicError);
+        service.topicUpdate( TopicActions._topicUpdate , TopicActions.topicError);
       }
     })
   }
@@ -93,7 +93,7 @@ export class TopicActions {
       type: t.topicActivate,
       payload: function() {
         const service = TopicService.getInstance()
-        service.topicActivate( topicActions._topicActivate , topicActions.topicError);
+        service.topicActivate( TopicActions._topicActivate , TopicActions.topicError);
       }
     })
   }
