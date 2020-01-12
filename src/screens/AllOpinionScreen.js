@@ -35,7 +35,7 @@ const AllOpinionScreen = () => {
             <Text style={styles.text}>Friends</Text>
         </TouchableOpacity>
       </View>
-      <Input  label="Description"
+      <Input  label="Sujet de la semaine"
         defaultValue= { TopicStore.Description }
         autoCapitalize="none" 
         autoCorrect={false}
@@ -46,6 +46,16 @@ const AllOpinionScreen = () => {
         inputStyle= { { height:92, backgroundColor: 'beige' } } 
         onChangeText= {newValue => TopicStore.Description = newValue}
         placeHolder={"Topic Description"}
+        rightIcon={
+          <Icon
+            name='new-message'
+            type='entypo'
+            size={24}
+            color='black'
+            onPress= { () => Keyboard.dismiss() }
+          />
+        }
+
 
       /> 
       
