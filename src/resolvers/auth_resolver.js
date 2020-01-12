@@ -19,7 +19,7 @@ export function authResolver(action, next) {
       authStore.signOut()
       break;
     case t.authError:
-      authStore.authError(action.payload)
+      authStore.error(action.payload)
       break;
   }
   return next(null, action);

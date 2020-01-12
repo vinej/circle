@@ -12,11 +12,7 @@ class AuthStore {
   getError() {
     return this.errorMessage
   }
-
-  isAuthenticated() {
-    return this.authenticated
-  }
-
+  
   async checkToken(isValid) {
     if (isValid) {
       // check if the token still valid
@@ -76,11 +72,10 @@ decorate(AuthStore,
   name : observable,
   authenticated : observable,
   errorMessage : observable,
-  isAutorizationInit : observable,
+  error : action,
   signOut: action,
   signInOrUp: action,
-  checkToken: action,
-  setAuthorizations: action
+  checkToken: action
 });
 
 export default new AuthStore();
