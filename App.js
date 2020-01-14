@@ -24,6 +24,7 @@ import SettingScreen from './src/screens/SettingScreen'
 import TodoScreen from './src/screens/TodoScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import TopicScreen from './src/screens/TopicScreen';
+import Notification from './src/services/notification_service';
 
 const settingNavigator = createStackNavigator( {
   Setting: SettingScreen,
@@ -52,6 +53,10 @@ const switchNavigator = createSwitchNavigator( {
 });
 
 const App = createAppContainer(switchNavigator );
+
+console.log("Starting notification...")
+Notification.connect();
+console.log("Notification started")
 
 export default () => {
   return (

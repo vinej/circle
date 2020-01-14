@@ -4,6 +4,7 @@ import { authResolver }           from './auth_resolver';
 import { todoResolver }           from './todo_resolver';
 import { topicResolver }           from './topic_resolver';
 import { errorResolver }           from './error_resolver';
+import { notificationResolver }           from './notification_resolver';
 
 class ParallelAction {
   constructor(count, next) {
@@ -113,6 +114,9 @@ dispatcher.addResolver( thunkResolver )
 
 // authentification
 dispatcher.addResolver( authResolver )
+
+// notification
+dispatcher.addResolver( notificationResolver )
 
 // no special order for functionnal resolvers6
 dispatcher.addResolver( todoResolver )
