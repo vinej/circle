@@ -62,7 +62,6 @@ class AuthStore {
     this.name = '' ;
     this.token = '';
     this.isAutorizationInit = false
-    console.log(error)
     navigate('Login');
   }
 }

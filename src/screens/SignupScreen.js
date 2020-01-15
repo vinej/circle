@@ -61,7 +61,7 @@ const SignupScreen = ( { navigation }) => {
           />
         </View>  
 
-          <Text> { authStore.errorMessage }</Text>
+          <Text> { authStore.errorMessage.toString() }</Text>
       </View>
     </SafeAreaView>
   )

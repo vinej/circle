@@ -1,13 +1,22 @@
 import { navigate } from  '../navigationRef'
+import { authPrefixType } from '../actions/auth_action_type'
 
 export function errorResolver(action, next) {
-  if (action.type.replace(action.prefixType, '') == "Error") {
+  if (action.type.replace(action.prefixType, '') === "Error" && action.prefixType != authPrefixType) {
     console.log("error management", action.type, action);
-    if (action.payload == "Error: Request failed with status code 401") {
+    if (action.payload.toString().indexOf("code 401") !== -1 ||
+        action.payload.toString().indexOf("code 404") !== -1
+    ) {
       navigate('Login');
+      return;
     }
-  } else {
-    console.log("no error management");
   }
+
+  if (action.payload.toString().indexOf('code 404') !== -1) {
+    action.payload = "Server not available try later : code 404";
+  } else if (action.payload.toString().indexOf('code 500') !== -1) {
+    action.payload = "Server error, call admin : code 500";
+  }
+
   return next(null, action);
 }

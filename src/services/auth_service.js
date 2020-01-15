@@ -1,4 +1,5 @@
 import api from './circle_api'
+import { HEADERS } from './circle_api'
 
 export default class AuthService {
   constructor() {
@@ -17,8 +18,8 @@ export default class AuthService {
   }
 
   checkToken(token, next, err) {
-    var parameters = `/token?token=${token}`;
-    api.get(parameters)
+    var parameters = `/token?token=true`;
+    api.get(parameters, HEADERS())
     .then(response => {
       next(response.data); 
     })

@@ -48,7 +48,7 @@ const LoginScreen = ( { navigation }) => {
             onPress={ () => navigation.navigate('Welcome') }          
           />
           </View>
-          <Text>{ authStore.errorMessage }</Text>
+          <Text>{ authStore.errorMessage.toString() }</Text>
     </View>
     </SafeAreaView>
   )
