@@ -1,6 +1,6 @@
 import axios from 'axios'
 import authStore from '../stores/auth_store'
-
+import { API_URL } from './config_service'
 
 export const HEADERS = function() {
     return { headers: { 'Authorization' : `Bearer ${authStore.token}` } } 
@@ -12,6 +12,6 @@ export const checkStandardError = function(error) {
 }
 
 export default axios.create( {
-    baseURL: 'http://5a293d2c.ngrok.io/api'
+    baseURL: API_URL
 });
 

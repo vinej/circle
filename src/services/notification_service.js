@@ -1,6 +1,7 @@
 import signalr from 'react-native-signalr';
 import { dispatch } from '../resolvers/dispatcher'
 import { notificationTypes  as t } from '../actions/notification_action_type'
+import { WSS_URL }  from './config_service'
 
 class NotificationService {
 
@@ -17,7 +18,7 @@ class NotificationService {
   }
 
   connect() {
-    this.connection = signalr.hubConnection('http://5a293d2c.ngrok.io/signalr');
+    this.connection = signalr.hubConnection(WSS_URL);
     this.connection.logging = true;
  
     this.proxy = this.connection.createHubProxy('notification');

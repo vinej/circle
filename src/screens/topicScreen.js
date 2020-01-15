@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react'
-import {  StyleSheet, Keyboard, Modal, View} from 'react-native';
+import {  StyleSheet, Keyboard, View} from 'react-native';
 import { Text, Button, CheckBox, Input, Icon } from 'react-native-elements';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from "react-native-modal-datetime-picker";
 import TopicStore from '../stores/topic_store';
 import { TopicActions as on } from '../actions/topic_actions'
 import I18n from 'ex-react-native-i18n'
-import {SafeAreaView} from 'react-navigation'
 
 const TopicScreen = () => {
   //var topic = TopicStore.get();
@@ -71,33 +70,24 @@ const TopicScreen = () => {
             setStartDateVisible(!isStartDateVisible)
           } }
         />
+
+        <DateTimePicker 
+          isVisible={ isStartDateVisible}
+          title="Start"
+          display="calendar"
+          locale={ I18n.locale}
+          value={ TopicStore.StartDate}
+          onConfirm={ (date) => { 
+            TopicStore.StartDate = new Date(date);
+            setStartDateVisible(!isStartDateVisible)
+          }}
+          onCancel={ () => {
+            TopicStore.StartDate = previousStartDate;
+            setStartDateVisible(!isStartDateVisible)
+          }}
+          mode="date"
+        />
       </View>
-      <Modal 
-        visible={ isStartDateVisible } 
-        transparent= {false}
-        animationType="slide"
-      >
-        <SafeAreaView forceInset={ { top: 'always'} }> 
-          <Text style={styles.text}>Start Date:</Text>
-          <DateTimePicker 
-            title="Start"
-            display="calendar"
-            locale={ I18n.locale}
-            value={ TopicStore.StartDate}
-            onChange={ (event, date) => TopicStore.StartDate = new Date(date) }
-            mode="date"
-          />
-          <Button title="OK" type="outline"
-            onPress={ () => setStartDateVisible(!isStartDateVisible) }
-          /> 
-          <Button title="X" type="outline"
-            onPress={ () =>  {
-              TopicStore.StartDate = previousStartDate;
-              setStartDateVisible(!isStartDateVisible) } 
-            }
-          /> 
-        </SafeAreaView>
-      </Modal>
 
       <View style={ styles.daterow } >
         <Text style={styles.date}>End Date: </Text>
@@ -112,32 +102,23 @@ const TopicScreen = () => {
         />
       </View>
 
-      <Modal 
-        visible={ isEndDateVisible } 
-        transparent= {false}
-        animationType="slide"
-      >
-        <SafeAreaView forceInset={ { top: 'always'} }> 
-          <Text style={styles.text}>End Date:</Text>
-          <DateTimePicker 
-            title="Start"
-            display="calendar"
-            locale={ I18n.locale}
-            value={ TopicStore.EndDate}
-            onChange={ (event, date) => TopicStore.EndDate = new Date(date) }
-            mode="date"
-          />
-          <Button title="OK" type="outline"
-            onPress={ () => setEndDateVisible(!isEndDateVisible) }
-          /> 
-          <Button title="X" type="outline"
-            onPress={ () =>  {
-              TopicStore.EndDate = previousEndDate;
-              setEndDateVisible(!isEndDateVisible) } 
-            }
-          /> 
-        </SafeAreaView>
-      </Modal>
+      <DateTimePicker 
+        isVisible={ isEndDateVisible }
+        title="Start"
+        display="calendar"
+        locale={ I18n.locale}
+        value={ TopicStore.EndDate}
+        onConfirm={ (date) => 
+          {
+            TopicStore.EndDate = new Date(date);
+            setEndDateVisible(!isEndDateVisible)
+        } }
+        onCancel={ () => {
+          TopicStore.EndDate = previousEndDate;
+          setEndDateVisible(!isEndDateVisible)
+        }}
+        mode="date"
+      />
 
       <CheckBox
         title="Activated"

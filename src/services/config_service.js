@@ -1,6 +1,6 @@
-export const ROOT_URL = 'http://localhost:3090'
-export const WSS_URL = 'ws://localhost:5000'
-export const API_URL = 'http://localhost:3090/api'
+export const ROOT_URL = 'http://6eec35bf.ngrok.io'
+export const WSS_URL = `${ROOT_URL}/signalr`
+export const API_URL = `${ROOT_URL}/api`
 export const HEADERS = function() {
   return { headers: { 'Authorization' : 'Bearer '+localStorage.getItem('remux-circle-token') } } 
 }
