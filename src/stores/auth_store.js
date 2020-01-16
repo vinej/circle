@@ -12,7 +12,11 @@ class AuthStore {
   getError() {
     return this.errorMessage
   }
-  
+
+  async loadToken() {
+    this.token = await localStorage.getItem('remux-circle-token')
+  }
+
   async checkToken(isValid) {
     if (isValid) {
       // check if the token still valid

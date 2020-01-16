@@ -1,18 +1,17 @@
 import { dispatch } from '../resolvers/dispatcher'
 import AuthService from '../services/auth_service';
 import { authTypes as t } from '../actions/auth_action_type'
-import localStorage from '../helpers/localStorage'
+import AuthStore from '../stores/auth_store'
 
 // must use static method to pass them as callback
 export class AuthActions {
   static async authCheckToken() {
-    const token = await localStorage.getItem('remux-circle-token')
-    if (token != null && token != '') {
+    if (AuthStore.token != null && AuthStore.token != '') {
       dispatch( {
         type: t.authCheckToken,
         payload: function() {
           const service = AuthService.getInstance()
-          service.checkToken(token, AuthActions._authCheckToken , AuthActions.authError)
+          service.checkToken(AuthStore.token, AuthActions._authCheckToken , AuthActions.authError)
         }
       })
     } else {

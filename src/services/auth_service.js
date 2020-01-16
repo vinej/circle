@@ -17,8 +17,8 @@ export default class AuthService {
     return this.instanceService
   }
 
-  checkToken(token, next, err) {
-    var parameters = `/token?token=check`;
+  checkToken(next, err) {
+    var parameters = `/token?token=true`;
     api.get(parameters, HEADERS())
     .then(response => {
       next(response.data); 
