@@ -12,6 +12,7 @@
     "axios": "^0.19.0",
     "ex-react-native-i18n": "0.0.6",
     "expo": "^36.0.2",
+    "expo-sqlite": "^8.0.0",
     "mobx": "^5.15.1",
     "mobx-react": "^6.1.4",
     "react": "16.9.0",

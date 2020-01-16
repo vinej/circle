@@ -25,6 +25,11 @@ import TodoScreen from './src/screens/TodoScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import TopicScreen from './src/screens/TopicScreen';
 import Notification from './src/services/notification_service';
+import Database from './src/dal/database'
+
+Database.open();
+Database.create_tables();
+Database.insert_test_values();
 
 const settingNavigator = createStackNavigator( {
   Setting: SettingScreen,

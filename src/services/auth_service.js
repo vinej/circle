@@ -18,7 +18,7 @@ export default class AuthService {
   }
 
   checkToken(token, next, err) {
-    var parameters = `/token?token=true`;
+    var parameters = `/token?token=check`;
     api.get(parameters, HEADERS())
     .then(response => {
       next(response.data); 

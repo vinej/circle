@@ -1,4 +1,4 @@
-export const ROOT_URL = 'http://f0abda56.ngrok.io'
+export const ROOT_URL = 'http://485db5a3.ngrok.io'
 export const WSS_URL = `${ROOT_URL}/signalr`
 export const API_URL = `${ROOT_URL}/api`
 export const HEADERS = function() {

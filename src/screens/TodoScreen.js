@@ -17,7 +17,7 @@ const TodoScreen = (props) => {
   return (
       <View>
         <Button title="add"
-            onPress={ () => todoAction.todoAdd({ IdMember:1,  Content: 'test34', IdDone: true, DoneDate:'2012-12-12'})}
+            onPress={ () => todoAction.todoAdd({ Id:1,  Content: 'test34', IsDone: 1})}
         />   
         <Button title="delete"
             onPress={ () => todoAction.todoDelete(1)}

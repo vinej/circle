@@ -3,14 +3,20 @@ import TodoService from '../services/todo_service';
 import { todoTypes  as t } from './todo_action_type'
 import { authTypes  as at } from './auth_action_type'
 import { TabRouter } from 'react-navigation';
+import { IsOnline } from '../services/circle_api';
+import TodoDal from '../dal/todo_dal';
 
 export class TodoActions {
   static todoGetAll() {
     dispatch( {
       type: t.todoGetAll,
       payload: function() {
-        const service = TodoService.getInstance()
-        service.getAll( TodoActions._todoGetAll , TodoActions.todoError);
+        if (IsOnline == true) {
+          const service = TodoService.getInstance()
+          service.getAll( TodoActions._todoGetAll , TodoActions.todoError);
+        } else {
+          TodoDal.getAll(TodoActions._todoGetAll , TodoActions.todoError)
+        }
       }
     })
   }
