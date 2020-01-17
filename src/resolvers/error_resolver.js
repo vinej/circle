@@ -1,4 +1,4 @@
-import { navigate } from  '../navigationRef'
+import { navigate } from  '../navigation_ref'
 import { authPrefixType } from '../actions/auth_action_type'
 
 export function errorResolver(action, next) {

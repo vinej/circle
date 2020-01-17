@@ -1,6 +1,6 @@
 import { action, decorate, observable } from 'mobx'
-import localStorage from '../helpers/localStorage'
-import { navigate } from  '../navigationRef'
+import localStorage from '../helpers/local_storage'
+import { navigate } from  '../navigation_ref'
 
 class AuthStore {
   name = '';
@@ -14,14 +14,14 @@ class AuthStore {
   }
 
   async loadToken() {
-    this.token = await localStorage.getItem('remux-circle-token')
+    this.token = await localStorage.getItem('circle-token')
   }
 
   async checkToken(isValid) {
     if (isValid) {
       // check if the token still valid
-      const token = await localStorage.getItem('remux-circle-token')
-      const name = await localStorage.getItem('remux-circle-name')
+      const token = await localStorage.getItem('circle-token')
+      const name = await localStorage.getItem('circle-name')
       this.token = token;
       this.authenticated = true
       this.name = name
@@ -38,8 +38,8 @@ class AuthStore {
   }
 
   async signInOrUp(token, name) {
-    await localStorage.setItem('remux-circle-token', token.toString());
-    await localStorage.setItem('remux-circle-name', name.toString());
+    await localStorage.setItem('circle-token', token.toString());
+    await localStorage.setItem('circle-name', name.toString());
     this.token = token;
     this.authenticated = true;
     this.name = name;
@@ -49,8 +49,8 @@ class AuthStore {
   }
 
   async signOut() {
-    await localStorage.removeItem('remux-circle-token');
-    await localStorage.removeItem('remux-circle-name');
+    await localStorage.removeItem('circle-token');
+    await localStorage.removeItem('circle-name');
     this.authenticated = false;
     this.name = '';
     this.token = '';
@@ -59,8 +59,8 @@ class AuthStore {
   }
 
   async error(error) {
-    await localStorage.removeItem('remux-circle-token');
-    await localStorage.removeItem('remux-circle-name');
+    await localStorage.removeItem('circle-token');
+    await localStorage.removeItem('circle-name');
     this.errorMessage = error;
     this.authenticated = false;
     this.name = '' ;

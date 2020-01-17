@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, FlatList, View, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-navigation'
-import OpinionDetail from '../components/OpinionDetail'
+import OpinionDetail from '../components/opinion_detail'
 import TopicStore from '../stores/topic_store';
 import { TopicActions as on } from '../actions/topic_actions'
 import { Text, Button, CheckBox, Input, Icon } from 'react-native-elements';

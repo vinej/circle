@@ -20,12 +20,22 @@ class Database {
     )
   }
 
-  open() {
-    this.db = SQLite.openDatabase("circle.db");
+  open(next, err) {
+    try {
+      this.db = SQLite.openDatabase("circle.db");
+      next();
+    } catch(error) {
+      err(error)
+    }
   }
 
   close() {
-    this.db = null;
+    try {
+      this.db._db.close();
+      next();
+    } catch(error) {
+      err(error)
+    }
   }
 
   select(name, entity, condition, next, err) {

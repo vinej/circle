@@ -3,7 +3,7 @@ import { observer, Observer } from 'mobx-react'
 import { Text, StyleSheet, FlatList, View, Button, TouchableOpacity} from 'react-native';
 import { TodoActions as on } from '../actions/todo_actions'
 import todoStore from '../stores/todo_store'
-import { AuthActions } from '../actions/auth_actions';
+import { AuthAction } from '../actions/auth_actions';
 import { EvilIcons } from '@expo/vector-icons';
 
 const TodoScreen = (props) => {

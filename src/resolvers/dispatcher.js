@@ -4,6 +4,7 @@ import { authResolver }           from './auth_resolver';
 import { todoResolver }           from './todo_resolver';
 import { topicResolver }           from './topic_resolver';
 import { errorResolver }           from './error_resolver';
+import { databaseResolver }           from './database_resolver';
 import { notificationResolver }           from './notification_resolver';
 
 class ParallelAction {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity} from 'react-native';
-import { AuthActions as on } from '../actions/auth_actions'
+import { AuthAction as on } from '../actions/auth_actions'
 
 const LogoutScreen = () => {
   return (<>

@@ -1,29 +1,29 @@
 import React from 'react'
 import { ThemeProvider } from 'react-native-elements';
-import { setNavigator } from './src/navigationRef'
+import { setNavigator } from './src/navigation_ref'
 
 import {  createStackNavigator, 
           createSwitchNavigator, 
           createBottomTabNavigator,
           createAppContainer,
          } from 'react-navigation';
-import AboutScreen from './src/screens/AboutScreen';
-import AdvertiserScreen from './src/screens/AdvertiserScreen';
-import AllOpinionScreen from './src/screens/AllOpinionScreen';
-import ChatScreen from './src/screens/ChatScreen';
-import IssueScreen from './src/screens/IssueScreen';
-import LoginScreen from './src/screens/LoginScreen';
-import LogoutScreen from './src/screens/LogoutScreen';
-import OpinionScreen from './src/screens/OpinionScreen';
-import PaypalScreen from './src/screens/PaypalScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
-import SignupScreen from './src/screens/SignupScreen';
-import RuleScreen from './src/screens/RuleScreen';
-import WelcomeScreen from './src/screens/WelcomeScreen'
-import SettingScreen from './src/screens/SettingScreen'
-import TodoScreen from './src/screens/TodoScreen';
-import SplashScreen from './src/screens/SplashScreen';
-import TopicScreen from './src/screens/TopicScreen';
+import AboutScreen from './src/screens/about_screen';
+import AdvertiserScreen from './src/screens/advertise_screen';
+import AllOpinionScreen from './src/screens/all_opinion_screen';
+import ChatScreen from './src/screens/chat_screen';
+import IssueScreen from './src/screens/issue_screen';
+import LoginScreen from './src/screens/login_screen';
+import LogoutScreen from './src/screens/logout_screen';
+import OpinionScreen from './src/screens/opinion_screen';
+import PaypalScreen from './src/screens/paypal_screen';
+import ProfileScreen from './src/screens/profile_screen';
+import SignupScreen from './src/screens/signup_screen';
+import RuleScreen from './src/screens/rule_screen';
+import WelcomeScreen from './src/screens/welcome_screen'
+import SettingScreen from './src/screens/setting_screen'
+import TodoScreen from './src/screens/todo_screen';
+import SplashScreen from './src/screens/splash_screen';
+import TopicScreen from './src/screens/topic_screen';
 import Notification from './src/services/notification_service';
 import Database from './src/dal/database'
 
