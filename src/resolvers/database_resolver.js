@@ -1,8 +1,8 @@
 import DatabaseStore from '../stores/database_store'
-import { databaseTypes as t, databasePrefixType  } from '../actions/database_action_type'
+import { databaseType as t, databasePrefix  } from '../actions/database_action_type'
 
 export function databaseResolver(action, next) {
-  if ( databasePrefixType !== action.prefixType ) {
+  if ( databasePrefix !== action.prefixType ) {
     return next(null, action);
   }
 

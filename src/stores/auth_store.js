@@ -14,10 +14,11 @@ class AuthStore {
   }
 
   async loadToken() {
-    this.token = await localStorage.getItem('circle-token')
+    this.token =  await localStorage.getItem('circle-token');
   }
 
   async checkToken(isValid) {
+    console.log("auth store check token", isValid);
     if (isValid) {
       // check if the token still valid
       const token = await localStorage.getItem('circle-token')

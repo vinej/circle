@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { observer, Observer } from 'mobx-react'
 import { Text, StyleSheet, FlatList, View, Button, TouchableOpacity} from 'react-native';
-import { TodoActions as on } from '../actions/todo_actions'
+import { TodoAction as on } from '../actions/todo_actions'
 import todoStore from '../stores/todo_store'
 import { AuthAction } from '../actions/auth_actions';
 import { EvilIcons } from '@expo/vector-icons';
@@ -11,7 +11,7 @@ const TodoScreen = (props) => {
 
   // call get all once
   useEffect(() => {
-    on.todoGetAll();
+    on.getAll();
   }, [])
 
   return (

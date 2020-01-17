@@ -3,7 +3,7 @@ import { StyleSheet, FlatList, View, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-navigation'
 import OpinionDetail from '../components/opinion_detail'
 import TopicStore from '../stores/topic_store';
-import { TopicActions as on } from '../actions/topic_actions'
+import { TopicAction as on } from '../actions/topic_actions'
 import { Text, Button, CheckBox, Input, Icon } from 'react-native-elements';
 import { observer } from 'mobx-react'
 
@@ -16,7 +16,7 @@ const AllOpinionScreen = () => {
   ];
 
   useEffect(() => {
-    on.topicGetCurrent();
+    on.getCurrent();
   }, []);
   
   // horizontal : horizontal list.

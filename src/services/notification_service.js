@@ -1,6 +1,6 @@
 import signalr from 'react-native-signalr';
 import { dispatch } from '../resolvers/dispatcher'
-import { notificationTypes  as t } from '../actions/notification_action_type'
+import { notificationType  as t } from '../actions/notification_action_type'
 import { WSS_URL }  from './config_service'
 
 class NotificationService {
@@ -26,7 +26,7 @@ class NotificationService {
     this.proxy.on('say', (something)  => { 
       console.log('message-from-server', something);
       dispatch( {
-        type: t.notificationSayReceive,
+        type: t.sayReceive,
         payload: something
       });
     });

@@ -1,13 +1,13 @@
 // same name of the type is the name of the function, but with a underscore. The pattern need that
-export let topicPrefixType = 'topic_'
+export let topicPrefix = 'topic_'
 
-export let topicTypes = {
-  topicAdd         : topicPrefixType + 'Add',
-  topicDelete      : topicPrefixType + 'Delete',
-  topicUpdate      : topicPrefixType + 'Update',
-  topicActivate    : topicPrefixType + 'Activate',
-  topicDeActivate  : topicPrefixType + 'DeActivate',
-  topicGetAll      : topicPrefixType + 'GetAll',
-  topicGetCurrent  : topicPrefixType + 'GetCurrent',
-  topicError       : topicPrefixType + 'Error'
+export let topicType = {
+  add         : topicPrefix + 'add',
+  delete      : topicPrefix + 'delete',
+  update      : topicPrefix + 'update',
+  activate    : topicPrefix + 'activate',
+  deActivate  : topicPrefix + 'deActivate',
+  getAll      : topicPrefix + 'getAll',
+  getCurrent  : topicPrefix + 'getCurrent',
+  error       : topicPrefix + 'error'
 }

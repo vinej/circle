@@ -1,33 +1,32 @@
-import topicStore from '../stores/topic_store'
-import { topicTypes as t, topicPrefixType  } from '../actions/topic_action_type'
+import TopicStore from '../stores/topic_store'
+import { topicType as t, topicPrefix  } from '../actions/topic_action_type'
 
 export function topicResolver(action, next) {
-  if ( topicPrefixType !== action.prefixType ) {
+  if ( topicPrefix !== action.prefixType ) {
     return next(null, action);
   }
 
   switch(action.type) {
-    case t.topicAdd :
-      topicStore.add(action.payload)
+    case t.add :
+      TopicStore.add(action.payload)
       break;
-    case t.topicDelete :
-      topicStore.delete(action.payload)
+    case t.delete :
+      TopicStore.delete(action.payload)
       break;
-    case t.topicGetAll :
-      topicStore.setAll(action.payload)
+    case t.getAll :
+      TopicStore.setAll(action.payload)
       break;
-    case t.topicGetCurrent :
-      console.log("resolver topic get current")
-      topicStore.set(action.payload)
+    case t.getCurrent :
+      TopicStore.set(action.payload)
       break;
-    case t.topicActivate :
-      topicStore.activate(action.payload)
+    case t.activate :
+      TopicStore.activate(action.payload)
       break;
-    case t.topicDeActivate :
-      topicStore.deactivate(action.payload)
+    case t.deactivate :
+      TopicStore.deactivate(action.payload)
       break;
-    case t.topicError :
-      topicStore.error(action.payload)
+    case t.error :
+      TopicStore.error(action.payload)
       break;
     }
   return next(null, action);

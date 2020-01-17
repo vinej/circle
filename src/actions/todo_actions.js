@@ -1,64 +1,61 @@
 import { dispatch } from '../resolvers/dispatcher'
 import TodoService from '../services/todo_service';
-import { todoTypes  as t } from './todo_action_type'
-import { authTypes  as at } from './auth_action_type'
-import { TabRouter } from 'react-navigation';
-import { IsOnline } from '../services/circle_api';
+import { todoType  as t } from './todo_action_type'
+import { isOnline } from '../services/circle_api';
 import TodoDal from '../dal/todo_dal';
 
-export class TodoActions {
-  static todoGetAll() {
+export class TodoAction {
+  static getAll() {
     dispatch( {
-      type: t.todoGetAll,
+      type: t.getAll,
       payload: function() {
-        if (IsOnline == true) {
-          const service = TodoService.getInstance()
-          service.getAll( TodoActions._todoGetAll , TodoActions.todoError);
+        if (isOnline) {
+          TodoService.getInstance().getAll( TodoAction._getAll , TodoAction.error);
         } else {
-          TodoDal.getAll(TodoActions._todoGetAll , TodoActions.todoError)
+          TodoDal.getAll(TodoAction._getAll , TodoAction.error)
         }
       }
     })
   }
 
-  static _todoGetAll(todos) {
+  static _getAll(todos) {
     dispatch( {
-      type: t.todoGetAll,
+      type: t.getAll,
       payload: todos
     })
   }
 
-  static todoAdd(todo) {
+  static add(todo) {
     dispatch( {
-      type: t.todoAdd,
+      type: t.add,
       payload: todo
     })
   }
 
-  static todoDelete(id) {
+  static delete(id) {
     dispatch( {
-      type: t.todoDelete,
+      type: t.delete,
       payload: id
     })
   }
 
-  static todoSetDesc(desc) {
+  static setDesc(desc) {
     dispatch( {
-      type: t.todoSetDesc,
+      type: t.setDesct,
       payload: desc
     })
   }
 
-  static todoSetDone(todo, done) {
+  static setDone(todo, done) {
     dispatch( {
-      type: t.todoSetDone,
+      type: t.setDone,
       payload: { todo, done }
     })
   }
 
-  static todoError(error) {
+  static error(error) {
     dispatch( {
-      type: t.todoError,
+      type: t.error,
       payload: error
     })
   }

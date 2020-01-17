@@ -1,96 +1,91 @@
 import { dispatch } from '../resolvers/dispatcher'
 import TopicService from '../services/topic_service';
-import { topicTypes  as t } from './topic_action_type'
+import { topicType  as t } from './topic_action_type'
 
-export class TopicActions {
-  static topicGetAll() {
+export class TopicAction {
+  static getAll() {
     dispatch( {
-      type: t.topicGetAll,
+      type: t.getAll,
       payload: function() {
-        const service = TopicService.getInstance()
-        service.getAll( TopicActions._topicGetAll , TopicActions.topicError);
+        TopicService.getInstance().getAll( TopicAction._getAll , TopicAction.error);
       }
     })
   }
 
-  static _topicGetAll(topics) {
+  static _getAll(topics) {
     dispatch( {
-      type: t.topicGetAll,
+      type: t.getAll,
       payload: topics
     })
   }
 
-  static topicGetCurrent() {
+  static getCurrent() {
     dispatch( {
-      type: t.topicGetCurrent,
+      type: t.getCurrent,
       payload: function() {
-        const service = TopicService.getInstance();
-        service.getCurrent( TopicActions._topicGetCurrent , TopicActions.topicError);
+        TopicService.getInstance().getCurrent( TopicAction._getCurrent , TopicAction.error);
       }
     })
   }
 
-  static _topicGetCurrent(topic) {
+  static _getCurrent(topic) {
     dispatch( {
-      type: t.topicGetCurrent,
+      type: t.getCurrent,
       payload: topic
     })
   }
 
-  static topicAdd(topic) {
+  static add(topic) {
     dispatch( {
-      type: t.topicAdd,
+      type: t.add,
       payload: function() {
-        const service = TopicService.getInstance()
-        service.add( topic, TopicActions._topicAdd , TopicActions.topicError);
+        TopicService.getInstance().add( topic, TopicAction._add , TopicAction.error);
       }
     })
   }
 
-  static _topicAdd(topic) {
+  static _add(topic) {
     dispatch( {
-      type: t.topicAdd,
+      type: t.add,
       payload: topic
     })
   }
 
-  static topicDelete(topic) {
+  static delete(topic) {
     dispatch( {
-      type: t.topicDelete,
+      type: t.delete,
       payload: function() {
-        const service = TopicService.getInstance()
-        service.delete( topic, TopicActions._topicDelete , TopicActions.topicError);
+        TopicService.getInstance().delete( topic, TopicAction._delete , TopicAction.error);
       }
     })
   }
 
-  static _topicDelete(topic) {
+  static _delete(topic) {
     dispatch( {
       type: t.topicDelete,
       payload: topic
     })
   }
 
-  static topicUpdate(topic) {
+  static update(topic) {
     dispatch( {
-      type: t.topicUpdate,
+      type: t.update,
       payload: function() {
-        const service = TopicService.getInstance()
-        service.update( topic, TopicActions._topicUpdate , TopicActions.topicError);
+        TopicService.getInstance().update( topic, TopicAction._update , TopicAction.error);
       }
     })
   }
 
-  static _topicUpdate(topic) {
+  static _update(topic) {
     dispatch( {
-      type: t.topicUpdate,
+      type: t.update,
       payload: topic
     })
   }
 
-  static topicError(error) {
+  static error(error) {
     dispatch( {
-      type: t.topicError,
+      type: t.error,
       payload: error
     })
   }

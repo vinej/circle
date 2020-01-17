@@ -1,38 +1,38 @@
 import { dispatch } from '../resolvers/dispatcher'
-import { notificationTypes  as t } from './notification_action_type'
+import { notificationType  as t } from './notification_action_type'
 import NotificationService from '../services/notification_service'
 
 // must use static method to pass them as callback
-export class NotificationActions {
+export class NotificationAction {
 
-  static notificationSaySend(something) {
+  static saySend(something) {
     console.log("say called", something);
     dispatch( {
-      type: t.notificationSaySend,
+      type: t.saySend,
       payload: function() {
         const service = NotificationService;
-        service.say(something, NotificationActions._notificationSaySend , NotificationActions.notificationError);
+        service.say(something, NotificationAction._saySend , NotificationAction.error);
       }
     })
   }
 
-  static _notificationSaySend(something) {
+  static _saySend(something) {
     dispatch( {
-      type: t.notificationSaySend,
+      type: t.saySend,
       payload: something
     })
   }
 
-  static notificationSayReceive(something) {
+  static sayReceive(something) {
     dispatch( {
-      type: t.notificationSayReceive,
+      type: t.sayReceive,
       payload: something
     })
   }
 
-  static notificationError(error) {
+  static error(error) {
     dispatch( {
-      type: t.notificationError,
+      type: t.error,
       payload : error
     })
   }

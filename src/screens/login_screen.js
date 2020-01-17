@@ -39,7 +39,7 @@ const LoginScreen = ( { navigation }) => {
             buttonStyle={styles.button}
             title="Se connecter"
             type='outline'
-            onPress={ () => on.authSignIn(email, password) }          
+            onPress={ () => on.signIn(email, password) }          
           />
           <Button
             buttonStyle={styles.button}

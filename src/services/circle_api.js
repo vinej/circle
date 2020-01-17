@@ -16,5 +16,5 @@ export default axios.create( {
     baseURL: API_URL
 });
 
-export const IsOnline = false;
+export const isOnline = false;
 

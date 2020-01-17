@@ -1,25 +1,25 @@
 import React from 'react';
- import { StyleSheet, View, Image} from 'react-native';
- import { Text, Button, CheckBox, Input, Icon , Divider} from 'react-native-elements';
+import { StyleSheet, View, Image} from 'react-native';
+import { Text, Icon , Divider} from 'react-native-elements';
 
-  const OpinionDetail = (props) => {
-    return ( 
-      <View style={ { marginTop:10 }} >
-        <View style={styles.row}>
-          <Image style={styles.image} source= { require('../../assets/IMG_1417.png')}></Image>
-          <Text style={styles.comment}>{props.opinion.comment}</Text>
-        </View>
-        <View style={styles.rowicons}>
-            <View style={styles.row}>
-              <Icon name='like2' type='antdesign' />
-              <Text style={styles.like}>{props.opinion.like}</Text>
-            </View>
-            <Icon name='dislike2' type='antdesign' />
-            <Icon name='md-person' type='ionicon' />
-        </View>
-        <Divider style={ { marginBottom:10 } }/>
+const OpinionDetail = (props) => {
+  return ( 
+    <View style={ { marginTop:10 }} >
+      <View style={styles.row}>
+        <Image style={styles.image} source= { require('../../assets/IMG_1417.png')}></Image>
+        <Text style={styles.comment}>{props.opinion.comment}</Text>
       </View>
-     )
+      <View style={styles.rowicons}>
+          <View style={styles.row}>
+            <Icon name='like2' type='antdesign' />
+            <Text style={styles.like}>{props.opinion.like}</Text>
+          </View>
+          <Icon name='dislike2' type='antdesign' />
+          <Icon name='md-person' type='ionicon' />
+      </View>
+      <Divider style={ { marginBottom:10 } }/>
+    </View>
+    )
  };
 
   const styles = StyleSheet.create({
@@ -45,4 +45,4 @@ import React from 'react';
 });
 
  
-  export default OpinionDetail; 
+export default OpinionDetail; 

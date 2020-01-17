@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
-import { AuthAction as on} from '../actions/auth_actions'
-import AuthStore from '../stores/auth_store' 
+import { AuthAction as on } from '../actions/auth_actions'
 
 const SplashScreen = () => {
-
     useEffect(() => {
         // is already connected, go directly to main flow
-        AuthStore.loadToken();
-        on.authCheckToken(); 
+        on.loadToken();
+        on.checkToken();
     }, []);
     
     return null

@@ -1,24 +1,26 @@
 import authStore  from '../stores/auth_store'
-import { authTypes, authPrefixType  } from '../actions/auth_action_type'
+import { authType as t, authPrefix  } from '../actions/auth_action_type'
 
 export function authResolver(action, next) {
-  if (authPrefixType !== action.prefixType) {
+  if (authPrefix !== action.prefixType) {
     return next(null, action);
   }
 
-  const t = authTypes
   switch(action.type) {
-    case t.authCheckToken:
+    case t.loadToken:
+      authStore.loadToken();
+      break;
+    case t.checkToken:
       authStore.checkToken(action.payload)
       break;
-    case t.authSignIn:
-    case t.authSignUp:
+    case t.signIn:
+    case t.signUp:
       authStore.signInOrUp(action.payload.token, action.payload.name)
       break;
-    case t.authSignOut:
+    case t.signOut:
       authStore.signOut()
       break;
-    case t.authError:
+    case t.error:
       authStore.error(action.payload)
       break;
   }

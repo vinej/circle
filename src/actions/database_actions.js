@@ -1,11 +1,11 @@
 import { dispatch } from '../resolvers/dispatcher'
-import { databaseTypes as t } from './database_action_type'
+import { databaseType as t } from './database_action_type'
 import Database from '../dal/database'
 
 
 // must use static method to pass them as callback
 export class DatabaseAction {
-  static async open() {
+  static open() {
     dispatch( {
       type: t.open,
       payload: function() {
@@ -14,14 +14,13 @@ export class DatabaseAction {
     });
   };
 
-  static async _open() {
+  static _open() {
     dispatch( {
-      type: t.open,
-      payload: null
+      type: t.open
     });
   };
 
-  static async close() {
+  static close() {
     dispatch( {
       type: t.close,
       payload: function() {
@@ -30,17 +29,17 @@ export class DatabaseAction {
     });
   };
 
-  static async _close() {
+  static _close() {
     dispatch( {
-      type: t.close,
-      payload : null
+      type: t.close
     });
   }
 
-  static async error(error) {
+  static error(error) {
     dispatch( {
       type: t.error,
       payload : error
     });
   }
 }
+

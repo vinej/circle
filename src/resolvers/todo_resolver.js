@@ -1,24 +1,24 @@
-import todoStore from '../stores/todo_store'
-import { todoTypes as t, todoPrefixType  } from '../actions/todo_action_type'
+import TodoStore from '../stores/todo_store'
+import { todoType as t, todoPrefix  } from '../actions/todo_action_type'
 
 export function todoResolver(action, next) {
-  if ( todoPrefixType !== action.prefixType ) {
+  if ( todoPrefix !== action.prefixType ) {
     return next(null, action);
   }
 
   switch(action.type) {
-    case t.todoAdd :
-      todoStore.add(action.payload)
+    case t.add :
+      TodoStore.add(action.payload)
       break;
-    case t.todoDelete :
-      todoStore.delete(action.payload)
+    case t.delete :
+      TodoStore.delete(action.payload)
       break;
-    case t.todoGetAll :
-      todoStore.setAll(action.payload)
+    case t.getAll :
+      TodoStore.setAll(action.payload)
       break;
-      case t.todoError :
-        todoStore.error(action.payload)
-        break;
-    }
+    case t.error :
+      TodoStore.error(action.payload)
+      break;
+  }
   return next(null, action);
 }

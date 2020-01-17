@@ -1,21 +1,21 @@
-import notificationStore from '../stores/notification_store'
-import { notificationTypes as t, notificationPrefixType  } from '../actions/notification_action_type'
+import NotificationStore from '../stores/notification_store'
+import { notificationType as t, notificationPrefix  } from '../actions/notification_action_type'
 
 export function notificationResolver(action, next) {
-  if ( notificationPrefixType !== action.prefixType ) {
+  if ( notificationPrefix !== action.prefixType ) {
     return next(null, action);
   }
 
   switch(action.type) {
-    case t.notificationSaySend :
-      notificationStore.send(action.payload)
+    case t.saySend :
+      NotificationStore.send(action.payload)
       break;
-    case t.notificationSayReceive :
-      notificationStore.receive(action.payload)
+    case t.sayReceive :
+      NotificationStore.receive(action.payload)
       break;
-      case t.notificationError :
-        notificationStore.error(action.payload)
-        break;
-    }
+    case t.error :
+      NotificationStore.error(action.payload)
+      break;
+  }
   return next(null, action);
 }

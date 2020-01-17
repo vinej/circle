@@ -1,7 +1,8 @@
 import CrudService from './crud_service' 
 
-export default class TodoService {
+export default class TodoService  extends CrudService {
   constructor() {
+    super("todo");
     this.instanceService = null
   }
 

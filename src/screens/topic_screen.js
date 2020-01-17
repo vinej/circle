@@ -4,14 +4,14 @@ import {  StyleSheet, Keyboard, View} from 'react-native';
 import { Text, Button, CheckBox, Input, Icon } from 'react-native-elements';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import TopicStore from '../stores/topic_store';
-import { TopicActions as on } from '../actions/topic_actions'
+import { TopicAction as on } from '../actions/topic_actions'
 import I18n from 'ex-react-native-i18n'
 
 const TopicScreen = () => {
   //var topic = TopicStore.get();
   // call get the current topic
   useEffect(() => {
-    on.topicGetCurrent();
+    on.getCurrent();
   }, []);
 
   var saveButton;
@@ -19,13 +19,13 @@ const TopicScreen = () => {
     saveButton = <Button 
       title="Add" 
       type="outline"
-      onPress={ () => on.topicAdd(TopicStore.get()) }
+      onPress={ () => on.add(TopicStore.get()) }
     />
   } else {
     saveButton = <Button 
       title="Update" 
       type="outline"
-      onPress={ () => on.topicUpdate(TopicStore.get()) }
+      onPress={ () => on.update(TopicStore.get()) }
     />
   } 
 

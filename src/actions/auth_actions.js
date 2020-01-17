@@ -1,81 +1,88 @@
 import { dispatch } from '../resolvers/dispatcher'
 import AuthService from '../services/auth_service';
-import { authTypes as t } from '../actions/auth_action_type'
+import { authType as t } from '../actions/auth_action_type'
 import AuthStore from '../stores/auth_store'
 
 // must use static method to pass them as callback
-export class AuthActions {
-  static async authCheckToken() {
+export class AuthAction {
+
+  static async loadToken(next) {
+      dispatch( {
+        type: t.loadToken
+      });
+  }
+
+  static checkToken() {
     if (AuthStore.token != null && AuthStore.token != '') {
       dispatch( {
-        type: t.authCheckToken,
+        type: t.checkToken,
         payload: function() {
           const service = AuthService.getInstance()
-          service.checkToken(AuthStore.token, AuthActions._authCheckToken , AuthActions.authError)
+          service.checkToken(AuthStore.token, AuthAction._checkToken , AuthAction.error)
         }
       })
     } else {
       // no token, == false
       dispatch( {
-        type: t.authCheckToken,
+        type: t.checkToken,
         payload: false
       })
     }
   }
 
-  static _authCheckToken(isValid) {
+  static _checkToken(isValid) {
     dispatch( {
-      type: t.authCheckToken,
+      type: t.checkToken,
       payload: isValid
     })
   }
 
-  static authSignIn(email, password) {
+  static signIn(email, password) {
     dispatch( {
-      type: t.authSignIn,
+      type: t.signIn,
       payload: function() {
         const service = AuthService.getInstance()
-        service.signIn({ email, password }, AuthActions._authSignIn, AuthActions.authError)
+        service.signIn({ email, password }, AuthAction._signIn, AuthAction.error)
       }
     })
   }
 
   // called from service
-  static _authSignIn(token, name) {
+  static _signIn(token, name) {
     dispatch( {
-      type: t.authSignIn,
+      type: t.signIn,
       payload: { token, name }
     })
   }
 
   static authSignUp(email, password, name) {
     dispatch( {
-      type: t.authSignUp,
+      type: t.signUp,
       payload: function() {
         const service = AuthService.getInstance()
-        service.signUp({ email, password, name }, AuthActions._authSignUp, AuthActions.authError)
+        service.signUp({ email, password, name }, AuthAction._signUp, AuthAction.error)
       }
     })
   }
 
   // called from service
-  static _authSignUp(token, name) {
+  static _signUp(token, name) {
     dispatch( {
-      type: t.authSignUp,
+      type: t.signUp,
       payload: { token, name }
     })
   }
 
     // called from service
-  static authSignOut() {
+  static signOut() {
     dispatch( {
-      type: t.authSignOut
+      type: t.signOut
     })
   }
 
-  static authError(error) {
+  static error(error) {
     dispatch( {
-      type: t.authError,
+      type: t.error,
       payload : error
     })
   }

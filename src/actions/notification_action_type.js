@@ -1,7 +1,7 @@
-export let notificationPrefixType = "notification_"
+export let notificationPrefix = "notification_"
 
-export let notificationTypes = {
-  notificationSaySend        : notificationPrefixType + 'SaySend',
-  notificationSayReceive     : notificationPrefixType + 'SayReceive',
-  notificationError          : notificationPrefixType + 'Error'
+export let notificationType = {
+  saySend        : notificationPrefix + 'saySend',
+  sayReceive     : notificationPrefix + 'sayReceive',
+  error          : notificationPrefix + 'error'
 }

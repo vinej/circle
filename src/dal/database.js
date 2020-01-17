@@ -1,5 +1,4 @@
 import * as SQLite from "expo-sqlite";
-import { createContext } from "react";
 
 class Database {
   db = null;
@@ -23,6 +22,8 @@ class Database {
   open(next, err) {
     try {
       this.db = SQLite.openDatabase("circle.db");
+      //this.create_tables();
+      //this.insert_test_values();
       next();
     } catch(error) {
       err(error)
@@ -32,6 +33,7 @@ class Database {
   close() {
     try {
       this.db._db.close();
+      this.db = null;
       next();
     } catch(error) {
       err(error)

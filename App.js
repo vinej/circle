@@ -25,11 +25,9 @@ import TodoScreen from './src/screens/todo_screen';
 import SplashScreen from './src/screens/splash_screen';
 import TopicScreen from './src/screens/topic_screen';
 import Notification from './src/services/notification_service';
-import Database from './src/dal/database'
+import { DatabaseAction } from './src/actions/database_actions'
 
-Database.open();
-Database.create_tables();
-Database.insert_test_values();
+DatabaseAction.open();
 
 const settingNavigator = createStackNavigator( {
   Setting: SettingScreen,
@@ -59,9 +57,9 @@ const switchNavigator = createSwitchNavigator( {
 
 const App = createAppContainer(switchNavigator );
 
-console.log("Starting notification...")
-Notification.connect();
-console.log("Notification started")
+//onsole.log("Starting notification...")
+//Notification.connect();
+//console.log("Notification started")
 
 export default () => {
   return (

@@ -1,8 +1,9 @@
 import { navigate } from  '../navigation_ref'
-import { authPrefixType } from '../actions/auth_action_type'
+import { authPrefixType as authPrefix } from '../actions/auth_action_type'
 
 export function errorResolver(action, next) {
-  if (action.type.replace(action.prefixType, '') === "Error" && action.prefixType != authPrefixType) {
+  return next(null, action);
+  if (action.type.replace(action.prefixType, '') === "Error" && action.prefixType != authPrefix) {
     if (action.payload !== null) {
       if (action.payload.toString().indexOf("code 401") !== -1 ||
           action.payload.toString().indexOf("code 404") !== -1

@@ -6,7 +6,7 @@ const LogoutScreen = () => {
   return (<>
             <Text style={styles.text}>Desole de vous voir partir</Text>
             <TouchableOpacity
-                onPress={ () => on.authSignOut() }
+                onPress={ () => on.signOut() }
               >
               <Text>Quitter circle</Text>
             </TouchableOpacity>
