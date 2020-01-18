@@ -7,27 +7,27 @@ export function errorResolver(action, next) {
       var error = action.payload.toString();
       if (error.indexOf("code 401") != -1)
       {
-        action.payload = "Authentifiction error";
         navigate('Login');
         return next(null, action); 
       }
 
       if (error.indexOf("code 404") != -1)
       {
-        action.payload = "Server not available try later";
         navigate('Welcome');
         return next(null, action); 
       }
-    }
-  }
 
-  if (action.payload != null) {
-    if (action.payload.toString().indexOf('code 404') != -1) {
-      action.payload = "Server not available try later";
-      navigate('Welcome');
-      return next(null, action); 
-  } else if (action.payload.toString().indexOf('code 500') != -1) {
-      action.payload = "Server error, call administrator";
+      if (error.indexOf("code 409") != -1)
+      {
+        navigate('Welcome');
+        return next(null, action); 
+      }
+
+      if (error.indexOf("code 500") != -1)
+      {
+        navigate('Welcome');
+        return next(null, action); 
+      }
     }
   }
 

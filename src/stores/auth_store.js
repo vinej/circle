@@ -62,7 +62,11 @@ class AuthStore {
     await localStorage.removeItem('circle-token');
     await localStorage.removeItem('circle-name');
     this.internalError = error;
-    this.errorMessage = 'Authentification server not available';
+    if (error.toString().indexOf('code 401') != -1) {
+      this.errorMessage = "Authentification error";
+    } else {
+      this.errorMessage = 'Authentification server not available';
+    }
     this.isAuthenticated = false;
     this.name = '' ;
     this.token = '';
