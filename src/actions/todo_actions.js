@@ -28,7 +28,20 @@ export class TodoAction {
   static add(todo) {
     dispatch( {
       type: t.add,
-      payload: todo
+      payload: function() {
+        if (isOnline) {
+          TodoService.getInstance().add(todo, TodoAction._getAll , TodoAction.error);
+        } else {
+          TodoDal.add(todo, TodoAction._add , TodoAction.error)
+        }
+      }
+    });
+  }
+
+  static _add(todo) {
+    dispatch( {
+      type: t.add,
+      payload: todo,
     })
   }
 

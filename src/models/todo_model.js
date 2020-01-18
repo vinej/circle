@@ -1,5 +1,5 @@
 export const todo = {
     Id: 0,
-    IsDone: true,
+    IsDone: 1,
     Content: ''
 }

@@ -2,12 +2,11 @@ import React, {useEffect} from 'react';
 import { observer, Observer } from 'mobx-react'
 import { Text, StyleSheet, FlatList, View, Button, TouchableOpacity} from 'react-native';
 import { TodoAction as on } from '../actions/todo_actions'
-import todoStore from '../stores/todo_store'
-import { AuthAction } from '../actions/auth_actions';
+import TodoStore from '../stores/todo_store'
 import { EvilIcons } from '@expo/vector-icons';
 
 const TodoScreen = (props) => {
-  const todos = todoStore.todos.slice();
+  const todos = TodoStore.todos.slice();
 
   // call get all once
   useEffect(() => {
@@ -17,10 +16,13 @@ const TodoScreen = (props) => {
   return (
       <View>
         <Button title="add"
-            onPress={ () => todoAction.todoAdd({ Id:1,  Content: 'test34', IsDone: 1})}
+            onPress={ () => on.add({ Id:4,  Content: 'test348fffff', IsDone: 1})}
         />   
         <Button title="delete"
-            onPress={ () => todoAction.todoDelete(1)}
+            onPress={ () => on.delete(1)}
+        />   
+        <Button title="update"
+            onPress={ () => on.update(1)}
         />   
 
         <FlatList
@@ -31,11 +33,12 @@ const TodoScreen = (props) => {
               <View style={styles.filter}>
                 <Text>{item.Id}</Text>
                 <Text>{item.Content}</Text>
-                <Text>{item.IsDone}</Text>
+                <Text>{item.IsDone.toString()}</Text>
               </View>
           )}</Observer>
         )}
         />
+        <Text>{ TodoStore.errorMessage }</Text>
       </View>
     )
 };

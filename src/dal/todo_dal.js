@@ -3,12 +3,12 @@ import { todo } from '../models/todo_model'
 
 class TodoDal {
     getAll(next,err) {
-        Database.select('todo', todo, { Id:2 }, next, err);
+        Database.select('todo', todo, null, next, err);
         //next(todos);
     }
 
     add(todo, next, err) {
-
+        Database.insert('todo', todo, next, err);
     };
 
     delete(entity, next, err) {
