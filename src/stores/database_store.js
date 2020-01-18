@@ -1,9 +1,10 @@
 import { action, decorate, observable } from 'mobx'
+import localStorage from '../helpers/local_storage'
 
 class DatabaseStore {
   isOpen = false;
   isSchema = false;
-  version = '';
+  version = '0';
   isError = false;
   errorDescription = '';
 
@@ -19,13 +20,14 @@ class DatabaseStore {
 
   open() {
     this.isOpen = true;
+    this.loadStatus();
   }
 
   close() {
     this.isOpen = false;
   }
 
-  createSchema(version) {
+  create(version) {
     this.isSchema = true;
     this.version = version;
     this.saveStatus();

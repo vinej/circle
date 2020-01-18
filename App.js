@@ -26,8 +26,7 @@ import SplashScreen from './src/screens/splash_screen';
 import TopicScreen from './src/screens/topic_screen';
 import Notification from './src/services/notification_service';
 import { DatabaseAction } from './src/actions/database_actions'
-
-DatabaseAction.open();
+import { AuthAction  } from './src/actions/auth_actions'
 
 const settingNavigator = createStackNavigator( {
   Setting: SettingScreen,
@@ -57,9 +56,19 @@ const switchNavigator = createSwitchNavigator( {
 
 const App = createAppContainer(switchNavigator );
 
-//onsole.log("Starting notification...")
-//Notification.connect();
-//console.log("Notification started")
+
+console.log("Starting database...")
+DatabaseAction.open();
+//DatabaseAction.create();
+console.log("database started")
+
+console.log("Starting notification...")
+Notification.connect();
+console.log("Notification started")
+
+console.log("Starting service...")
+AuthAction.checkToken();
+console.log("service started")
 
 export default () => {
   return (

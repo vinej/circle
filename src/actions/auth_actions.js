@@ -5,29 +5,14 @@ import AuthStore from '../stores/auth_store'
 
 // must use static method to pass them as callback
 export class AuthAction {
-
-  static async loadToken(next) {
-      dispatch( {
-        type: t.loadToken
-      });
-  }
-
   static checkToken() {
-    if (AuthStore.token != null && AuthStore.token != '') {
-      dispatch( {
-        type: t.checkToken,
-        payload: function() {
-          const service = AuthService.getInstance()
-          service.checkToken(AuthStore.token, AuthAction._checkToken , AuthAction.error)
-        }
-      })
-    } else {
-      // no token, == false
-      dispatch( {
-        type: t.checkToken,
-        payload: false
-      })
-    }
+    dispatch( {
+      type: t.checkToken,
+      payload: async function() {
+          await AuthStore.loadToken();            
+          AuthService.getInstance().checkToken(AuthStore.token, AuthAction._checkToken , AuthAction.error);
+      }
+    });
   }
 
   static _checkToken(isValid) {

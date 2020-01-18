@@ -4,7 +4,7 @@ import { FlatList, StyleSheet, View, Keyboard} from 'react-native';
 import { Text, Input, Icon, Divider} from 'react-native-elements'
 import {SafeAreaView} from 'react-navigation'
 import NotificationStore from '../stores/notification_store';
-import { NotificationActions as on } from '../actions/notification_actions'
+import { NotificationAction as on } from '../actions/notification_actions'
 
 const ChatScreen = () => {
 
@@ -44,7 +44,7 @@ const ChatScreen = () => {
                 size={24}
                 color='black'
                 onPress= { () => { 
-                  on.notificationSaySend(message);
+                  on.saySend(message);
                   setMessage('');
                   Keyboard.dismiss();
                  }

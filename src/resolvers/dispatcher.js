@@ -119,6 +119,7 @@ dispatcher.addResolver( authResolver )
 // notification
 dispatcher.addResolver( notificationResolver )
 
+dispatcher.addResolver( databaseResolver )
 // no special order for functionnal resolvers6
 dispatcher.addResolver( todoResolver )
 

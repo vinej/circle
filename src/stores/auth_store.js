@@ -18,7 +18,6 @@ class AuthStore {
   }
 
   async checkToken(isValid) {
-    console.log("auth store check token", isValid);
     if (isValid) {
       // check if the token still valid
       const token = await localStorage.getItem('circle-token')
@@ -66,8 +65,7 @@ class AuthStore {
     this.authenticated = false;
     this.name = '' ;
     this.token = '';
-    this.isAutorizationInit = false
-    navigate('Login');
+    this.isAutorizationInit = false;
   }
 }
 

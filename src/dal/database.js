@@ -2,11 +2,15 @@ import * as SQLite from "expo-sqlite";
 
 class Database {
   db = null;
+  version = 1;
 
-  create_tables() {
+  create(next, err) {
     this.db.transaction(tx => {
       tx.executeSql(
-        "create table if not exists todo (Id integer primary key not null, IsDone integer, Content text);"
+        "create table if not exists todo (Id integer primary key not null, IsDone integer, Content text);",
+        null, 
+        () => next(this.version), 
+        (error) => err(error)
       );
     });
   }
@@ -57,7 +61,7 @@ class Database {
         tx.executeSql(
           `select ${fields} from ${name} where ${conditions.join(' and ')};`,
           parameters,
-          (_, { rows: { _array } }) => next( _array), (errror) => err(error) )
+          (_, { rows: { _array } }) => next( _array), (error) => err(error) )
         });
     } else {
       this.db.transaction(tx => {

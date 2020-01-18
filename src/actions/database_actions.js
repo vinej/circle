@@ -35,6 +35,21 @@ export class DatabaseAction {
     });
   }
 
+  static create() {
+    dispatch( {
+      type: t.create,
+      payload: function() {
+        Database.create(DatabaseAction._create , DatabaseAction.error);
+      }
+    });
+  };
+
+  static _create() {
+    dispatch( {
+      type: t.create
+    });
+  }
+
   static error(error) {
     dispatch( {
       type: t.error,
