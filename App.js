@@ -24,7 +24,7 @@ import SettingScreen from './src/screens/setting_screen'
 import TodoScreen from './src/screens/todo_screen';
 import SplashScreen from './src/screens/splash_screen';
 import TopicScreen from './src/screens/topic_screen';
-import Notification from './src/services/notification_service';
+import { NotificationAction}  from './src/actions/notification_actions';
 import { DatabaseAction } from './src/actions/database_actions'
 import { AuthAction  } from './src/actions/auth_actions'
 
@@ -59,16 +59,12 @@ const App = createAppContainer(switchNavigator );
 
 console.log("Starting database...")
 DatabaseAction.open();
-//DatabaseAction.create();
-console.log("database started")
 
 console.log("Starting notification...")
-Notification.connect();
-console.log("Notification started")
+NotificationAction.connect();
 
-console.log("Starting service...")
+console.log("Checking token for Authentification...")
 AuthAction.checkToken();
-console.log("service started")
 
 export default () => {
   return (

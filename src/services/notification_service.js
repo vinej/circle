@@ -17,11 +17,12 @@ class NotificationService {
     }); 
   }
 
-  connect() {
+  connect(nect, err) {
     this.connection = signalr.hubConnection(WSS_URL);
     this.connection.logging = true;
  
     this.proxy = this.connection.createHubProxy('notification');
+
     //receives broadcast messages from a hub function, called "helloApp"
     this.proxy.on('say', (something)  => { 
       console.log('message-from-server', something);
@@ -34,15 +35,12 @@ class NotificationService {
     // atempt connection, and handle errors
     this.connection.start().done(() => {
       console.log('Now connected, connection ID=' + this.connection.id);
- 
-      this.proxy.invoke('say', 'Bonjour from React Native')
-        .done(() => {
-          console.log('dsend-to-server');
-        }).fail(() => {
-          console.warn('Something went wrong when calling server, it might not be up and running?')
-        }); 
-    }).fail(() => {
+      next();
+      return;
+    }).fail((error) => {
       console.log('Failed');
+      err(error);
+      return;
     });
 
     //connection-handling
@@ -60,6 +58,10 @@ class NotificationService {
         console.log('When using react-native-signalr on ios with http remember to enable http in App Transport Security https://github.com/olofd/react-native-signalr/issues/14')
       }
       console.debug('SignalR error: ' + errorMessage, detailedError)
+      dispatch( {
+        type: t.error,
+        payload: errorMessage,
+      });
     });
   }
 }

@@ -30,6 +30,21 @@ export class NotificationAction {
     })
   }
 
+  static connect() {
+    dispatch( {
+      type: t.connect,
+      payload: function() {
+        NotificationService.connect(NotificationAction._connect, NotificationAction.error);
+      }
+    });
+  }
+
+  static _connect() {
+    dispatch( {
+      type: t.connect,
+    });
+  }
+
   static error(error) {
     dispatch( {
       type: t.error,

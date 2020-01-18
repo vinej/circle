@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
-import { AuthAction as on } from '../actions/auth_actions'
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import {SafeAreaView} from 'react-navigation'
 
 const SplashScreen = () => {
     return (
         <SafeAreaView forceInset={ { top: 'always'} }>
-            <Text>Loading ...</Text>
+            <Text style={ styles.text}>Loading ...</Text>
         </SafeAreaView>
     );
 };
+
+const styles = StyleSheet.create({
+    safearea: {
+    },
+    text: {
+        marginLeft: 15,
+        fontSize: 40
+    },
+});
 
 export default SplashScreen;

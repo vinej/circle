@@ -2,7 +2,9 @@ import { action, decorate, observable } from 'mobx'
 
 class NotificationStore {
   messages = [];
-  count = 0
+  count = 0;
+  isConnected = false;
+  errorMessage = '';
 
   // call at first by the service to set the current topic
   send(something) {
@@ -16,12 +18,21 @@ class NotificationStore {
     this.count = this.count + 1;
   }
 
+  connect() {
+    this.errorMessage = '';
+    this.isConnected = true;
+  }
+
   error(error) {
+    this.errorMessage = error;
+    this.isConnected = false;
   }
 }
 
 decorate( NotificationStore, {
   messages : observable,
+  isConnected: observable,
+  error: observable,
   send: action,
   receive: action
 })

@@ -61,7 +61,7 @@ const SignupScreen = ( { navigation }) => {
             title="Retour a Welcome"
           />
         </View>  
-        <ErrorMessage message={AuthStore.errorMessage.toString()} />
+        <ErrorMessage />
       </View>
     </SafeAreaView>
   )

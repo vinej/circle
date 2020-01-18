@@ -5,7 +5,7 @@ import { navigate } from  '../navigation_ref'
 class AuthStore {
   name = '';
   token = '';
-  authenticated = false;
+  isAuthenticated = false;
   errorMessage = '';
   isAutorizationInit = false;
 
@@ -25,7 +25,7 @@ class AuthStore {
       const token = await localStorage.getItem('circle-token')
       const name = await localStorage.getItem('circle-name')
       this.token = token;
-      this.authenticated = true
+      this.isAuthenticated = true
       this.name = name
       this.errorMessage = ''
       this.isAutorizationInit = true
@@ -37,7 +37,7 @@ class AuthStore {
     await localStorage.setItem('circle-token', token.toString());
     await localStorage.setItem('circle-name', name.toString());
     this.token = token;
-    this.authenticated = true;
+    this.isAuthenticated = true;
     this.name = name;
     this.errorMessage = '';
     this.isAutorizationInit = true
@@ -47,7 +47,7 @@ class AuthStore {
   async signOut() {
     await localStorage.removeItem('circle-token');
     await localStorage.removeItem('circle-name');
-    this.authenticated = false;
+    this.isAuthenticated = false;
     this.name = '';
     this.token = '';
     this.errorMessage = '';
@@ -58,7 +58,7 @@ class AuthStore {
     await localStorage.removeItem('circle-token');
     await localStorage.removeItem('circle-name');
     this.errorMessage = error.toString();
-    this.authenticated = false;
+    this.isAuthenticated = false;
     this.name = '' ;
     this.token = '';
     this.isAutorizationInit = false;
@@ -68,7 +68,7 @@ class AuthStore {
 decorate(AuthStore,
 {
   name : observable,
-  authenticated : observable,
+  isAuthenticated : observable,
   errorMessage : observable,
   error : action,
   signOut: action,

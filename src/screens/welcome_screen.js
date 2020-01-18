@@ -1,7 +1,6 @@
 import React from 'react';
 import { Icon, Text, Button } from 'react-native-elements';
 import { StyleSheet,  View } from 'react-native';
-import AuthStore from '../stores/auth_store'
 import { observer } from 'mobx-react'
 import ErrorMessage from '../components/error_message'
 
@@ -31,7 +30,7 @@ const WelcomeScreen = ( { navigation}) => {
                     title="S'enregister   "
                 />
             </View>
-            <ErrorMessage message={ AuthStore.errorMessage.toString()} />
+            <ErrorMessage />
         </View>
 
     );

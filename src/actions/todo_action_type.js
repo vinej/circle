@@ -2,10 +2,10 @@
 export let todoPrefix = 'todo_'
 
 export let todoType = {
-  add       : todoPrefix + 'Add',
-  delete    : todoPrefix + 'Delete',
-  setDesct  : todoPrefix + 'SetDesc',
-  setDone   : todoPrefix + 'SetDone',
-  getAll    : todoPrefix + 'GetAll',
-  error     : todoPrefix + 'Error'
+  add       : todoPrefix + 'add',
+  delete    : todoPrefix + 'delete',
+  setDesct  : todoPrefix + 'setDesc',
+  setDone   : todoPrefix + 'setDone',
+  getAll    : todoPrefix + 'getAll',
+  error     : todoPrefix + 'error'
 }
