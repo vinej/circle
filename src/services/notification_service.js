@@ -17,7 +17,7 @@ class NotificationService {
     }); 
   }
 
-  connect(nect, err) {
+  connect(next, err) {
     this.connection = signalr.hubConnection(WSS_URL);
     this.connection.logging = true;
  
@@ -35,12 +35,9 @@ class NotificationService {
     // atempt connection, and handle errors
     this.connection.start().done(() => {
       console.log('Now connected, connection ID=' + this.connection.id);
-      next();
-      return;
     }).fail((error) => {
       console.log('Failed');
       err(error);
-      return;
     });
 
     //connection-handling
@@ -63,6 +60,8 @@ class NotificationService {
         payload: errorMessage,
       });
     });
+
+    next();
   }
 }
 

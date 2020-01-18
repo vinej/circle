@@ -9,7 +9,7 @@ import { observer } from 'mobx-react'
 const ErrorMessage = (props) => {
   return ( 
     <View>
-    { !AuthStore.isAuthenticated  && 
+    { AuthStore.errorMessage != '' && 
         <View style={ styles.view } >
             <Icon iconStyle={styles.icon} name='error' type='material' />
             <Text style={ styles.text}>{AuthStore.errorMessage}</Text>
@@ -23,7 +23,7 @@ const ErrorMessage = (props) => {
         </View>
     }
 
-    { !NotificationStore.isConnected  && 
+    { NotificationStore.errorMessage != ''  && 
         <View style={ styles.view } >
             <Icon iconStyle={styles.icon} name='error' type='material' />
             <Text style={ styles.text}>{NotificationStore.errorMessage}</Text>
