@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import { observer, Observer } from 'mobx-react'
-import { Text, StyleSheet, FlatList, View, Button, TouchableOpacity} from 'react-native';
+import { StyleSheet, FlatList, View} from 'react-native';
+import { Icon, Text, Button } from 'react-native-elements'
 import { TodoAction as on } from '../actions/todo_actions'
-import TodoStore from '../stores/todo_store'
-import { EvilIcons } from '@expo/vector-icons';
+import TodoStore from '../stores/todo_store' 
+import TodoItem  from '../components/todo_item'
 
 const TodoScreen = (props) => {
   const todos = TodoStore.todos.slice();
@@ -15,28 +16,22 @@ const TodoScreen = (props) => {
 
   return (
       <View>
-        <Button title="add"
+        <Button title="add" type="outline"
             onPress={ () => on.add({ Id:4,  Content: 'test348fffff', IsDone: 1})}
         />   
-        <Button title="delete"
+        <Button title="delete" type="outline"
             onPress={ () => on.delete(1)}
         />   
-        <Button title="update"
+        <Button title="update" type="outline"
             onPress={ () => on.update(1)}
         />   
 
         <FlatList
-        data = { todos }
-        keyExtractor = { (todo) => todo.Id.toString()}
-        renderItem = { ( { item } )  => (
-           <Observer>{ () => (
-              <View style={styles.filter}>
-                <Text>{item.Id}</Text>
-                <Text>{item.Content}</Text>
-                <Text>{item.IsDone.toString()}</Text>
-              </View>
-          )}</Observer>
-        )}
+          data = { todos }
+          keyExtractor = { (todo) => todo.Id.toString()}
+          renderItem = { ( { item } )  => (
+            <TodoItem todo = {item}/>
+          )}
         />
         <Text>{ TodoStore.errorMessage }</Text>
       </View>
@@ -46,13 +41,19 @@ const TodoScreen = (props) => {
 TodoScreen.navigationOptions = () => {
   return {
     headerRight: (
-      <TouchableOpacity >
-        <EvilIcons name='pencil' size={30} />
-      </TouchableOpacity>
+    <>
+      <Icon
+          name='pencil'
+          type='evilicon'
+      />
+      <Icon
+          name='plus'
+          type='evilicon'
+      />
+    </>
     )
   }
 }
-
 
 const styles = StyleSheet.create({
   view: {

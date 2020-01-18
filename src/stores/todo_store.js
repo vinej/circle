@@ -7,7 +7,7 @@ class TodoStore {
   internalError = null;
 
   delete(id) {
-    const idx = this.todos.findIndex( (r) => r.id === id );
+    const idx = this.todos.findIndex( (r) => r.Id === id );
     this.todos.splice(idx,1);
   }
 

@@ -5,7 +5,7 @@ class Database {
   version = 1;
   idName = 'Id';
 
-  create() {
+  _create() {
     this.db.transaction(tx => {
       tx.executeSql(
         "create table if not exists todo (Id integer primary key not null, IsDone integer, Content text);",
@@ -16,7 +16,7 @@ class Database {
     });
   }
 
-  drop(table) {
+  _drop(table) {
     this.db.transaction(tx => {
       tx.executeSql(
         `drop table if exists ${table}`, null, 
@@ -74,14 +74,14 @@ class Database {
         tx.executeSql(
           `select ${fields} from ${name} where ${conditions.join(' and ')};`,
           parameters,
-          (_, { rows: { _array } }) => next( _array), (error) => err(error) )
+          (_, { rows: { _array } }) => next( _array), (_,error) => err(error) )
         });
     } else {
       this.db.transaction(tx => {
         tx.executeSql(
           `select ${fields} from ${name};`,
           null,
-          (_, { rows: { _array } }) => next(_array), (error) => err(error) )
+          (_, { rows: { _array } }) => next(_array), (_,error) => err(error) )
       });
     }
   };
@@ -105,7 +105,7 @@ class Database {
       tx.executeSql(
         `insert into ${name} (${fields.join(',')}) values(${values.join(',')});`,
         parameters,
-        (trn,res) =>  {
+        (_,res) =>  {
             entity.Id = res.insertId; 
             next(entity);
          }, 
@@ -135,9 +135,22 @@ class Database {
 
     this.db.transaction(tx => {
       tx.executeSql(
-        `update ${name} set ${fields.join(",")} where Id=?` ,
+        `update ${name} set ${fields.join(",")} where Id=?;` ,
         parameters,
         () => next(entity),
+        (_, error) => err(error))
+    });
+  };
+
+  delete(name, id, next, err) {
+    var parameters = [];
+    parameters.push(id);
+
+    this.db.transaction(tx => {
+      tx.executeSql(
+        `delete from ${name} where Id=?;` ,
+        parameters,
+        () => next(id),
         (_, error) => err(error))
     });
   };

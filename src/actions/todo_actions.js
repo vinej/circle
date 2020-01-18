@@ -48,7 +48,20 @@ export class TodoAction {
   static delete(id) {
     dispatch( {
       type: t.delete,
-      payload: id
+      payload: function() {
+        if (isOnline) {
+          TodoService.getInstance().delete(id, TodoAction._delete , TodoAction.error);
+        } else {
+          TodoDal.delete(id, TodoAction._delete , TodoAction.error)
+        }
+      }
+    });
+  }
+
+  static _delete(id) {
+    dispatch( {
+      type: t.delete,
+      payload: id,
     })
   }
 

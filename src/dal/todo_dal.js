@@ -11,8 +11,8 @@ class TodoDal {
         Database.insert('todo', todo, next, err);
     };
 
-    delete(entity, next, err) {
-        
+    delete(id, next, err) {
+        Database.delete('todo', id, next, err);        
     };
 
     update(entity, next, err) {
