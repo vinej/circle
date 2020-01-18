@@ -18,7 +18,9 @@ class AuthStore {
   }
 
   async checkToken(isValid) {
-    if (isValid) {
+    console.log('into check token');
+    console.log(isValid);
+    if (isValid.toString() == 'true') {
       // check if the token still valid
       const token = await localStorage.getItem('circle-token')
       const name = await localStorage.getItem('circle-name')
@@ -28,12 +30,6 @@ class AuthStore {
       this.errorMessage = ''
       this.isAutorizationInit = true
       navigate('mainFlow');
-    } else {
-      this.authenticated = false
-      this.name = ''
-      this.errorMessage = ''
-      this.isAutorizationInit = false
-      navigate('Welcome');
     }
   }
 
@@ -61,7 +57,7 @@ class AuthStore {
   async error(error) {
     await localStorage.removeItem('circle-token');
     await localStorage.removeItem('circle-name');
-    this.errorMessage = error;
+    this.errorMessage = error.toString();
     this.authenticated = false;
     this.name = '' ;
     this.token = '';

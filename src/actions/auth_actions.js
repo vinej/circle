@@ -10,7 +10,7 @@ export class AuthAction {
       type: t.checkToken,
       payload: async function() {
           await AuthStore.loadToken();            
-          AuthService.getInstance().checkToken(AuthStore.token, AuthAction._checkToken , AuthAction.error);
+          AuthService.getInstance().checkToken(AuthAction._checkToken , AuthAction.error);
       }
     });
   }

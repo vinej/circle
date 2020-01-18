@@ -21,7 +21,12 @@ export default class AuthService {
     var parameters = `/token?token=true`;
     api.get(parameters, HEADERS())
     .then(response => {
-      next(response.data); 
+      console.log('respose.data', response.data);
+      if (response.data.toString() != 'true') {
+        err(response.data);
+      } else {
+        next(response.data);
+      } 
     })
     .catch(error => {
       err(error);

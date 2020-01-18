@@ -4,11 +4,6 @@ import { Text } from 'react-native';
 import {SafeAreaView} from 'react-navigation'
 
 const SplashScreen = () => {
-    useEffect(() => {
-        // is already connected, go directly to main flow
-        on.checkToken();
-    }, []);
-    
     return (
         <SafeAreaView forceInset={ { top: 'always'} }>
             <Text>Loading ...</Text>

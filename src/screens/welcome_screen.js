@@ -1,7 +1,8 @@
 import React from 'react';
 import { Icon, Text, Button } from 'react-native-elements';
 import { StyleSheet,  View } from 'react-native';
-import {SafeAreaView} from 'react-navigation'
+import AuthStore from '../stores/auth_store'
+import { observer } from 'mobx-react'
 
 const WelcomeScreen = ( { navigation}) => {
     return (
@@ -29,7 +30,9 @@ const WelcomeScreen = ( { navigation}) => {
                 title="Se connecter  "
             />
             </View>
+            <Text>{ AuthStore.errorMessage.toString() }</Text>
         </View>
+
     );
 };
 
@@ -46,4 +49,4 @@ const styles = StyleSheet.create( {
         justifyContent: 'space-evenly'   },
 });
 
-export default WelcomeScreen;
+export default observer(WelcomeScreen);

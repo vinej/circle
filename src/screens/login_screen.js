@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { StyleSheet, View, TextInput, Text} from 'react-native';
 import { Button, Input, Divider} from 'react-native-elements';
 import { AuthAction as on } from '../actions/auth_actions'
-import authStore from '../stores/auth_store'
+import AuthStore from '../stores/auth_store'
 import {SafeAreaView} from 'react-navigation'
 
 const LoginScreen = ( { navigation }) => {
@@ -48,7 +48,7 @@ const LoginScreen = ( { navigation }) => {
             onPress={ () => navigation.navigate('Welcome') }          
           />
           </View>
-          <Text>{ authStore.errorMessage.toString() }</Text>
+          <Text>{ AuthStore.errorMessage.toString() }</Text>
     </View>
     </SafeAreaView>
   )
