@@ -5,6 +5,7 @@ import { Button, Input, Divider} from 'react-native-elements';
 import { AuthAction as on } from '../actions/auth_actions'
 import AuthStore from '../stores/auth_store'
 import {SafeAreaView} from 'react-navigation'
+import ErrorMessage from '../components/error_message'
 
 const LoginScreen = ( { navigation }) => {
   const [email, setEmail] = useState('');
@@ -48,7 +49,7 @@ const LoginScreen = ( { navigation }) => {
             onPress={ () => navigation.navigate('Welcome') }          
           />
           </View>
-          <Text>{ AuthStore.errorMessage.toString() }</Text>
+          <ErrorMessage message={AuthStore.errorMessage.toString()} />
     </View>
     </SafeAreaView>
   )

@@ -3,6 +3,7 @@ import { Icon, Text, Button } from 'react-native-elements';
 import { StyleSheet,  View } from 'react-native';
 import AuthStore from '../stores/auth_store'
 import { observer } from 'mobx-react'
+import ErrorMessage from '../components/error_message'
 
 const WelcomeScreen = ( { navigation}) => {
     return (
@@ -11,26 +12,26 @@ const WelcomeScreen = ( { navigation}) => {
             <Text h1 style={styles.circleStyle}>This is the circle</Text>
             <Text h2 style={styles.welcomeStyle}>Bienvenu </Text>
             <View>
-            <Button 
-                type="outline"
-                onPress={ () => navigation.navigate("Signup")}
-                icon= {
-                    <Icon type="antdesign" name='login'/>
-                }
-                iconRight
-                title="S'enregister   "
-            />
-            <Button   
-                type="outline"
-                onPress={ () => navigation.navigate("Login")}
-                icon= {
-                    <Icon type="octicon" name='sign-in'/>
-                }
-                iconRight
-                title="Se connecter  "
-            />
+                <Button   
+                    type="outline"
+                    onPress={ () => navigation.navigate("Login")}
+                    icon= {
+                        <Icon type="octicon" name='sign-in'/>
+                    }
+                    iconRight
+                    title="Se connecter  "
+                />
+                <Button 
+                    type="outline"
+                    onPress={ () => navigation.navigate("Signup")}
+                    icon= {
+                        <Icon type="antdesign" name='login'/>
+                    }
+                    iconRight
+                    title="S'enregister   "
+                />
             </View>
-            <Text>{ AuthStore.errorMessage.toString() }</Text>
+            <ErrorMessage message={ AuthStore.errorMessage.toString()} />
         </View>
 
     );

@@ -3,8 +3,9 @@ import { observer } from 'mobx-react'
 import { StyleSheet, View, TextInput} from 'react-native';
 import { Text, Button, Input} from 'react-native-elements';
 import { AuthAction as on } from '../actions/auth_actions';
-import authStore from '../stores/auth_store';
+import AuthStore from '../stores/auth_store';
 import {SafeAreaView} from 'react-navigation'
+import ErrorMessage from '../components/error_message'
 
 const SignupScreen = ( { navigation }) => {
 
@@ -60,8 +61,7 @@ const SignupScreen = ( { navigation }) => {
             title="Retour a Welcome"
           />
         </View>  
-
-          <Text> { authStore.errorMessage.toString() }</Text>
+        <ErrorMessage message={AuthStore.errorMessage.toString()} />
       </View>
     </SafeAreaView>
   )
