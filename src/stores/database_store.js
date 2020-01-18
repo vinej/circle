@@ -1,4 +1,4 @@
-import { action, decorate, observable } from 'mobx'
+import { action, decorate, observable, onBecomeObserved } from 'mobx'
 import localStorage from '../helpers/local_storage'
 
 class DatabaseStore {
@@ -6,7 +6,8 @@ class DatabaseStore {
   isSchema = false;
   version = '0';
   isError = false;
-  errorDescription = '';
+  internalError = null;
+  errorMessage = '';
 
   async loadStatus() {
     this.isSchema = (await localStorage.getItem('circle-db-isschema')) == 'true';
@@ -20,11 +21,14 @@ class DatabaseStore {
 
   open() {
     this.isOpen = true;
+    this.errorMessage = ''
     this.loadStatus();
   }
 
   close() {
     this.isOpen = false;
+    this.errorMessage = ''
+    this.internalError = null;
   }
 
   create(version) {
@@ -33,14 +37,15 @@ class DatabaseStore {
     this.saveStatus();
   }
 
-  updateSchema(version) {
+  update(version) {
     this.isSchema = true;
     this.version = version;
     this.saveStatus();
   }
 
-  error(errorDescription) {
-    this.errorDescription = errorDescription;
+  error(error) {
+    this.errorMessage = 'Database server error'
+    this.internalError = error;
   }
 }
 
@@ -50,11 +55,12 @@ decorate(DatabaseStore,
   isSchema : observable,
   version : observable,
   isError : observable,
-  errorDescription : observable,
+  errorMessage : observable,
+  internalError: observable,
   open : action,
   close: action,
-  createSchema : action,
-  updateSchema : action,
+  create : action,
+  update : action,
   error: action
 });
 

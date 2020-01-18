@@ -5,4 +5,5 @@ export let databaseType = {
   close  : databasePrefix + 'close',
   error  : databasePrefix + 'error',
   create : databasePrefix + 'create',
+  update : databasePrefix + 'update',
 }

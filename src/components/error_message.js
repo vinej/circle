@@ -4,6 +4,7 @@ import { Text, Icon } from 'react-native-elements';
 import AuthStore from '../stores/auth_store'
 import DatabaseStore from '../stores/database_store'
 import NotificationStore from '../stores/notification_store'
+import { observer } from 'mobx-react'
 
 const ErrorMessage = (props) => {
   return ( 
@@ -11,21 +12,21 @@ const ErrorMessage = (props) => {
     { !AuthStore.isAuthenticated  && 
         <View style={ styles.view } >
             <Icon iconStyle={styles.icon} name='error' type='material' />
-            <Text style={ styles.text}>Authentification Error : {AuthStore.errorMessage.toString()}</Text>
+            <Text style={ styles.text}>{AuthStore.errorMessage}</Text>
         </View>
     }
 
     { !DatabaseStore.isOpen  && 
         <View style={ styles.view } >
             <Icon iconStyle={styles.icon} name='error' type='material' />
-            <Text style={ styles.text}>Database error : {DatabaseStore.errorMessage.toString()}</Text>
+            <Text style={ styles.text}>{DatabaseStore.errorMessage}</Text>
         </View>
     }
 
     { !NotificationStore.isConnected  && 
         <View style={ styles.view } >
             <Icon iconStyle={styles.icon} name='error' type='material' />
-            <Text style={ styles.text}>Notification service error : {NotificationStore.errorMessage.toString()}</Text>
+            <Text style={ styles.text}>{NotificationStore.errorMessage}</Text>
         </View>
     }
     </View>
@@ -51,4 +52,4 @@ const styles = StyleSheet.create({
 });
 
  
-export default ErrorMessage; 
+export default observer(ErrorMessage); 

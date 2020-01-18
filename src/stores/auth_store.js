@@ -7,6 +7,7 @@ class AuthStore {
   token = '';
   isAuthenticated = false;
   errorMessage = '';
+  internalError = null;
   isAutorizationInit = false;
 
   getError() {
@@ -28,6 +29,7 @@ class AuthStore {
       this.isAuthenticated = true
       this.name = name
       this.errorMessage = ''
+      this.internalError = null;
       this.isAutorizationInit = true
       navigate('mainFlow');
     }
@@ -40,6 +42,7 @@ class AuthStore {
     this.isAuthenticated = true;
     this.name = name;
     this.errorMessage = '';
+    this.internalError = null;
     this.isAutorizationInit = true
     navigate('mainFlow');
   }
@@ -51,13 +54,15 @@ class AuthStore {
     this.name = '';
     this.token = '';
     this.errorMessage = '';
+    this.internalError = null;
     navigate("Welcome");
   }
 
   async error(error) {
     await localStorage.removeItem('circle-token');
     await localStorage.removeItem('circle-name');
-    this.errorMessage = error.toString();
+    this.internalError = error;
+    this.errorMessage = 'Authentification server not available';
     this.isAuthenticated = false;
     this.name = '' ;
     this.token = '';
@@ -70,6 +75,7 @@ decorate(AuthStore,
   name : observable,
   isAuthenticated : observable,
   errorMessage : observable,
+  internalError: observable,
   error : action,
   signOut: action,
   signInOrUp: action,

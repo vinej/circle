@@ -50,6 +50,21 @@ export class DatabaseAction {
     });
   }
 
+  static update() {
+    dispatch( {
+      type: t.update,
+      payload: function() {
+        Database.create(DatabaseAction._update , DatabaseAction.error);
+      }
+    });
+  };
+
+  static _update() {
+    dispatch( {
+      type: t.update
+    });
+  }
+
   static error(error) {
     dispatch( {
       type: t.error,

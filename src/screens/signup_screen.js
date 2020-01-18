@@ -3,7 +3,6 @@ import { observer } from 'mobx-react'
 import { StyleSheet, View, TextInput} from 'react-native';
 import { Text, Button, Input} from 'react-native-elements';
 import { AuthAction as on } from '../actions/auth_actions';
-import AuthStore from '../stores/auth_store';
 import {SafeAreaView} from 'react-navigation'
 import ErrorMessage from '../components/error_message'
 

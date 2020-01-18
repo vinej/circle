@@ -14,7 +14,10 @@ export function databaseResolver(action, next) {
       DatabaseStore.close()
       break;
     case t.create :
-      DatabaseStore.create(action.prefixType)
+      DatabaseStore.create(action.payload)
+      break;
+    case t.update :
+      DatabaseStore.update(action.payload)
       break;
     case t.error :
       DatabaseStore.error(action.payload)

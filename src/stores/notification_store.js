@@ -4,6 +4,7 @@ class NotificationStore {
   messages = [];
   count = 0;
   isConnected = false;
+  internalError = null;
   errorMessage = '';
 
   // call at first by the service to set the current topic
@@ -20,11 +21,13 @@ class NotificationStore {
 
   connect() {
     this.errorMessage = '';
+    this.internalError = null;
     this.isConnected = true;
   }
 
   error(error) {
-    this.errorMessage = error;
+    this.internalError = error;
+    this.errorMessage = 'Notification server not available';
     this.isConnected = false;
   }
 }
@@ -32,7 +35,9 @@ class NotificationStore {
 decorate( NotificationStore, {
   messages : observable,
   isConnected: observable,
-  error: observable,
+  errorMessage: observable,
+  internalError : observable,
+  error: action,
   send: action,
   receive: action
 })
