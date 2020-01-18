@@ -1,21 +1,25 @@
-import React, { useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
-import {SafeAreaView} from 'react-navigation'
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Icon, Text } from 'react-native-elements';
 
 const SplashScreen = () => {
     return (
-        <SafeAreaView forceInset={ { top: 'always'} }>
+        <View style={ styles.root} >
+            <Icon type="feather" name="circle" size= {100}/>
             <Text style={ styles.text}>Loading ...</Text>
-        </SafeAreaView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    safearea: {
+    root: {
+        justifyContent: 'space-around',
+        ...StyleSheet.absoluteFillObject,
+        textAlign: 'center',
     },
     text: {
-        marginLeft: 15,
-        fontSize: 40
+        textAlign: 'center',
+        fontSize: 40,
     },
 });
 
