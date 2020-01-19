@@ -15,9 +15,9 @@ class TodoDal {
         Database.delete('todo', id, next, err);        
     };
 
-    update(entity, next, err) {
-        
-    };
+    update(todo, next, err) {
+        Database.update('todo', todo, next, err);
+    }
 }
 
 export default new TodoDal();

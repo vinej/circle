@@ -4,6 +4,7 @@ export let todoPrefix = 'todo_'
 export let todoType = {
   add       : todoPrefix + 'add',
   delete    : todoPrefix + 'delete',
+  update    : todoPrefix + 'update',
   setDesct  : todoPrefix + 'setDesc',
   setDone   : todoPrefix + 'setDone',
   getAll    : todoPrefix + 'getAll',

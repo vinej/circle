@@ -31,7 +31,7 @@ class AuthStore {
       this.errorMessage = ''
       this.internalError = null;
       this.isAutorizationInit = true
-      navigate('mainFlow');
+      navigate('Todo');
     }
   }
 
@@ -44,7 +44,7 @@ class AuthStore {
     this.errorMessage = '';
     this.internalError = null;
     this.isAutorizationInit = true
-    navigate('mainFlow');
+    navigate('Todo');
   }
 
   async signOut() {

@@ -65,6 +65,27 @@ export class TodoAction {
     })
   }
 
+  static update(todo) {
+    dispatch( {
+      type: t.update,
+      payload: function() {
+        if (isOnline) {
+          TodoService.getInstance().update(todo, TodoAction._update , TodoAction.error);
+        } else {
+          TodoDal.update(todo, TodoAction._update , TodoAction.error)
+        }
+      }
+    });
+  }
+
+  static _update(todo) {
+    dispatch( {
+      type: t.update,
+      payload: todo,
+    })
+  }
+
+
   static setDesc(desc) {
     dispatch( {
       type: t.setDesct,

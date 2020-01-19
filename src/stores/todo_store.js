@@ -16,6 +16,11 @@ class TodoStore {
     this.count = 0
   }
 
+  update(todo) {
+    const idx = this.todos.findIndex( (r) => r.Id === todo.Id );
+    this.todos[idx] = todo;
+  }
+
   add(todo) {
     //todo.id = this.count + 1;
     console.log('todo add', todo)
