@@ -29,11 +29,11 @@ const TodoScreen = (props) => {
           <Text style={ styles.index}>{ TodoStore.end() } )</Text>
         </View>
 
-        <View style= { { flexDirection: 'row'}}>
+        <View style= { { flexDirection: 'row', justifyContent:'space-between'}}>
         <Icon
             name='navigate-before'
             type='materrialicons'
-            size={24}
+            size={37}
             color='black'
             onPress= { () => TodoStore.prev() }
         />
@@ -44,7 +44,7 @@ const TodoScreen = (props) => {
         <Icon
             name='navigate-next'
             type='materrialicons'
-            size={24}
+            size={37}
             color='black'
             onPress= { () => TodoStore.next() }
         />

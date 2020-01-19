@@ -56,7 +56,7 @@ const TodoItem = ( { todo }) => {
               type='materialicon'
               size= {30}
               onPress= { () => {  todo.IsDone == 0? todo.IsDone=1: todo.IsDone=0; on.update(todo)  }}
-              iconStyle= { {color :'green'}}
+              iconStyle= { todo.IsDone == 0 ? {color :'gray'} : {color :'green'}}
             />
             { !isEdit && <Text style={styles.text}>{todo.Content} </Text> }
             { isEdit  && 

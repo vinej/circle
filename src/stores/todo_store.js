@@ -3,7 +3,7 @@ import { action, decorate, observable } from 'mobx'
 class TodoStore {
   todos = [];
   allTodos = [];
-  pagingSize = 5;
+  pagingSize = 10;
   count = 0;
   pageNumber = 0;
   errorMessage = '';
