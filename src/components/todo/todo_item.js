@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { observer, Observer } from 'mobx-react'
-import { StyleSheet, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Modal, TouchableOpacity} from 'react-native';
 import { Text, Icon , Divider, Button, Input} from 'react-native-elements';;
 //import { Constants } from 'expo';
 //import { SearchBar } from 'react-native-elements';
@@ -8,13 +8,16 @@ import { Text, Icon , Divider, Button, Input} from 'react-native-elements';;
 import Swipeout from 'react-native-swipeout';
 import { TodoAction as on } from '../../actions/todo_actions'
 import TodoEdit from './todo_edit'
+import {SafeAreaView} from 'react-navigation'
 
 const TodoItem = ( { todo }) => {
   const [isEdit, setIsEdit] = useState(false);
   rowId = -1;
   oldContent = todo.Content;
   newContent = todo.Content;
+  isSelected = false;
   console.log("enter in edit");
+  self = this;
 
   swipeBtns = [
     {
@@ -38,13 +41,16 @@ const TodoItem = ( { todo }) => {
 
   return ( 
     <Swipeout
-        backgroundColor='beige'
+        backgroundColor= 'white'
         right={this.swipeBtns}
-        //close={(this.state.activeRow !== index)}
         rowID={todo.Id}
         sectionId= {1}
-        autoClose = {true}
-        onOpen = {(secId, rowId, direction) => this.rowId = rowId }
+        sensitivity={100}
+        autoClose = {true}      
+        onOpen = {(secId, rowId, direction) => { 
+          this.rowId = rowId;
+
+        } }
       >
         <View
             style={styles.row}
@@ -55,33 +61,50 @@ const TodoItem = ( { todo }) => {
               name={ todo.IsDone == 1 ? 'done' : 'remove' }
               type='materialicon'
               size= {30}
+              style={{paddingRight:40}}
               onPress= { () => {  todo.IsDone == 0? todo.IsDone=1: todo.IsDone=0; on.update(todo)  }}
               iconStyle= { todo.IsDone == 0 ? {color :'gray'} : {color :'green'}}
             />
-            { !isEdit && <Text style={styles.text}>{todo.Content} </Text> }
+            { !isEdit && 
+                 <TouchableOpacity onPress={ () => setIsEdit(true)}>
+                  <Text 
+                    style={{flex:8}}>
+                  {todo.Content} 
+                  </Text> 
+                </TouchableOpacity>
+            }
             { isEdit  && 
-              <View style={styles.edit}>
-                <TodoEdit todo={todo} temp={ (data) => this.newContent = data}/> 
-                <Divider style={ { marginBottom:10 } }/>
-                <Button 
-                  title="Save" 
-                  type="outline"
-                  onPress={ () => {
-                    setIsEdit(false);
-                    todo.Content = this.newContent;
-                    this.oldContent = todo.Content;
-                    on.update(todo) ;
-                  } }
-                /> 
-                <Button 
-                  title="Cancel" 
-                  type="outline"
-                  onPress={ () => {
-                    todo.Content = this.oldContent;
-                    setIsEdit(false);
-                  } }
-                /> 
-              </View>
+              <Modal>
+                <SafeAreaView forceInset={ { top: 'always'} }>
+                <View style={styles.edit}>
+                  <TodoEdit todo={todo} temp={ (data) => this.newContent = data}/> 
+                  <View style={ styles.row}>
+                    <Icon
+                      name='done'
+                      type='materialicon'
+                      size= {40}
+                      onPress= { () => {                      
+                        setIsEdit(false);
+                        todo.Content = this.newContent;
+                        this.oldContent = todo.Content;
+                        on.update(todo) ;
+                      }}
+                      iconStyle= { {color :'green'} }
+                    />
+                    <Icon
+                      name='remove'
+                      type='materialicon'
+                      size= {40}
+                      onPress= { () => {
+                        todo.Content = this.oldContent;
+                        setIsEdit(false);
+                      }}
+                      iconStyle= { {color :'green'} }
+                    />
+                  </View>
+                </View>
+                </SafeAreaView>
+              </Modal>
             }
         </View>
         <Divider/>
