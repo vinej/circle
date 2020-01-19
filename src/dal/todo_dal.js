@@ -12,7 +12,7 @@ class TodoDal {
     };
 
     delete(id, next, err) {
-        Database.delete('todo', id, next, err);        
+        Database.delete('todo', id, next, err);
     };
 
     update(todo, next, err) {
