@@ -3,8 +3,7 @@ import { todo } from '../models/todo_model'
 
 class TodoDal {
     getAll(next,err) {
-        Database.select('todo', todo, null, next, err);
-        //next(todos);
+        Database.select('todo', todo, null, 'CreatedDate desc', next, err);
     }
 
     add(todo, next, err) {

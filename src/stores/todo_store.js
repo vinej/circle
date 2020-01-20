@@ -57,8 +57,6 @@ class TodoStore {
   }
 
   add(todo) {
-    //todo.id = this.count + 1;
-    console.log('todo add', todo)
     this.allTodos.unshift( todo );
     this.pageNumber = 0;
     this.todos = this.allTodos.slice( this.start(), this.end());

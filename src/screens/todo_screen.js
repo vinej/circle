@@ -43,14 +43,14 @@ const TodoScreen = (props) => {
         <Modal>
             <SafeAreaView forceInset={ { top: 'always'} }>
             <View style={styles.edit}>
-              <TodoEdit todo={ { Id:-1, Content:'', IsDone:0} } temp={ (data) => this.newContent = data}/> 
+              <TodoEdit todo={ { Id:-1, Content:'', IsDone:0, CreatdDate: Date.now().toString()} } temp={ (data) => this.newContent = data}/> 
               <View style={ styles.row}>
                 <Icon
                   name='done'
                   type='materialicon'
                   size= {40}
                   onPress= { () => {
-                    on.add( { Content: this.newContent, IsDone:0});
+                    on.add( { Content: this.newContent, IsDone:0, CreatedDate: Date.now().toString()});
                     setIsEdit(false);
                   }}
                   iconStyle= { {color :'green'} }

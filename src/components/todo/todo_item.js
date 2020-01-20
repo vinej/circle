@@ -10,6 +10,12 @@ import { TodoAction as on } from '../../actions/todo_actions'
 import TodoEdit from './todo_edit'
 import {SafeAreaView} from 'react-navigation'
 
+function getTime(atime) {
+  var dt = new Date();
+  dt.setTime(parseInt(atime));
+  return dt.toString();
+}
+
 const TodoItem = ( { todo }) => {
   const [isEdit, setIsEdit] = useState(false);
   rowId = -1;
@@ -62,14 +68,16 @@ const TodoItem = ( { todo }) => {
               type='materialicon'
               size= {30}
               style={{paddingRight:40}}
-              onPress= { () => {  todo.IsDone == 0? todo.IsDone=1: todo.IsDone=0; on.update(todo)  }}
+              onPress= { () => {  todo.IsDone == 0 ? todo.IsDone=1: todo.IsDone=0; on.update(todo) }}
               iconStyle= { todo.IsDone == 0 ? {color :'gray'} : {color :'green'}}
             />
             { !isEdit && 
                  <TouchableOpacity onPress={ () => setIsEdit(true)}>
-                  <Text 
-                    style={{flex:8}}>
-                  {todo.Content} 
+                  <Text style={{flex:8}}>
+                    { todo.Content }
+                  </Text> 
+                  <Text style={{flex:8, fontSize:12}}>
+                    { getTime(todo.CreatedDate)}
                   </Text> 
                 </TouchableOpacity>
             }

@@ -8,7 +8,7 @@ class Database {
   _create() {
     this.db.transaction(tx => {
       tx.executeSql(
-        "create table if not exists todo (Id integer primary key not null, IsDone integer, Content text);",
+        "create table if not exists todo (Id integer primary key not null, IsDone integer, Content text, CreatedDate text);",
         null, 
         (trn, res) => console.log('create ok:', trn, res), 
         (trn, error) => console.log('create error:', trn, error),
@@ -28,8 +28,8 @@ class Database {
 
   insert_test_values() {
     this.db.transaction(tx => {
-        tx.executeSql("insert into todo(Id,IsDone,Content) values(1,1,'acheter des vivres');");
-        tx.executeSql("insert into todo(Id,IsDone,Content) values(2,0,'terminer mes devoirs');");
+        tx.executeSql("insert into todo(IsDone,Content,CreatedDate) values(1,'acheter des vivres', datetime('now'));");
+        tx.executeSql("insert into todo(IsDone,Content,CreatedDate) values(0,'terminer mes devoirs', datetime('now));");
       }
     )
   }
@@ -37,9 +37,8 @@ class Database {
   open(next, err) {
     try {
       this.db = SQLite.openDatabase("circle.db");
-      //this.drop('todo');
-      //this.create();
-      //this.create_tables();
+      //this._drop('todo');
+      //this._create();
       //this.insert_test_values();
       next();
     } catch(error) {
@@ -57,10 +56,14 @@ class Database {
     }
   }
 
-  select(name, entity, condition, next, err) {
+  select(name, entity, condition, order, next, err) {
     fields = Object.keys(entity).join(',');
     conditions = [];
     parameters = [];
+
+    if (order == null) {
+      order = 'Id';
+    }
 
     if (condition !== null) {
       for (let [key, value] of Object.entries(condition)) {
@@ -72,7 +75,7 @@ class Database {
     if (condition !== null) {
       this.db.transaction(tx => {
         tx.executeSql(
-          `select ${fields} from ${name} where ${conditions.join(' and ')};`,
+          `select ${fields} from ${name} where ${conditions.join(' and ')} order by ${order};`,
           parameters,
           (_, { rows: { _array } }) => next( _array), (_,error) => err(error) )
         });
@@ -119,6 +122,7 @@ class Database {
   // update table set column=?, column = ? ... where Is = , column= value
   // do not update the Id column. This column is used into the where condition
   update(name, entity, next, err) {
+    console.log(entity);
     var fields = [];
     var parameters = [];
     var id = -1;
