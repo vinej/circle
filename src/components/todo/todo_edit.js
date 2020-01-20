@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, Button} from 'react-native';
+import { StyleSheet, View, Keyboard} from 'react-native';
 import { Icon, Input} from 'react-native-elements';
 
 const TodoEdit = ( { todo, temp } ) => {

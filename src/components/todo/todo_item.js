@@ -73,10 +73,10 @@ const TodoItem = ( { todo }) => {
             />
             { !isEdit && 
                  <TouchableOpacity onPress={ () => setIsEdit(true)}>
-                  <Text style={{flex:8}}>
+                  <Text style={{flex:8, fontSize:16}}>
                     { todo.Content }
                   </Text> 
-                  <Text style={{flex:8, fontSize:12}}>
+                  <Text style={{flex:8, fontSize:10}}>
                     { getTime(todo.CreatedDate)}
                   </Text> 
                 </TouchableOpacity>
