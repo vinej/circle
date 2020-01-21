@@ -18,13 +18,13 @@ function getTime(atime) {
 
 const TodoItem = ( { todo }) => {
   const [isEdit, setIsEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   rowId = -1;
   oldContent = todo.Content;
   newContent = todo.Content;
   if (newContent == null) { newContent = ''}
   isSelected = false;
   console.log("enter in edit");
-  self = this;
 
   swipeBtns = [
     {
@@ -87,7 +87,7 @@ const TodoItem = ( { todo }) => {
             name='clear'
             type='materialicon'
             size= {30}
-            onPress= { () => {  on.delete(todo.Id) }}
+            onPress= { () => {   on.delete(todo.Id)  }}
             iconStyle= { {color :'red', flex:1} }
           />
           { isEdit  && 

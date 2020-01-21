@@ -90,7 +90,7 @@ const TodoScreen = (props) => {
           windowSize={10}
           keyExtractor = { (todo) => todo.Id.toString()}
           renderItem = { ( { item } )  => (
-            <TodoItem todo={item}/> }</Observer>
+            <TodoItem todo={item}/>
           )} 
         />
       </View>

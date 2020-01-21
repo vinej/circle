@@ -25,6 +25,7 @@ class TodoStore {
 
     const idx = this.todos.findIndex( (r) => r.Id === id );
     this.todos.splice(idx,1);
+    this.todos = this.todos.slice();
     //this.todos = this.allTodos.slice( this.start(), this.end());
     this.count -= 1;
   }
