@@ -2,8 +2,8 @@ import { action, decorate, observable } from 'mobx'
 
 class TodoStore {
   todos = [];
-  allTodos = [];
-  pagingSize = 10;
+  //allTodos = [];
+  pagingSize = 100;
   count = 0;
   pageNumber = 0;
   errorMessage = '';
@@ -14,14 +14,18 @@ class TodoStore {
   }
 
   end() {
-    return Math.min((this.pageNumber +1 ) * this.pagingSize, this.allTodos.length);
+    return Math.min((this.pageNumber +1 ) * this.pagingSize, this.todos.length);
+    //return Math.min((this.pageNumber +1 ) * this.pagingSize, this.allTodos.length);
   }
 
   delete(id) {
     console.log('todo store delete');
-    const idx = this.allTodos.findIndex( (r) => r.Id === id );
-    this.allTodos.splice(idx,1);
-    this.todos = this.allTodos.slice( this.start(), this.end());
+    //const idx = this.allTodos.findIndex( (r) => r.Id === id );
+    //this.allTodos.splice(idx,1);
+
+    const idx = this.todos.findIndex( (r) => r.Id === id );
+    this.todos.splice(idx,1);
+    //this.todos = this.allTodos.slice( this.start(), this.end());
     this.count -= 1;
   }
 
@@ -31,35 +35,37 @@ class TodoStore {
   }
 
   getCount() {
-    return this.allTodos.length;
+    return this.todos.length;
+    //return this.allTodos.length;
   }
 
   update(todo) {
-    const idx = this.allTodos.findIndex( (r) => r.Id === todo.Id );
-    this.allTodos[idx] = todo;
+    //const idx = this.allTodos.findIndex( (r) => r.Id === todo.Id );
+    //this.allTodos[idx] = todo;
 
     const idx2 = this.todos.findIndex( (r) => r.Id === todo.Id );
     this.todos[idx2] = todo;
   }
 
   next() {
-    if ( ((this.pageNumber + 1) * this.pagingSize) < this.allTodos.length) {
-      this.pageNumber += 1;
-      this.todos = this.allTodos.slice( this.start(), this.end());
-    }
+    //if ( ((this.pageNumber + 1) * this.pagingSize) < this.allTodos.length) {
+    //  this.pageNumber += 1;
+     // this.todos = this.allTodos.slice( this.start(), this.end());
+    //}
   }
 
   prev() {
-    if (this.pageNumber > 0) {
-      this.pageNumber -= 1;
-      this.todos = this.allTodos.slice( this.start(), this.end());
-    }
+    //if (this.pageNumber > 0) {
+    //  this.pageNumber -= 1;
+    //  this.todos = this.allTodos.slice( this.start(), this.end());
+    //}
   }
 
   add(todo) {
-    this.allTodos.unshift( todo );
+    //this.allTodos.unshift( todo );
     this.pageNumber = 0;
-    this.todos = this.allTodos.slice( this.start(), this.end());
+    //this.todos = this.allTodos.slice( this.start(), this.end());
+    this.todos.unshift( todo );
     this.count = this.count + 1
     this.errorMessage = '';
     this.internalError = null;
@@ -67,15 +73,16 @@ class TodoStore {
 
   setAll(todos) {
     if (todos != null) {
-      this.allTodos = todos;
-      this.todos = this.allTodos.slice( this.start(), this.end());
+      //this.allTodos = todos;
+      this.todos = todos; //this.allTodos.slice( this.start(), this.end());
     } else {
-      this.allTodos = [];
-      this.todos = [];
+        //this.allTodos = [];
+        this.todos = [];
     }
     this.errorMessage = '';
     this.internalError = null;
-    this.count = this.allTodos.length;
+    //this.count = this.allTodos.length;
+    this.count = this.todos.length;
   }
 
   getAll() {

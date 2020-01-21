@@ -21,6 +21,7 @@ const TodoItem = ( { todo }) => {
   rowId = -1;
   oldContent = todo.Content;
   newContent = todo.Content;
+  if (newContent == null) { newContent = ''}
   isSelected = false;
   console.log("enter in edit");
   self = this;
@@ -46,77 +47,87 @@ const TodoItem = ( { todo }) => {
   ];
 
   return ( 
-    <Swipeout
-        backgroundColor= 'white'
-        right={this.swipeBtns}
-        rowID={todo.Id}
-        sectionId= {1}
-        sensitivity={100}
-        autoClose = {true}      
-        onOpen = {(secId, rowId, direction) => { 
-          this.rowId = rowId;
-
-        } }
+    /*
+    //<Swipeout
+    //    backgroundColor= 'white'
+    //    right={this.swipeBtns}
+    //    rowID={todo.Id}
+    //    sectionId= {1}
+    //    sensitivity={100}
+    //    autoClose = {true}      
+    //    onOpen = {(secId, rowId, direction) => { 
+    //      this.rowId = rowId;
+    //
+    //    } }
+    //  >
+    */
+   <>
+      <View
+          style={styles.row}
+          activeOpacity={0.4}
       >
-        <View
-            style={styles.row}
-            activeOpacity={0.4}
-            //onPress={this.viewNote(item)}
-        >
-            <Icon
-              name={ todo.IsDone == 1 ? 'done' : 'remove' }
-              type='materialicon'
-              size= {30}
-              style={{paddingRight:40}}
-              onPress= { () => {  todo.IsDone == 0 ? todo.IsDone=1: todo.IsDone=0; on.update(todo) }}
-              iconStyle= { todo.IsDone == 0 ? {color :'gray'} : {color :'green'}}
-            />
-            { !isEdit && 
-                 <TouchableOpacity onPress={ () => setIsEdit(true)}>
-                  <Text style={{flex:8, fontSize:16}}>
+          <Icon
+            name={ todo.IsDone == 1 ? 'done' : 'remove' }
+            type='materialicon'
+            size= {30}
+            onPress= { () => {  todo.IsDone == 0 ? todo.IsDone=1: todo.IsDone=0; on.update(todo) }}
+            iconStyle= { todo.IsDone == 0 ? {color :'gray', flex:1} : {color :'green', flex:1}}
+          />
+          { !isEdit && 
+                <TouchableOpacity style={{flex:8}} onPress={ () => setIsEdit(true)}>
+                  <Text style={{fontSize:16}}>
                     { todo.Content }
-                  </Text> 
-                  <Text style={{flex:8, fontSize:10}}>
-                    { getTime(todo.CreatedDate)}
-                  </Text> 
-                </TouchableOpacity>
-            }
-            { isEdit  && 
-              <Modal>
-                <SafeAreaView forceInset={ { top: 'always'} }>
-                <View style={styles.edit}>
-                  <TodoEdit todo={todo} temp={ (data) => this.newContent = data}/> 
-                  <View style={ styles.row}>
-                    <Icon
-                      name='done'
-                      type='materialicon'
-                      size= {40}
-                      onPress= { () => {                      
-                        setIsEdit(false);
-                        todo.Content = this.newContent;
-                        this.oldContent = todo.Content;
-                        on.update(todo) ;
-                      }}
-                      iconStyle= { {color :'green'} }
-                    />
-                    <Icon
-                      name='remove'
-                      type='materialicon'
-                      size= {40}
-                      onPress= { () => {
-                        todo.Content = this.oldContent;
-                        setIsEdit(false);
-                      }}
-                      iconStyle= { {color :'green'} }
-                    />
-                  </View>
+                  </Text>
+                  <Text style={{fontSize:10}}>
+                    { getTime(todo.CreatedDate) }
+                  </Text>
+              </TouchableOpacity>
+          }
+          <Icon
+            name='clear'
+            type='materialicon'
+            size= {30}
+            onPress= { () => {  on.delete(todo.Id) }}
+            iconStyle= { {color :'red', flex:1} }
+          />
+          { isEdit  && 
+            <Modal>
+              <SafeAreaView forceInset={ { top: 'always'} }>
+              <View style={styles.edit}>
+                <TodoEdit todo={todo} temp={ (data) => newContent = data}/> 
+                <View style={ styles.row}>
+                  <Icon
+                    name='done'
+                    type='materialicon'
+                    size= {40}
+                    onPress= { () => {                      
+                      setIsEdit(false);
+                      todo.Content = newContent;
+                      oldContent = todo.Content;
+                      on.update(todo) ;
+                    }}
+                    iconStyle= { {color :'green'} }
+                  />
+                  <Icon
+                    name='remove'
+                    type='materialicon'
+                    size= {40}
+                    onPress= { () => {
+                      todo.Content = oldContent;
+                      setIsEdit(false);
+                    }}
+                    iconStyle= { {color :'green'} }
+                  />
                 </View>
-                </SafeAreaView>
-              </Modal>
-            }
-        </View>
-        <Divider/>
-    </Swipeout>
+              </View>
+              </SafeAreaView>
+            </Modal>
+          }
+      </View>
+      <Divider/>
+    </>
+    ///  <Divider/>
+    //</Swipeout>
   )
 };
 
@@ -124,7 +135,6 @@ const styles = StyleSheet.create({
    row: {
      flexDirection: 'row',
      minHeight: 40,
-     flex:10,
    },
    edit: {
     minHeight: 40,
@@ -139,3 +149,40 @@ const styles = StyleSheet.create({
 });
  
 export default observer(TodoItem); 
+
+
+/*
+{ isEdit  && 
+            <Modal>
+              <SafeAreaView forceInset={ { top: 'always'} }>
+              <View style={styles.edit}>
+                <TodoEdit todo={todo} temp={ (data) => this.newContent = data}/> 
+                <View style={ styles.row}>
+                  <Icon
+                    name='done'
+                    type='materialicon'
+                    size= {40}
+                    onPress= { () => {                      
+                      setIsEdit(false);
+                      todo.Content = this.newContent;
+                      this.oldContent = todo.Content;
+                      on.update(todo) ;
+                    }}
+                    iconStyle= { {color :'green'} }
+                  />
+                  <Icon
+                    name='remove'
+                    type='materialicon'
+                    size= {40}
+                    onPress= { () => {
+                      todo.Content = this.oldContent;
+                      setIsEdit(false);
+                    }}
+                    iconStyle= { {color :'green'} }
+                  />
+                </View>
+              </View>
+              </SafeAreaView>
+            </Modal>
+          }
+*/

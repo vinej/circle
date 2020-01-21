@@ -43,7 +43,7 @@ const TodoScreen = (props) => {
         <Modal>
             <SafeAreaView forceInset={ { top: 'always'} }>
             <View style={styles.edit}>
-              <TodoEdit todo={ { Id:-1, Content:'', IsDone:0, CreatdDate: Date.now().toString()} } temp={ (data) => this.newContent = data}/> 
+              <TodoEdit todo={ { Id:-1, Content:'', IsDone:0, CreatdDate: Date.now().toString()} } temp={ (data) => newContent = data}/> 
               <View style={ styles.row}>
                 <Icon
                   name='done'
@@ -82,14 +82,18 @@ const TodoScreen = (props) => {
         </View>
 
         <FlatList
-          data = { todos }
+          data = { TodoStore.todos }
           contentContainerStyle={{ paddingBottom: 60}}
           contentInset={{top: 0, bottom: 20, left: 0, right: 0}}
           contentInsetAdjustmentBehavior='automatic'
+          maxToRenderPerBatch={2}
+          initialNumToRender={10}
+          removeClippedSubviews={true}
+          windowSize={10}
           keyExtractor = { (todo) => todo.Id.toString()}
           renderItem = { ( { item } )  => (
             <TodoItem todo={item}/>
-          )}
+          )} 
         />
       </View>
     )

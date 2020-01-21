@@ -10,7 +10,7 @@ const TodoEdit = ( { todo, temp } ) => {
         autoCapitalize="none" 
         autoCorrect={true}
         multiline={true}
-        inputStyle= { { height:92, backgroundColor: 'beige' } } 
+        inputStyle= { { height:150, backgroundColor: 'beige' } } 
         onChangeText= {newValue => temp(newValue) }
         placeHolder={"Enter your todo"}
         rightIcon={
