@@ -13,6 +13,12 @@ class Database {
         (trn, res) => console.log('create ok:', trn, res), 
         (trn, error) => console.log('create error:', trn, error),
       );
+      tx.executeSql(
+        "create index todo_index on todo(CreatedDate);",
+        null, 
+        (trn, res) => console.log('create ok:', trn, res), 
+        (trn, error) => console.log('create error:', trn, error),
+      );
     });
   }
 
@@ -82,7 +88,7 @@ class Database {
     } else {
       this.db.transaction(tx => {
         tx.executeSql(
-          `select ${fields} from ${name};`,
+          `select ${fields} from ${name} order by ${order};`,
           null,
           (_, { rows: { _array } }) => next(_array), (_,error) => err(error) )
       });

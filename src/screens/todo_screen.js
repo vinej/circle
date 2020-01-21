@@ -25,7 +25,7 @@ const TodoScreen = (props) => {
   return (
       <View>
         <View style= { { flexDirection: 'row'}}>
-          <Text style={ styles.title} >Getion des todos></Text>
+          <Text style={ styles.title} >Getion des todos</Text>
           <Text style={ styles.index}> ({ TodoStore.getCount() },</Text>
           <Text style={ styles.index}>{ TodoStore.start() + 1 },</Text>
           <Text style={ styles.index}>{ TodoStore.end() } )</Text>
@@ -90,7 +90,7 @@ const TodoScreen = (props) => {
           initialNumToRender={10}
           removeClippedSubviews={true}
           windowSize={10}
-          keyExtractor = { (todo) => todo.Id.toString()}
+          keyExtractor = { (todo) => todo.CreatedDate}
           renderItem = { ( { item } )  => (
             <TodoItem todo={item}/>
           )} 
