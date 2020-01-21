@@ -74,7 +74,7 @@ class TodoStore {
   setAll(todos) {
     if (todos != null) {
       //this.allTodos = todos;
-      this.todos = todos; //this.allTodos.slice( this.start(), this.end());
+      this.todos = todos.slice(); //this.allTodos.slice( this.start(), this.end());
     } else {
         //this.allTodos = [];
         this.todos = [];

@@ -15,8 +15,6 @@ const TodoScreen = (props) => {
   lastIndex = 10;
   newContent = '';
 
-  const todos = TodoStore.todos.slice();
-
   // call get all once
   useEffect(() => {
     on.getAll();
@@ -25,7 +23,7 @@ const TodoScreen = (props) => {
   return (
       <View>
         <View style= { { flexDirection: 'row'}}>
-          <Text style={ styles.title} >Getion des todos</Text>
+          <Text style={ styles.title} >Gestion des todos</Text>
           <Text style={ styles.index}> ({ TodoStore.getCount() },</Text>
           <Text style={ styles.index}>{ TodoStore.start() + 1 },</Text>
           <Text style={ styles.index}>{ TodoStore.end() } )</Text>
@@ -50,7 +48,7 @@ const TodoScreen = (props) => {
                   type='materialicon'
                   size= {40}
                   onPress= { () => {
-                    on.add( { Content: this.newContent, IsDone:0, CreatedDate: Date.now().toString()});
+                    on.add( { Content: newContent, IsDone:0, CreatedDate: Date.now().toString()});
                     setIsEdit(false);
                   }}
                   iconStyle= { {color :'green'} }
@@ -90,9 +88,9 @@ const TodoScreen = (props) => {
           initialNumToRender={10}
           removeClippedSubviews={true}
           windowSize={10}
-          keyExtractor = { (todo) => todo.CreatedDate}
+          keyExtractor = { (todo) => todo.Id.toString()}
           renderItem = { ( { item } )  => (
-            <TodoItem todo={item}/>
+            <TodoItem todo={item}/> }</Observer>
           )} 
         />
       </View>
