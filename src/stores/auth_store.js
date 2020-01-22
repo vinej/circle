@@ -19,8 +19,6 @@ class AuthStore {
   }
 
   async checkToken(isValid) {
-    console.log('into check token');
-    console.log(isValid);
     if (isValid.toString() == 'true') {
       // check if the token still valid
       const token = await localStorage.getItem('circle-token')

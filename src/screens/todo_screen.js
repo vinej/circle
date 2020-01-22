@@ -24,8 +24,8 @@ const TodoScreen = (props) => {
       <View>
         <View style= { { flexDirection: 'row'}}>
           <Text style={ styles.title} >Gestion des todos</Text>
-          <Text style={ styles.index}> ({ TodoStore.getCount() },</Text>
-          <Text style={ styles.index}>{ TodoStore.start() + 1 },</Text>
+          <Text style={ styles.index}> ( T:{ TodoStore.getCount() },</Text>
+          <Text style={ styles.index}>{ TodoStore.start() + 1 } de </Text>
           <Text style={ styles.index}>{ TodoStore.end() } )</Text>
         </View>
 
@@ -80,11 +80,11 @@ const TodoScreen = (props) => {
         </View>
 
         <FlatList
-          data = { TodoStore.todos }
+          data = { TodoStore.todos.slice() }
           contentContainerStyle={{ paddingBottom: 60}}
           contentInset={{top: 0, bottom: 20, left: 0, right: 0}}
           contentInsetAdjustmentBehavior='automatic'
-          maxToRenderPerBatch={2}
+          maxToRenderPerBatch={10}
           initialNumToRender={10}
           removeClippedSubviews={true}
           windowSize={10}

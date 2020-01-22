@@ -128,7 +128,6 @@ class Database {
   // update table set column=?, column = ? ... where Is = , column= value
   // do not update the Id column. This column is used into the where condition
   update(name, entity, next, err) {
-    console.log(entity);
     var fields = [];
     var parameters = [];
     var id = -1;

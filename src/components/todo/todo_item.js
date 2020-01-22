@@ -24,7 +24,7 @@ const TodoItem = ( { todo }) => {
   newContent = todo.Content;
   if (newContent == null) { newContent = ''}
   isSelected = false;
-  console.log("enter in edit");
+  console.log("==> Enter in TodoItem");
 
   swipeBtns = [
     {

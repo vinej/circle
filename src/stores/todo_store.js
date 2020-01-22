@@ -19,15 +19,12 @@ class TodoStore {
   }
 
   delete(id) {
-    console.log('todo store delete');
-    //const idx = this.allTodos.findIndex( (r) => r.Id === id );
-    //this.allTodos.splice(idx,1);
-
     const idx = this.todos.findIndex( (r) => r.Id === id );
     this.todos.splice(idx,1);
-    this.todos = this.todos.slice();
-    //this.todos = this.allTodos.slice( this.start(), this.end());
     this.count -= 1;
+    if (this.count == 0) {
+      this.todos = [];
+    }
   }
 
   init() {
@@ -74,10 +71,8 @@ class TodoStore {
 
   setAll(todos) {
     if (todos != null) {
-      //this.allTodos = todos;
-      this.todos = todos.slice(); //this.allTodos.slice( this.start(), this.end());
+      this.todos = todos;
     } else {
-        //this.allTodos = [];
         this.todos = [];
     }
     this.errorMessage = '';
