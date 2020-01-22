@@ -1,12 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import { observer, Observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { StyleSheet, FlatList, View, Modal} from 'react-native';
-import { Icon, Text, Button } from 'react-native-elements'
+import { Text, Button } from 'react-native-elements'
 import { TodoAction as on } from '../actions/todo_actions'
 import TodoStore from '../stores/todo_store' 
 import TodoItem  from '../components/todo/todo_item'
-import { SafeAreaView } from 'react-navigation';
 import TodoEdit from '../components/todo/todo_edit'
+
+function getNewTodo() {
+  return {
+    Id: -1,
+    IsDone: 0,
+    Content: '',
+    CreatedDate: Date.now().toString(),
+  }
+}
 
 const TodoScreen = (props) => {
   // the .slice is needed to refresh the list
@@ -29,54 +37,11 @@ const TodoScreen = (props) => {
           <Text style={ styles.index}>{ TodoStore.end() } )</Text>
         </View>
 
-        <View style= { { flexDirection: 'row', justifyContent:'space-between'}}>
-        <Icon
-            name='navigate-before'
-            type='materrialicons'
-            size={37}
-            color='black'
-            onPress= { () => TodoStore.prev() }
-        />
-        { isEdit &&
-        <Modal>
-            <SafeAreaView forceInset={ { top: 'always'} }>
-            <View style={styles.edit}>
-              <TodoEdit todo={ { Id:-1, Content:'', IsDone:0, CreatdDate: Date.now().toString()} } temp={ (data) => newContent = data}/> 
-              <View style={ styles.row}>
-                <Icon
-                  name='done'
-                  type='materialicon'
-                  size= {40}
-                  onPress= { () => {
-                    on.add( { Content: newContent, IsDone:0, CreatedDate: Date.now().toString()});
-                    setIsEdit(false);
-                  }}
-                  iconStyle= { {color :'green'} }
-                />
-                <Icon
-                  name='remove'
-                  type='materialicon'
-                  size= {40}
-                  onPress= { () => {
-                    setIsEdit(false);
-                  }}
-                  iconStyle= { {color :'green'} }
-                />
-              </View>
-            </View>
-            </SafeAreaView>
-        </Modal>
-        }
-        <Button title="Ajouter un nouveau todo" type="outline"
-            onPress={ () => setIsEdit(true) }
-        />   
-        <Icon
-            name='navigate-next'
-            type='materrialicons'
-            size={37}
-            color='black'
-            onPress= { () => TodoStore.next() }
-        />
+        <View style= { { flexDirection: 'row', justifyContent:'space-between'}}>        
+          { isEdit  &&  <TodoEdit todo={getNewTodo()} setPropIsEdit={ (data) => setIsEdit(data)} isNew={true} /> }
+          <Button title="Ajouter un nouveau todo" type="outline"
+              onPress={ () => setIsEdit(true) }
+          />   
         </View>
 
         <FlatList
