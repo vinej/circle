@@ -1,34 +1,59 @@
 import * as SQLite from "expo-sqlite";
+import { newTodo } from "../models/todo_model";
 
 class Database {
   db = null;
   version = 1;
   idName = 'Id';
 
-  _create() {
-    this.db.transaction(tx => {
-      tx.executeSql(
-        "create table if not exists todo (Id integer primary key not null, IsDone integer, Content text, CreatedDate text);",
-        null, 
-        (trn, res) => console.log('create ok:', trn, res), 
-        (trn, error) => console.log('create error:', trn, error),
-      );
-      tx.executeSql(
-        "create index todo_index on todo(CreatedDate);",
-        null, 
-        (trn, res) => console.log('create ok:', trn, res), 
-        (trn, error) => console.log('create error:', trn, error),
-      );
+  _executeSql = (sql,params=[])=>new Promise((resolve , reject)=>{
+    this.db.transaction((trans)=>{
+        trans.executeSql(sql,params,(db,results)=>{
+            console.log(`SQL:Success : ${sql}`)
+            console.log(`    Parameters : ${params}`)
+            console.log('SQL:End')
+            resolve(results);
+        },
+        (error)=>{
+            console.log(`SQL:Error : ${sql}`)
+            console.log(`    Parameters : ${params}`)
+            console.log(`    Error : ${error}`)
+            console.log('SQL:End')
+          reject(error);
+        });
+    });
+  });
+
+  _type(value) {
+    if (typeof(value) == 'number') {
+      valueString = value.toString();
+      if (valueString.indexOf(".") != -1) {
+        return 'real';
+      } else {
+        return 'integer';
+      }
+    }
+    return 'text';
+  }
+
+  _table(tableList) {
+    sqlList =  [];
+    tableList.forEach(tableDef => {
+      sqlList =  [];
+      for (let [key, value] of Object.entries(tableDef.modele)) {
+        if (key == 'Id') {
+          sqlList.push('Id integer primary key not null');
+        } else {
+          sqlList.push(`${key} ${this._type(value)}`);
+        }
+      }
+      this._executeSql(`create table if not exists ${tableDef.name}(${sqlList.join(',')} )`);
     });
   }
 
-  _drop(table) {
-    this.db.transaction(tx => {
-      tx.executeSql(
-        `drop table if exists ${table}`, null, 
-        (trn,res) => console.log('drop ok: ',trn, res), 
-        (trn, error) => console.log('drop error', trn, error)
-      );
+  _drop(tableList) {
+    tableList.forEach(table => {
+      this._executeSql(`drop table if exists ${table}`);
     });
   }
 
@@ -43,9 +68,8 @@ class Database {
   open(next, err) {
     try {
       this.db = SQLite.openDatabase("circle.db");
-      //this._drop('todo');
-      //this._create();
-      //this.insert_test_values();
+      this._drop(['todo']);
+      this._table([ { name:'todo', modele: newTodo()}]);
       next();
     } catch(error) {
       err(error)

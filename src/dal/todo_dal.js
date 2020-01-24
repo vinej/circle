@@ -1,9 +1,9 @@
 import Database from './database'
-import { todo } from '../models/todo_model'
+import { newTodo } from '../models/todo_model'
 
 class TodoDal {
     getAll(next,err) {
-        Database.select('todo', todo, null, 'Id desc', next, err);
+        Database.select('todo', newTodo(), null, 'Id desc', next, err);
     }
 
     add(todo, next, err) {

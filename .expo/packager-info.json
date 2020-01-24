@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 15872,
-  "expoServerNgrokUrl": "https://a2-3yk.anonymous.circle.exp.direct",
-  "packagerNgrokUrl": "https://packager.a2-3yk.anonymous.circle.exp.direct",
-  "ngrokPid": 15886
+  "packagerPort": 19003,
+  "packagerPid": 21799,
+  "expoServerNgrokUrl": "https://a2-3yk.vinej.circle.exp.direct",
+  "packagerNgrokUrl": "https://packager.a2-3yk.vinej.circle.exp.direct",
+  "ngrokPid": 21814
 }
