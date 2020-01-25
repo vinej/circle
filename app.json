@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "exmulti",
-    "slug": "exmulti",
-    "privacy": "public",
+    "name": "thecircle",
+    "slug": "thecircle",
+    "privacy": "unlisted",
+    "version" : "0.1.0",
     "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
