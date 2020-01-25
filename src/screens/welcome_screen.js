@@ -8,7 +8,7 @@ const WelcomeScreen = ( { navigation}) => {
     return (
         <View style={styles.mainViewStyle}>
             <Icon type="feather" name="circle" size= {100}/>
-            <Text h1 style={styles.circleStyle}>This is the circle</Text>
+            <Text h1 style={styles.circleStyle}>The Circle</Text>
             <Text h2 style={styles.welcomeStyle}>Bienvenu </Text>
             <View>
                 <Button   
@@ -28,15 +28,6 @@ const WelcomeScreen = ( { navigation}) => {
                     }
                     iconRight
                     title="S'enregister   "
-                />
-                <Button 
-                    type="outline"
-                    onPress={ () => navigation.navigate("Todo")}
-                    icon= {
-                        <Icon type="octicon" name='tasklist'/>
-                    }
-                    iconRight
-                    title="Todo"
                 />
             </View>
             <ErrorMessage />

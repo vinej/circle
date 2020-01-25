@@ -15,7 +15,7 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
       <SafeAreaView forceInset={ { top: 'always'} }>
       <View style={styles.edit}>
 
-      <Input  label="Todo"
+      <Input  label="Task"
         defaultValue= { todo.Content }
         autoCapitalize="none" 
         autoCorrect={true}

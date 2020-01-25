@@ -7,6 +7,7 @@ import TodoStore from '../stores/todo_store'
 import TodoItem  from '../components/todo/todo_item'
 import TodoEdit from '../components/todo/todo_edit'
 import { newTodo} from '../models/todo_model'
+import {SafeAreaView} from 'react-navigation'
 
 const TodoScreen = (props) => {
   // the .slice is needed to refresh the list
@@ -15,8 +16,6 @@ const TodoScreen = (props) => {
   lastIndex = 10;
   newContent = '';
 
-
-
   // call get all once
   useEffect(() => {
     props.navigation.setParams({ 'setIsEdit' : setIsEdit });
@@ -24,9 +23,16 @@ const TodoScreen = (props) => {
   }, [])
 
   return (
-      <View>
+    <SafeAreaView forceInset={ { top: 'always'} }>
         <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={ styles.title} >Gestion des todos</Text>
+        <Icon
+          name='new-message'
+          type='entypo'
+          size= {30}
+          iconStyle= { { color : 'black'} }
+          onPress= { () => setIsEdit(true) } 
+        />
+          <Text style={ styles.title} >Task List</Text>
           <Text style={ styles.index}>({ TodoStore.getCount() })</Text>
           <Icon
             name='undo'
@@ -55,7 +61,7 @@ const TodoScreen = (props) => {
             <TodoItem todo={item}/>
           )} 
         />
-      </View>
+    </SafeAreaView>
     )
 };
 
