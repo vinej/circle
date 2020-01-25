@@ -6,6 +6,9 @@ import { Button,} from 'react-native-elements';
 const SettingScreen = ({navigation}) => {
   return (
     <View>
+        <Button title="Welcome" type="outline"
+          onPress={ () => navigation.navigate("Welcome")}
+        />   
         <Button title="Logout" type="outline"
           onPress={ () => navigation.navigate("Logout")}
         />   

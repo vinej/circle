@@ -29,6 +29,15 @@ const WelcomeScreen = ( { navigation}) => {
                     iconRight
                     title="S'enregister   "
                 />
+                <Button 
+                    type="outline"
+                    onPress={ () => navigation.navigate("Todo")}
+                    icon= {
+                        <Icon type="octicon" name='tasklist'/>
+                    }
+                    iconRight
+                    title="Todo"
+                />
             </View>
             <ErrorMessage />
         </View>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'react-native-elements';
-import { setNavigator } from './src/navigation_ref'
+import { setNavigator } from './src/navigation_ref';
+import { Icon } from 'react-native-elements'
 
 import {  createStackNavigator, 
           createSwitchNavigator, 
@@ -32,7 +33,18 @@ const settingNavigator = createStackNavigator( {
   Setting: SettingScreen,
   Logout : LogoutScreen,
   Topic: TopicScreen,
-  Todo: TodoScreen,
+  Todo: {
+      screen: TodoScreen,
+      navigationOptions: ({navigation}) => ({
+          headerRight: <Icon
+          name='new-message'
+          type='entypo'
+          size= {30}
+          iconStyle= { { color : 'black'} }
+          onPress= { function() { navigation.getParam('setIsEdit')(true) } } 
+        />,
+      })
+    },
   Paypal : PaypalScreen,
   Rule: RuleScreen,
   Issue : IssueScreen,

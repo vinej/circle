@@ -9,6 +9,7 @@ class TodoStore {
   errorMessage = '';
   internalError = null;
   lastTodo = null;
+  currentScreen = null;
 
   start() {
     return (this.pageNumber * this.pagingSize);

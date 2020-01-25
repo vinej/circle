@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { observer } from 'mobx-react'
 import { StyleSheet, FlatList, View} from 'react-native';
-import { Text, Button , Icon} from 'react-native-elements'
+import { Text, Divider , Icon} from 'react-native-elements'
 import { TodoAction as on } from '../actions/todo_actions'
 import TodoStore from '../stores/todo_store' 
 import TodoItem  from '../components/todo/todo_item'
@@ -15,31 +15,32 @@ const TodoScreen = (props) => {
   lastIndex = 10;
   newContent = '';
 
+
+
   // call get all once
   useEffect(() => {
+    props.navigation.setParams({ 'setIsEdit' : setIsEdit });
     on.getAll();
   }, [])
 
   return (
       <View>
-        <View style= { { flexDirection: 'row'}}>
+        <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={ styles.title} >Gestion des todos</Text>
-          <Text style={ styles.index}> : { TodoStore.getCount() }  </Text>
+          <Text style={ styles.index}>({ TodoStore.getCount() })</Text>
           <Icon
             name='undo'
             type='materialicon'
             size= {30}
+            iconStyle= { { color : 'orange'} }
             onPress= { () => on.undo(TodoStore.lastTodo) }
           />
         </View>
 
         <View style= { { flexDirection: 'row', justifyContent:'space-between'}}>        
-          { isEdit  &&  <TodoEdit todo={newTodo()} setPropIsEdit={ (data) => setIsEdit(data)} isNew={true} /> }
-          <Button title="Ajouter un nouveau todo" type="outline"
-              onPress={ () => setIsEdit(true) }
-          />   
+          { isEdit  &&  <TodoEdit todo={newTodo()} setPropIsEdit={ (data) => setIsEdit(data)} isNew={true} /> } 
         </View>
-
+        <Divider style={ { marginTop:3, marginBottom:3}} />
         <FlatList
           data = { TodoStore.todos.slice() }
           contentContainerStyle={{ paddingBottom: 60}}

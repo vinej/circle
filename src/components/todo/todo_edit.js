@@ -20,7 +20,7 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
         autoCapitalize="none" 
         autoCorrect={true}
         multiline={true}
-        inputStyle= { { height:150, backgroundColor: 'beige' } } 
+        inputStyle= { { height:200, backgroundColor: 'beige' } } 
         onChangeText= {newValue => newContent = newValue}
         placeHolder={"Enter your todo"}
         rightIcon={
@@ -37,7 +37,7 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
           <Icon
             name='done'
             type='materialicon'
-            size= {40}
+            size= {50}
             onPress= { () => { 
               todo.Content = newContent;
               if (isNew) {
@@ -50,9 +50,9 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
             iconStyle= { {color :'green'} }
           />
           <Icon
-            name='remove'
+            name='cancel'
             type='materialicon'
-            size= {40}
+            size= {50}
             onPress= { () => {
               todo.Content = oldContent;
               setPropIsEdit(false);
@@ -67,6 +67,12 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
  };
 
   const styles = StyleSheet.create({
+    row: {
+      flexDirection: 'row',
+      minHeight: 40,
+      justifyContent: 'space-around'
+      
+    },
     text: {
      fontSize: 30
    },
