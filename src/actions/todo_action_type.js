@@ -8,5 +8,6 @@ export let todoType = {
   setDesct  : todoPrefix + 'setDesc',
   setDone   : todoPrefix + 'setDone',
   getAll    : todoPrefix + 'getAll',
+  undo      : todoPrefix + 'undo',
   error     : todoPrefix + 'error'
 }

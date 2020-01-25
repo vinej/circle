@@ -30,7 +30,7 @@ export class TodoAction {
       type: t.add,
       payload: function() {
         if (isOnline) {
-          TodoService.getInstance().add(todo, TodoAction._getAll , TodoAction.error);
+          TodoService.getInstance().add(todo, TodoAction._add , TodoAction.error);
         } else {
           TodoDal.add(todo, TodoAction._add , TodoAction.error)
         }
@@ -42,7 +42,7 @@ export class TodoAction {
     dispatch( {
       type: t.add,
       payload: todo,
-    })
+    });
   }
 
   static delete(id) {
@@ -52,7 +52,7 @@ export class TodoAction {
         if (isOnline) {
           TodoService.getInstance().delete(id, TodoAction._delete , TodoAction.error);
         } else {
-          TodoDal.delete(id, TodoAction._delete , TodoAction.error)
+          TodoDal.delete(id, TodoAction._delete , TodoAction.error);
         }
       }
     });
@@ -62,7 +62,7 @@ export class TodoAction {
     dispatch( {
       type: t.delete,
       payload: id,
-    })
+    });
   }
 
   static update(todo) {
@@ -85,6 +85,29 @@ export class TodoAction {
     })
   }
 
+
+  static undo(todo) {
+    if (todo == null) {
+      return;
+    }
+    dispatch( {
+      type: t.undo,
+      payload: function() {
+        if (isOnline) {
+          TodoService.getInstance().undo(todo, TodoAction._undo , TodoAction.error);
+        } else {
+          TodoDal.undo(todo, TodoAction._undo , TodoAction.error)
+        }
+      }
+    });
+  }
+
+  static _undo(todo) {
+    dispatch( {
+      type: t.undo,
+      payload: todo,
+    })
+  }
 
   static setDesc(desc) {
     dispatch( {

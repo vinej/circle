@@ -1,20 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { observer } from 'mobx-react'
-import { StyleSheet, FlatList, View, Modal} from 'react-native';
-import { Text, Button } from 'react-native-elements'
+import { StyleSheet, FlatList, View} from 'react-native';
+import { Text, Button , Icon} from 'react-native-elements'
 import { TodoAction as on } from '../actions/todo_actions'
 import TodoStore from '../stores/todo_store' 
 import TodoItem  from '../components/todo/todo_item'
 import TodoEdit from '../components/todo/todo_edit'
-
-function getNewTodo() {
-  return {
-    Id: -1,
-    IsDone: 0,
-    Content: '',
-    CreatedDate: Date.now().toString(),
-  }
-}
+import { newTodo} from '../models/todo_model'
 
 const TodoScreen = (props) => {
   // the .slice is needed to refresh the list
@@ -32,13 +24,17 @@ const TodoScreen = (props) => {
       <View>
         <View style= { { flexDirection: 'row'}}>
           <Text style={ styles.title} >Gestion des todos</Text>
-          <Text style={ styles.index}> ( T:{ TodoStore.getCount() },</Text>
-          <Text style={ styles.index}>{ TodoStore.start() + 1 } de </Text>
-          <Text style={ styles.index}>{ TodoStore.end() } )</Text>
+          <Text style={ styles.index}> : { TodoStore.getCount() }  </Text>
+          <Icon
+            name='undo'
+            type='materialicon'
+            size= {30}
+            onPress= { () => on.undo(TodoStore.lastTodo) }
+          />
         </View>
 
         <View style= { { flexDirection: 'row', justifyContent:'space-between'}}>        
-          { isEdit  &&  <TodoEdit todo={getNewTodo()} setPropIsEdit={ (data) => setIsEdit(data)} isNew={true} /> }
+          { isEdit  &&  <TodoEdit todo={newTodo()} setPropIsEdit={ (data) => setIsEdit(data)} isNew={true} /> }
           <Button title="Ajouter un nouveau todo" type="outline"
               onPress={ () => setIsEdit(true) }
           />   
@@ -71,7 +67,7 @@ const styles = StyleSheet.create({
     fontSize:30,
   },
   index: {
-    fontSize:20,
+    fontSize:30,
   }
 });
 

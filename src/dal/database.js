@@ -68,8 +68,8 @@ class Database {
   open(next, err) {
     try {
       this.db = SQLite.openDatabase("circle.db");
-      this._drop(['todo']);
-      this._table([ { name:'todo', modele: newTodo()}]);
+      //this._drop(['todo']);
+      //this._table([ { name:'todo', modele: newTodo()}]);
       next();
     } catch(error) {
       err(error)
@@ -175,18 +175,34 @@ class Database {
     });
   };
 
+  undo(name, todo, next, err) {
+    if (todo == null) {
+      return;
+    }
+    var parameters = [];
+    parameters.push(todo.Id);
+
+    this.db.transaction(tx => {
+      tx.executeSql(
+        `update ${name} set IsDeleted = 0 where Id=?;` ,
+        parameters,
+        () => next(todo),
+        (_, error) => err(error))
+    });
+  };
+
   delete(name, id, next, err) {
     var parameters = [];
     parameters.push(id);
 
     this.db.transaction(tx => {
       tx.executeSql(
-        `delete from ${name} where Id=?;` ,
+        `update ${name} set IsDeleted = 1 where Id=?;` ,
         parameters,
         () => next(id),
         (_, error) => err(error))
     });
-  };
+  }
 }
 
 export default new Database();

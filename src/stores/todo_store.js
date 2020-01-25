@@ -8,6 +8,7 @@ class TodoStore {
   pageNumber = 0;
   errorMessage = '';
   internalError = null;
+  lastTodo = null;
 
   start() {
     return (this.pageNumber * this.pagingSize);
@@ -20,6 +21,7 @@ class TodoStore {
 
   delete(id) {
     const idx = this.todos.findIndex( (r) => r.Id === id );
+    this.lastTodo = this.todos[idx];
     this.todos.splice(idx,1);
     this.count -= 1;
     if (this.count == 0) {
@@ -30,6 +32,11 @@ class TodoStore {
   init() {
     this.todos = []
     this.count = 0
+  }
+
+  undo(todo) {
+    this.add(todo);
+    this.lastTodo = null;
   }
 
   getCount() {

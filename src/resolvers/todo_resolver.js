@@ -13,6 +13,9 @@ export function todoResolver(action, next) {
     case t.update :
       TodoStore.update(action.payload);
       break;
+    case t.undo :
+      TodoStore.undo(action.payload);
+      break;
     case t.delete :
       TodoStore.delete(action.payload);
       break;
