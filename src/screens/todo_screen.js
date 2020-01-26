@@ -8,10 +8,13 @@ import TodoItem  from '../components/todo/todo_item'
 import TodoEdit from '../components/todo/todo_edit'
 import { newTodo} from '../models/todo_model'
 import {SafeAreaView} from 'react-navigation'
+import { getDate, stringToDate } from '../helpers/utilitiy'
+import TodoCalendar from '../components/todo/todo_calendar'
 
 const TodoScreen = (props) => {
   // the .slice is needed to refresh the list
   const [isEdit, setIsEdit] = useState(false);
+  const [isCalendar, setCalendar] = useState(false);
   firstIndex = 0;
   lastIndex = 10;
   newContent = '';
@@ -24,14 +27,15 @@ const TodoScreen = (props) => {
 
   return (
     <SafeAreaView forceInset={ { top: 'always'} }>
+        <Divider/>
         <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Icon
-          name='new-message'
-          type='entypo'
-          size= {30}
-          iconStyle= { { color : 'black'} }
-          onPress= { () => setIsEdit(true) } 
-        />
+          <Icon
+            name='new-message'
+            type='entypo'
+            size= {30}
+            iconStyle= { { color : 'black', marginTop:3} }
+            onPress= { () => setIsEdit(true) } 
+          />
           <Text style={ styles.title} >Task List</Text>
           <Text style={ styles.index}>({ TodoStore.getCount() })</Text>
           <Icon
@@ -42,9 +46,26 @@ const TodoScreen = (props) => {
             onPress= { () => on.undo(TodoStore.lastTodo) }
           />
         </View>
+        <Divider/>
+        <View style= { { flexDirection: 'row',  justifyContent:'center'}}>
+        <Text style= { styles.date }>{ getDate(TodoStore.selectedDate) }</Text>
+          <Icon
+            name='calendar'
+            type='entypo'
+            size= {30}
+            iconStyle= { { color : 'black', marginTop:3} }
+            onPress= { () => setCalendar(true) } 
+          />
+          { isCalendar  &&  <TodoCalendar setCalendarDate={ (date,type) => { 
+            var dt = new Date(date); //stringToDate(date, 'yyyy-MM-dd', '-');
+            TodoStore.selectedDate = dt.getTime().toString(); 
+            on.getAll();
+            setCalendar(false) }} /> } 
+
+        </View>
 
         <View style= { { flexDirection: 'row', justifyContent:'space-between'}}>        
-          { isEdit  &&  <TodoEdit todo={newTodo()} setPropIsEdit={ (data) => setIsEdit(data)} isNew={true} /> } 
+          { isEdit  &&  <TodoEdit todo={newTodo()} setPropIsEdit={ (status) => setIsEdit(status)} isNew={true} /> } 
         </View>
         <Divider style={ { marginTop:3, marginBottom:3}} />
         <FlatList
@@ -75,6 +96,11 @@ const styles = StyleSheet.create({
   },
   index: {
     fontSize:30,
+  },
+  date: {
+    fontSize: 20,
+    marginTop:6,
+    marginRight:10
   }
 });
 

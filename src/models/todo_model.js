@@ -1,4 +1,5 @@
-import AuthStore from "../stores/auth_store";
+import AuthStore from '../stores/auth_store';
+import TodoStore from '../stores/todo_store';
 
 export function newTodo() {
     return {
@@ -6,7 +7,7 @@ export function newTodo() {
         IsDone: 0,
         IsDeleted: 0,
         Content: '',
-        TodoDate: Date.now().toString(),
+        TodoDate: TodoStore.selectedDate,
         TodoUser: AuthStore.name,
         CreatedDate: Date.now().toString(),
         CreatedUser: AuthStore.name,

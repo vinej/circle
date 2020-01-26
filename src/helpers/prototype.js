@@ -64,7 +64,8 @@ if (!Array.prototype.findIndex) {
     }
     return -1;
   };
-}
+};
+
 
 
 

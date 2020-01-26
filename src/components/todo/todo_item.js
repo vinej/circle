@@ -8,13 +8,7 @@ import { Text, Icon , Divider, Button, Input} from 'react-native-elements';;
 import Swipeout from 'react-native-swipeout';
 import { TodoAction as on } from '../../actions/todo_actions'
 import TodoEdit from './todo_edit'
-import {SafeAreaView} from 'react-navigation'
-
-function getTime(atime) {
-  var dt = new Date();
-  dt.setTime(parseInt(atime));
-  return dt.toString();
-}
+import { getTime } from  '../../helpers/utilitiy'
 
 const TodoItem = ( { todo, setPropIsEdit }) => {
   const [isEdit, setIsEdit] = useState(false);

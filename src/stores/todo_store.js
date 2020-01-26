@@ -1,4 +1,5 @@
 import { action, decorate, observable } from 'mobx'
+import { getCurrentDateInMilliSecond } from '../helpers/utilitiy'
 
 class TodoStore {
   todos = [];
@@ -10,6 +11,7 @@ class TodoStore {
   internalError = null;
   lastTodo = null;
   currentScreen = null;
+  selectedDate = getCurrentDateInMilliSecond();
 
   start() {
     return (this.pageNumber * this.pagingSize);
@@ -104,9 +106,10 @@ class TodoStore {
 decorate( TodoStore, {
   todos : observable,
   count: observable,
-  pageNumber: observable,
-  firstIndex: observable,
-  lastIndex: observable,
+  selectedDate: observable,
+  //pageNumber: observable,
+  //firstIndex: observable,
+  //lastIndex: observable,
   internalError: observable,
   errorMessage: observable,
   add: action,
@@ -114,11 +117,10 @@ decorate( TodoStore, {
   setAll : action,
   getAll: action,
   getCount: action,
-  start: action,
-  end:action,
-  next: action,
-  prev: action,
-
+  //start: action,
+  //end:action,
+  //next: action,
+  //prev: action,
 })
 
 export default new TodoStore();

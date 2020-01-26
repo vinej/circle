@@ -1,9 +1,10 @@
 import Database from './database'
 import { newTodo } from '../models/todo_model'
+import TodoStore from '../stores/todo_store';
 
 class TodoDal {
     getAll(next,err) {
-        let condition = { IsDeleted : 0};
+        let condition = { IsDeleted : 0, TodoDate: TodoStore.selectedDate };
         Database.select('todo', newTodo(), condition, 'Id desc', next, err);
     }
 
