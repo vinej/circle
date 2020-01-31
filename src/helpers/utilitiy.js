@@ -10,6 +10,12 @@ export function getDate(atime) {
   return dt.toDateString();
 }
 
+export function getDateFromMillisecondString(atime) {
+  var dt = new Date();
+  dt.setTime(parseInt(atime));
+  return dt;
+}
+
 function getMonthString(month) {
   month = month + 1;
   if(month < 10) {
@@ -22,6 +28,11 @@ function getMonthString(month) {
 export function getCurrentDateInMilliSecond() {
   var dt2 = new Date(Date.now());
   var dt = new Date(dt2.getFullYear(),dt2.getMonth(),dt2.getDate());
+  return dt.getTime().toString();
+}
+
+export function getDateInMilliSecond(date) {
+  var dt = new Date(date.getFullYear(),date.getMonth(),date.getDate());
   return dt.getTime().toString();
 }
 

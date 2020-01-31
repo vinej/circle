@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { observer } from 'mobx-react'
 import { StyleSheet, FlatList, View} from 'react-native';
-import { Text, Divider , Icon} from 'react-native-elements'
+import { Text, Divider, Icon} from 'react-native-elements'
 import { TodoAction as on } from '../actions/todo_actions'
 import TodoStore from '../stores/todo_store' 
 import TodoItem  from '../components/todo/todo_item'
@@ -11,10 +11,12 @@ import {SafeAreaView} from 'react-navigation'
 import { getDate, stringToDate } from '../helpers/utilitiy'
 import TodoCalendar from '../components/todo/todo_calendar'
 
+
 const TodoScreen = (props) => {
   // the .slice is needed to refresh the list
   const [isEdit, setIsEdit] = useState(false);
   const [isCalendar, setCalendar] = useState(false);
+  
   firstIndex = 0;
   lastIndex = 10;
   newContent = '';
@@ -30,20 +32,20 @@ const TodoScreen = (props) => {
         <Divider/>
         <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
           <Icon
-            name='new-message'
-            type='entypo'
-            size= {30}
-            iconStyle= { { color : 'black', marginTop:3} }
-            onPress= { () => setIsEdit(true) } 
-          />
-          <Text style={ styles.title} >Task List</Text>
-          <Text style={ styles.index}>({ TodoStore.getCount() })</Text>
-          <Icon
             name='undo'
             type='materialicon'
             size= {30}
             iconStyle= { { color : 'orange'} }
             onPress= { () => on.undo(TodoStore.lastTodo) }
+          />
+          <Text style={ styles.title} >Task List</Text>
+          <Text style={ styles.index}>({ TodoStore.getCount() })</Text>
+          <Icon
+            name='new-message'
+            type='entypo'
+            size= {30}
+            iconStyle= { { color : 'black', marginTop:3} }
+            onPress= { () => setIsEdit(true) } 
           />
         </View>
         <Divider/>

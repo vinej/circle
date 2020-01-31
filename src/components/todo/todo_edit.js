@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { observer } from 'mobx-react';
 import { StyleSheet, View, Keyboard, Modal} from 'react-native';
-import { Icon, Input} from 'react-native-elements';
+import { Icon, Input, Text} from 'react-native-elements';
 import { TodoAction as on} from '../../actions/todo_actions'
 import { SafeAreaView } from 'react-navigation';
+import {getDateFromMillisecondString, getDate, getDateInMilliSecond} from '../../helpers/utilitiy'
+import DateTimePicker from "react-native-modal-datetime-picker";
+import I18n from 'ex-react-native-i18n'
 
 const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
   oldContent = todo.Content;
   newContent = todo.Content;
+  const [isTodoDateVisible, setTodoDateVisible] = useState(false);
+  var previousTodoDate = todo.TodoDate;
   if (newContent == null) { newContent = ''}
 
   return ( 
@@ -33,6 +38,37 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
             />
         }
         />
+
+        <View style={ styles.row } >
+        <Text style={styles.date}>Task Date: </Text>
+        <Text style={styles.date}>{ getDate(todo.TodoDate)}</Text>
+        <Icon 
+          name='calendar'
+          type='antdesign'
+          onPress= { () => {
+            previousTodoDate = todo.TodoDate;
+            setTodoDateVisible(!isTodoDateVisible)
+          } }
+        />
+
+        <DateTimePicker 
+          isVisible={ isTodoDateVisible}
+          title="Date"
+          display="calendar"
+          locale={ I18n.locale}
+          value={ getDateFromMillisecondString(todo.TodoDate) }
+          onConfirm={ (date) => { 
+            todo.TodoDate = getDateInMilliSecond(date);
+            setTodoDateVisible(!isTodoDateVisible)
+          }}
+          onCancel={ () => {
+            todo.TodoDate = previousTodoDate;
+            setTodoDateVisible(!isTodoDateVisible)
+          }}
+          mode="date"
+        />
+      </View>
+
         <View style={ styles.row}>
           <Icon
             name='done'
