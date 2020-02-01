@@ -81,7 +81,7 @@ const TodoScreen = (props) => {
             iconStyle= { { color : 'black', marginTop:3} }
             onPress= { () => setCalendar(true) } 
           />
-          { isCalendar  &&  <TodoCalendar setCalendarDate={ (date,type) => { 
+          { isCalendar  &&  <TodoCalendar now={getDate(TodoStore.selectedDate)} setCalendarDate={ (date,type) => { 
             var dt = new Date(date); //stringToDate(date, 'yyyy-MM-dd', '-');
             TodoStore.selectedDate = dt.getTime().toString(); 
             on.getAll();

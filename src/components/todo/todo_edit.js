@@ -85,6 +85,14 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
             }}
             iconStyle= { {color :'green'} }
           />
+          { isNew!=true && <Icon
+            name='delete'
+            type='materialicon'
+            size= {50}
+            onPress= { () => {   on.delete(todo.Id)  }}
+            iconStyle= { {color :'red'} }
+          />
+          }
           <Icon
             name='cancel'
             type='materialicon'
@@ -94,13 +102,6 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
               setPropIsEdit(false);
             }}
             iconStyle= { {color :'green'} }
-          />
-          <Icon
-            name='clear'
-            type='materialicon'
-            size= {50}
-            onPress= { () => {   on.delete(todo.Id)  }}
-            iconStyle= { {color :'red'} }
           />
         </View>
       </View>
