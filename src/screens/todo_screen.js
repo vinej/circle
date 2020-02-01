@@ -8,8 +8,9 @@ import TodoItem  from '../components/todo/todo_item'
 import TodoEdit from '../components/todo/todo_edit'
 import { newTodo} from '../models/todo_model'
 import {SafeAreaView} from 'react-navigation'
-import { getDate, stringToDate } from '../helpers/utilitiy'
+import { getDate, stringToDate, moveDateByDay } from '../helpers/utilitiy'
 import TodoCalendar from '../components/todo/todo_calendar'
+import SwipeGesture from '../helpers/swipe-gesture'
 
 
 const TodoScreen = (props) => {
@@ -26,6 +27,28 @@ const TodoScreen = (props) => {
     props.navigation.setParams({ 'setIsEdit' : setIsEdit });
     on.getAll();
   }, [])
+
+  onSwipePerformed = (action) => {
+    /// action : 'left' for left swipe
+    /// action : 'right' for right swipe
+    /// action : 'up' for up swipe
+    /// action : 'down' for down swipe
+    
+    switch(action){
+      case 'left':{
+        TodoStore.selectedDate = moveDateByDay(TodoStore.selectedDate, 1);
+        on.getAll();
+        console.log('left Swipe performed');
+        break;
+      }
+       case 'right':{
+        TodoStore.selectedDate = moveDateByDay(TodoStore.selectedDate, -1);
+        on.getAll();
+        console.log('right Swipe performed');
+        break;
+      }
+    }
+  }
 
   return (
     <SafeAreaView forceInset={ { top: 'always'} }>
@@ -70,20 +93,24 @@ const TodoScreen = (props) => {
           { isEdit  &&  <TodoEdit todo={newTodo()} setPropIsEdit={ (status) => setIsEdit(status)} isNew={true} /> } 
         </View>
         <Divider style={ { marginTop:3, marginBottom:3}} />
-        <FlatList
-          data = { TodoStore.todos.slice() }
-          contentContainerStyle={{ paddingBottom: 60}}
-          contentInset={{top: 0, bottom: 20, left: 0, right: 0}}
-          contentInsetAdjustmentBehavior='automatic'
-          maxToRenderPerBatch={10}
-          initialNumToRender={10}
-          removeClippedSubviews={true}
-          windowSize={10}
-          keyExtractor = { (todo) => todo.Id.toString()}
-          renderItem = { ( { item } )  => (
-            <TodoItem todo={item}/>
-          )} 
-        />
+        <View style={ styles.container} >
+        <SwipeGesture gestureStyle={styles.swipesGestureContainer} onSwipePerformed={this.onSwipePerformed} >
+          <FlatList
+            data = { TodoStore.todos.slice() }
+            contentContainerStyle={{ paddingBottom: 66}}
+            contentInset={{top: 0, bottom: 100, left: 0, right: 0}}
+            contentInsetAdjustmentBehavior='automatic'
+            maxToRenderPerBatch={10}
+            initialNumToRender={10}
+            removeClippedSubviews={true}
+            windowSize={10}
+            keyExtractor = { (todo) => todo.Id.toString()}
+            renderItem = { ( { item } )  => (
+              <TodoItem todo={item}/>
+            )} 
+          />
+        </SwipeGesture>
+        </View>
     </SafeAreaView>
     )
 };
@@ -103,7 +130,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop:6,
     marginRight:10
-  }
+  },
+  container:{
+    height:'100%',
+    width:'100%'
+  },
+  swipesGestureContainer:{
+    height:'100%',
+    width:'100%'
+  },
 });
 
 export default observer(TodoScreen);

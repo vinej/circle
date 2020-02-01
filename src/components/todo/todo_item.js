@@ -38,13 +38,9 @@ const TodoItem = ( { todo, setPropIsEdit }) => {
                   </Text>
               </TouchableOpacity>
           }
-          <Icon
-            name='clear'
-            type='materialicon'
-            size= {30}
-            onPress= { () => {   on.delete(todo.Id)  }}
-            iconStyle= { {color :'red', flex:1} }
-          />
+          <Text>
+  
+          </Text>
           { isEdit  &&  <TodoEdit todo={todo} setPropIsEdit={ (data) => setIsEdit(data)} isNew={false} /> }
       </View>
       <Divider/>

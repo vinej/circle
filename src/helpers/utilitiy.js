@@ -10,6 +10,12 @@ export function getDate(atime) {
   return dt.toDateString();
 }
 
+export function moveDateByDay(atime, days) {
+  var dt = new Date();
+  dt.setTime(parseInt(atime) + (days * 86400000));
+  return dt.getTime().toString();
+}
+
 export function getDateFromMillisecondString(atime) {
   var dt = new Date();
   dt.setTime(parseInt(atime));

@@ -95,6 +95,13 @@ const TodoEdit = ( { todo, setPropIsEdit, isNew } ) => {
             }}
             iconStyle= { {color :'green'} }
           />
+          <Icon
+            name='clear'
+            type='materialicon'
+            size= {50}
+            onPress= { () => {   on.delete(todo.Id)  }}
+            iconStyle= { {color :'red'} }
+          />
         </View>
       </View>
       </SafeAreaView>
