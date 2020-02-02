@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { observer } from 'mobx-react'
-import { StyleSheet, FlatList, View} from 'react-native';
+import { StyleSheet, FlatList, View, ImageBackground} from 'react-native';
 import { Text, Divider, Icon} from 'react-native-elements'
 import { TodoAction as on } from '../actions/todo_actions'
 import TodoStore from '../stores/todo_store' 
@@ -8,12 +8,13 @@ import TodoItem  from '../components/todo/todo_item'
 import TodoEdit from '../components/todo/todo_edit'
 import { newTodo} from '../models/todo_model'
 import {SafeAreaView} from 'react-navigation'
-import { getDate, stringToDate, moveDateByDay } from '../helpers/utilitiy'
+import { getDate, moveDateByDay } from '../helpers/utilitiy'
 import TodoCalendar from '../components/todo/todo_calendar'
 import SwipeGesture from '../helpers/swipe-gesture'
 
 
 const TodoScreen = (props) => {
+
   // the .slice is needed to refresh the list
   const [isEdit, setIsEdit] = useState(false);
   const [isCalendar, setCalendar] = useState(false);
@@ -51,26 +52,25 @@ const TodoScreen = (props) => {
   }
 
   return (
-      <SafeAreaView style= { { flex :1 }}>
-        <Divider/>
+      <SafeAreaView style= { { flex :1}}>
+        <ImageBackground source={ require('../../assets/task.jpg') } style={ styles.backgroundImage} />
         <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text style={ styles.title} >Task List</Text>
-          <Icon
-            name='undo'
-            type='materialicon'
-            size= {30}
-            iconStyle= { { color : 'orange'} }
-            onPress= { () => on.undo(TodoStore.lastTodo) }
-          />
-          <Icon
-            name='new-message'
-            type='entypo'
-            size= {30}
-            iconStyle= { { color : 'black', marginTop:3} }
-            onPress= { () => setIsEdit(true) } 
-          />
-        </View>
-        <Divider/>
+          <Text style={ styles.title} >Task List</Text>
+            <Icon
+              name='undo'
+              type='materialicon'
+              size= {30}
+              iconStyle= { { color : 'orange'} }
+              onPress= { () => on.undo(TodoStore.lastTodo) }
+            />
+            <Icon
+              name='new-message'
+              type='entypo'
+              size= {30}
+              iconStyle= { { color : 'black', marginTop:3} }
+              onPress= { () => setIsEdit(true) } 
+            />
+          </View>
         <View style= { { flexDirection: 'row',  justifyContent:'center'}}>
         <Text style= { styles.date }>{ getDate(TodoStore.selectedDate) }</Text>
           <Icon
@@ -146,6 +146,14 @@ const styles = StyleSheet.create({
     height:'100%',
     width:'100%'
   },
+  backgroundImage:{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: '87%',
+    right: 0,
+    opacity: 0.4
+},
 });
 
 export default observer(TodoScreen);
