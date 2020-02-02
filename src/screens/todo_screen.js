@@ -51,9 +51,10 @@ const TodoScreen = (props) => {
   }
 
   return (
-    <SafeAreaView forceInset={ { top: 'always'} }>
+      <SafeAreaView style= { { flex :1 }}>
         <Divider/>
         <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={ styles.title} >Task List</Text>
           <Icon
             name='undo'
             type='materialicon'
@@ -61,8 +62,6 @@ const TodoScreen = (props) => {
             iconStyle= { { color : 'orange'} }
             onPress= { () => on.undo(TodoStore.lastTodo) }
           />
-          <Text style={ styles.title} >Task List</Text>
-          <Text style={ styles.index}>({ TodoStore.getCount() })</Text>
           <Icon
             name='new-message'
             type='entypo'
@@ -97,8 +96,8 @@ const TodoScreen = (props) => {
         <SwipeGesture gestureStyle={styles.swipesGestureContainer} onSwipePerformed={this.onSwipePerformed} >
           <FlatList
             data = { TodoStore.todos.slice() }
-            contentContainerStyle={{ paddingBottom: 66}}
-            contentInset={{top: 0, bottom: 100, left: 0, right: 0}}
+            contentContainerStyle={{ paddingBottom: 60}}
+            contentInset={{top: 0, bottom: 20, left: 0, right: 0}}
             contentInsetAdjustmentBehavior='automatic'
             maxToRenderPerBatch={10}
             initialNumToRender={10}
@@ -111,12 +110,20 @@ const TodoScreen = (props) => {
           />
         </SwipeGesture>
         </View>
-    </SafeAreaView>
+      </SafeAreaView>
     )
 };
 
-
 const styles = StyleSheet.create({
+  root: {
+    borderColor: 'gray',
+    borderWidth:1,
+    position: 'absolute',
+    top: 20,
+    left:0,
+    right:0,
+    bottom:0
+  },
   main: {
     ...StyleSheet.absoluteFillObject,
   },

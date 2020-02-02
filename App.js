@@ -22,6 +22,50 @@ import { NotificationAction}  from './src/actions/notification_actions';
 import { DatabaseAction } from './src/actions/database_actions'
 import { AuthAction  } from './src/actions/auth_actions'
 
+const WelcomeIcon = (tintColor) => {
+  return (
+  <Icon
+    name='home'
+    type='materialicon'
+    color = {tintColor}
+    size={35}
+  />)
+};
+
+const TaskIcon = (tintColor) => {
+  return(
+  <Icon
+    name='event'
+    type='materialicon'
+    color={tintColor}
+    size={35}
+  />
+  )
+}
+
+const ChatIcon = (tintColor) => {
+  return (
+  <Icon
+    name='chat'
+    type='materialicon'
+    color={tintColor}
+    size={35}
+  />
+  )
+}
+
+const SettingIcon = (tintColor) => {
+  return (
+  <Icon
+    name='build'
+    type='materialicon'
+    color={tintColor}
+    size={35}
+  />
+  )
+}
+
+
 const settingNavigator = createStackNavigator( {
   Setting: SettingScreen,
   Logout : LogoutScreen,
@@ -30,22 +74,50 @@ const settingNavigator = createStackNavigator( {
 
 const switchNavigator = createSwitchNavigator( {
   mainFlow : createBottomTabNavigator( {
-    Welcome: WelcomeScreen,
-    TaskList: TodoScreen,
-    Chat: ChatScreen,
-    Settings : settingNavigator
+    Welcome: {
+      screen: WelcomeScreen,
+      navigationOptions: () => ({
+        tabBarIcon: ({tintColor}) => WelcomeIcon(tintColor)
+      })
+    },
+    TaskList: {
+      screen: TodoScreen,
+      navigationOptions: () => ({
+        tabBarIcon: ({tintColor}) => TaskIcon(tintColor)
+      })
+    },
+    Chat: {
+      screen: ChatScreen,
+      navigationOptions: () => ({
+        tabBarIcon: ({tintColor}) => ChatIcon(tintColor)
+      })
+    },
+    Settings : {
+      screen: settingNavigator,
+      navigationOptions: () => ({
+        tabBarIcon: ({tintColor}) => SettingIcon(tintColor)
+      })
+    }
   },
   {
     tabBarOptions: {
+      showLabel: false,
+      showIcon: true,
+      tintColor: 'gray',
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray',
-      style: { height:20 }
+      style: { 
+        height:40,
+        backgroundColor: '',
+        alignContent: 'center'
+      }
     },
   }),
   Splash : SplashScreen,
   Signup : SignupScreen,
   Login : LoginScreen,
-});
+},
+);
 
 const App = createAppContainer(switchNavigator );
 
