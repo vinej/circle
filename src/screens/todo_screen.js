@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { observer } from 'mobx-react'
-import { StyleSheet, FlatList, View, ImageBackground} from 'react-native';
+import { StyleSheet, FlatList, View, ImageBackground, Platform, StatusBar} from 'react-native';
 import { Text, Divider, Icon} from 'react-native-elements'
 import { TodoAction as on } from '../actions/todo_actions'
 import TodoStore from '../stores/todo_store' 
@@ -52,46 +52,68 @@ const TodoScreen = (props) => {
   }
 
   return (
-      <SafeAreaView style= { { flex :1}}>
-        <ImageBackground source={ require('../../assets/task.jpg') } style={ styles.backgroundImage} />
-        <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={ styles.title} >Task List</Text>
-            <Icon
-              name='undo'
-              type='materialicon'
+      <SafeAreaView style= { styles.safeArea }>
+          <ImageBackground resizeMode='stretch' source={ require('../../assets/task.jpg') } style={ styles.backgroundImage}>
+          <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={ styles.title} >Task List</Text>
+              <Icon
+                name='undo'
+                type='materialicon'
+                size= {30}
+                iconStyle= { { color : 'orange'} }
+                onPress= { () => on.undo(TodoStore.lastTodo) }
+              />
+              <Icon
+                name='new-message'
+                type='entypo'
+                size= {30}
+                iconStyle= { { color : 'black', marginTop:3} }
+                onPress= { () => setIsEdit(true) } 
+              />
+            </View>
+          <View style= { { flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Icon
+              name='left'
+              type='antdesign'
               size= {30}
-              iconStyle= { { color : 'orange'} }
-              onPress= { () => on.undo(TodoStore.lastTodo) }
+              iconStyle= { { color : 'black', marginTop:3} }
+              onPress= { () => { 
+                TodoStore.selectedDate = moveDateByDay(TodoStore.selectedDate, -1);
+                on.getAll();   
+              } } 
             />
+          <View style= { { flexDirection: 'row', justifyContent: 'center'}}>
+          <Text style= { styles.date }>{ getDate(TodoStore.selectedDate) }</Text>
             <Icon
-              name='new-message'
+              name='calendar'
               type='entypo'
               size= {30}
               iconStyle= { { color : 'black', marginTop:3} }
-              onPress= { () => setIsEdit(true) } 
+              onPress= { () => setCalendar(true) } 
+            />
+            { isCalendar  &&  <TodoCalendar now={getDate(TodoStore.selectedDate)} setCalendarDate={ (date,type) => { 
+              var dt = new Date(date); //stringToDate(date, 'yyyy-MM-dd', '-');
+              TodoStore.selectedDate = dt.getTime().toString(); 
+              on.getAll();
+              setCalendar(false) }} /> } 
+          </View>
+          <Icon
+              name='right'
+              type='antdesign'
+              size= {30}
+              iconStyle= { { color : 'black', marginTop:3} }
+              onPress= { () => { 
+                TodoStore.selectedDate = moveDateByDay(TodoStore.selectedDate, 1);
+                on.getAll();   
+              } } 
             />
           </View>
-        <View style= { { flexDirection: 'row',  justifyContent:'center'}}>
-        <Text style= { styles.date }>{ getDate(TodoStore.selectedDate) }</Text>
-          <Icon
-            name='calendar'
-            type='entypo'
-            size= {30}
-            iconStyle= { { color : 'black', marginTop:3} }
-            onPress= { () => setCalendar(true) } 
-          />
-          { isCalendar  &&  <TodoCalendar now={getDate(TodoStore.selectedDate)} setCalendarDate={ (date,type) => { 
-            var dt = new Date(date); //stringToDate(date, 'yyyy-MM-dd', '-');
-            TodoStore.selectedDate = dt.getTime().toString(); 
-            on.getAll();
-            setCalendar(false) }} /> } 
 
-        </View>
-
-        <View style= { { flexDirection: 'row', justifyContent:'space-between'}}>        
-          { isEdit  &&  <TodoEdit todo={newTodo()} setPropIsEdit={ (status) => setIsEdit(status)} isNew={true} /> } 
-        </View>
-        <Divider style={ { marginTop:3, marginBottom:3}} />
+          <View style= { { flexDirection: 'row', justifyContent:'space-between'}}>        
+            { isEdit  &&  <TodoEdit todo={newTodo()} setPropIsEdit={ (status) => setIsEdit(status)} isNew={true} /> } 
+          </View>
+          <Divider style={ { marginTop:1, marginBottom:3}} />
+        </ImageBackground>
         <View style={ styles.container} >
         <SwipeGesture gestureStyle={styles.swipesGestureContainer} onSwipePerformed={this.onSwipePerformed} >
           <FlatList
@@ -115,6 +137,10 @@ const TodoScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
+  safeArea :{
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+  },
   root: {
     borderColor: 'gray',
     borderWidth:1,
@@ -147,12 +173,6 @@ const styles = StyleSheet.create({
     width:'100%'
   },
   backgroundImage:{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: '87%',
-    right: 0,
-    opacity: 0.4
 },
 });
 
